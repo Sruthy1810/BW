@@ -8,6 +8,8 @@ from src.cleaner import keep_valid_rows
 from src.validator import check_cost_total
 from src.cost_reader import read_costs
 from src.cost_writer import write_cost_sheet
+from pathlib import Path
+from src.client_share import get_client_share
 
 
 def main():
@@ -28,6 +30,16 @@ def main():
 
         valid = keep_valid_rows(df, config["principal_col_index"],
                                 config["interest_col_index"], config["rule_mode"])
+        client_name = config.get("client_name")
+        if not isinstance(client_name, str) or not client_name.strip() \
+                or client_name.strip().lower() == "nan":
+            client_name = Path(config["input_file"]).stem
+        config["client_share_pct"] = get_client_share(
+            config.get("master_file", "input/MasterDatatable_1.xlsx"),
+            config.get("master_sheet", "InterestPercentage_Temp2"),
+            client_name,
+            config.get("master_share_column", "BWShare"),
+        )
 
         Path(config["output_file"]).parent.mkdir(parents=True, exist_ok=True)
         valid.to_excel(config["output_file"], index=False)

@@ -19,8 +19,11 @@ def format_payment_sheet(path, df, cfg):
 
     rows = []
     for _, r in df.iterrows():
+        
         principal = round(float(r.iloc[cfg["pay_principal_col"]]), 2)
         client = round(principal * pct, 2)
+        if (principal+client ==0):
+            continue
         rows.append([
             r.iloc[1], r.iloc[13], r.iloc[2],
             round(float(r.iloc[cfg["pay_total_col"]]), 2),

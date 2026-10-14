@@ -28,7 +28,7 @@ DEFAULTS = [
     ("pay_principal_col", "5"),
     ("pay_costs_col", "8"),
     ("pay_interest_col", "6"),
-    ("client_share_pct", "0.85"),
+
 ]
 
 # Order of the numeric columns on each debtor row in the Remittance Report
@@ -58,5 +58,4 @@ def load_config() -> dict:
     config["expected_cost_total"] = float(config["expected_cost_total"])
     for k in ("pay_total_col", "pay_principal_col", "pay_costs_col", "pay_interest_col"):
         config[k] = int(config[k])
-    config["client_share_pct"] = float(config["client_share_pct"])
     return config
