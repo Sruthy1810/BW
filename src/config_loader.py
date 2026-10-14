@@ -9,9 +9,9 @@ DEFAULTS = [
     ("output_file", "output/valid_remittance.xlsx"),
     ("log_file", "logs/app.log"),
     ("log_level", "INFO"),
-    ("rule_mode", "BOTH"),            # BOTH = both columns non-zero, ANY = either
+    ("rule_mode", "SUM"),            # BOTH = both columns non-zero, ANY = either
     ("principal_col_index", "5"),     # 0-based column number
-    ("interest_col_index", "6"),      # 0-based column number
+    ("interest_col_index", "7"),      # 0-based column number
     ("expected_principal_total", "49090.97"),
     ("expected_interest_total", "6689.97"),
         # ---- Cost sheet ----
@@ -21,6 +21,14 @@ DEFAULTS = [
     ("cost_title", "Consumer Collection Management, Inc. 2"),
     ("cost_thru_date", "AUTO"),       # AUTO = today's date, or type e.g. 10-13-2026
     ("expected_cost_total", "9659.09"),
+        # ---- Payments sheet format ----
+    ("pay_title", "CONSUMER COLLECTION MANAGEMENT, INC. 2"),
+    ("pay_thru_date", "AUTO"),
+    ("pay_total_col", "3"),
+    ("pay_principal_col", "5"),
+    ("pay_costs_col", "8"),
+    ("pay_interest_col", "6"),
+    ("client_share_pct", "0.85"),
 ]
 
 # Order of the numeric columns on each debtor row in the Remittance Report
@@ -48,4 +56,7 @@ def load_config() -> dict:
     config["expected_principal_total"] = float(config["expected_principal_total"])
     config["expected_interest_total"] = float(config["expected_interest_total"])
     config["expected_cost_total"] = float(config["expected_cost_total"])
+    for k in ("pay_total_col", "pay_principal_col", "pay_costs_col", "pay_interest_col"):
+        config[k] = int(config[k])
+    config["client_share_pct"] = float(config["client_share_pct"])
     return config

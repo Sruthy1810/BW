@@ -1,5 +1,5 @@
 from pathlib import Path
-
+from src.payment_writer import format_payment_sheet
 from src.config_loader import load_config
 from src.logger_setup import setup_logger
 from src.reader import read_report
@@ -32,6 +32,7 @@ def main():
         Path(config["output_file"]).parent.mkdir(parents=True, exist_ok=True)
         valid.to_excel(config["output_file"], index=False)
         log.info("Saved valid data to %s", config["output_file"])
+        format_payment_sheet(config["output_file"], valid, config)
                 # ---- Cost sheet (added after the valid data is saved) ----
         plaintiff_map = dict(zip(df["Claim"], df["Plaintiff"]))
         cost_df = read_costs(config["input_file"], config["cost_identifier"],
