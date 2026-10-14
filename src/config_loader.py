@@ -11,9 +11,16 @@ DEFAULTS = [
     ("log_level", "INFO"),
     ("rule_mode", "BOTH"),            # BOTH = both columns non-zero, ANY = either
     ("principal_col_index", "5"),     # 0-based column number
-    ("interest_col_index", "7"),      # 0-based column number
+    ("interest_col_index", "6"),      # 0-based column number
     ("expected_principal_total", "49090.97"),
     ("expected_interest_total", "6689.97"),
+        # ---- Cost sheet ----
+    ("cost_sheet_name", "Cost"),
+    ("cost_identifier", "Cost Detail Report"),
+    ("cost_end_marker", "Total Costs Expended"),
+    ("cost_title", "Consumer Collection Management, Inc. 2"),
+    ("cost_thru_date", "AUTO"),       # AUTO = today's date, or type e.g. 10-13-2026
+    ("expected_cost_total", "9659.09"),
 ]
 
 # Order of the numeric columns on each debtor row in the Remittance Report
@@ -40,4 +47,5 @@ def load_config() -> dict:
     config["interest_col_index"] = int(config["interest_col_index"])
     config["expected_principal_total"] = float(config["expected_principal_total"])
     config["expected_interest_total"] = float(config["expected_interest_total"])
+    config["expected_cost_total"] = float(config["expected_cost_total"])
     return config

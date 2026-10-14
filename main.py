@@ -5,6 +5,9 @@ from src.logger_setup import setup_logger
 from src.reader import read_report
 from src.validator import check_totals
 from src.cleaner import keep_valid_rows
+from src.validator import check_cost_total
+from src.cost_reader import read_costs
+from src.cost_writer import write_cost_sheet
 
 
 def main():
@@ -29,6 +32,14 @@ def main():
         Path(config["output_file"]).parent.mkdir(parents=True, exist_ok=True)
         valid.to_excel(config["output_file"], index=False)
         log.info("Saved valid data to %s", config["output_file"])
+                # ---- Cost sheet (added after the valid data is saved) ----
+        plaintiff_map = dict(zip(df["Claim"], df["Plaintiff"]))
+        cost_df = read_costs(config["input_file"], config["cost_identifier"],
+                             config["cost_end_marker"], plaintiff_map)
+        check_cost_total(cost_df, config["expected_cost_total"])
+        write_cost_sheet(config["output_file"], config["cost_sheet_name"],
+                         cost_df, config["cost_title"], config["cost_thru_date"])
+        log.info("Cost sheet added to %s", config["output_file"])
 
         print(valid.head(20).to_string())
         print(f"\nValid rows: {len(valid)}")
