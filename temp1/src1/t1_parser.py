@@ -1,5 +1,6 @@
 import math
 import pandas as pd
+import re
 
 # 0-based column positions in the input sheet (A=0, B=1, ...). Change here if needed.
 NAME_COL = 1         # B -> defendant name
@@ -33,6 +34,43 @@ def clean_text(value):
         return str(int(value))
     return str(value).strip()
 
+# ---------------------------------------------------------------------
+# Business-defendant rules (client requirement)
+# ---------------------------------------------------------------------
+BUSINESS_SUFFIXES = {
+    "llc", "llp", "lp", "pllc", "pc", "pa", "inc", "incorporated",
+    "corp", "corporation", "co", "company", "ltd", "limited", "trust",
+    "association", "assoc", "partnership", "holdings",
+}   # periods are removed before comparing, so L.L.C. -> llc, P.C. -> pc, P.A. -> pa
+
+DBA_PATTERN = re.compile(r"(?<![a-z0-9])d[./]?b[./]?a\.?(?![a-z0-9])")   # dba, d/b/a, d.b.a.
+STARTS_PATTERN = re.compile(r"^(the|city of)(?![a-z0-9])")               # "The ...", "City of ..."
+
+
+def is_business(name):
+    """True if the defendant name looks like a business. Whole words only, not case-sensitive."""
+    text = " ".join(str(name).lower().split())
+    text = text.rstrip(" .,")                       # ignore trailing periods and commas
+    if not text:
+        return False
+
+    if "&" in text or any(ch.isdigit() for ch in text):
+        return True                                 # ampersand or a number anywhere
+    if DBA_PATTERN.search(text):
+        return True                                 # DBA / D/B/A anywhere
+    if STARTS_PATTERN.match(text):
+        return True                                 # begins with 'The' or 'City of'
+
+    last_word = text.split(" ")[-1].replace(".", "").strip(",")
+    return last_word in BUSINESS_SUFFIXES           # ends with a business suffix
+
+
+# ---------------------------------------------------------------------
+# Name formatting
+# ---------------------------------------------------------------------
+
+
+
 SUFFIXES = {"jr", "jr.", "sr", "sr.", "ii", "iii", "iv", "v"}
 
 
@@ -40,10 +78,13 @@ def format_name(name):
     """'Tabitha Wood' -> 'Wood, Tabitha'
     'Mary Ann Smith' -> 'Smith, Mary Ann'
     'John Smith Jr' -> 'Smith Jr, John'
-    Already 'Wood, Tabitha' or a single word -> unchanged."""
+    Business names, names already in 'Last, First' form and single words -> unchanged."""
     name = " ".join(str(name).split())
     if not name or "," in name:
         return name                      # empty or already in 'Last, First' form
+
+    if is_business(name):
+        return name                      # business: keep exactly as written
 
     parts = name.split(" ")
     if len(parts) < 2:
@@ -61,6 +102,7 @@ def format_name(name):
 def cell(row, idx):
     return row[idx] if idx in row.index else None
 
+
 def has_text(row):
     """True if any cell contains letters (a name, a label...)."""
     return any(isinstance(v, str) and any(ch.isalpha() for ch in v)
@@ -69,6 +111,7 @@ def has_text(row):
 
 def count_numbers(row):
     return sum(to_number(v) is not None for v in row.tolist())
+
 
 def is_totals_row(row, text):
     """Grand totals row: 1,09,676.29  0.00  24,127.82 ... (10 numbers).
@@ -79,6 +122,7 @@ def is_totals_row(row, text):
     if not has_text(row):          # only numbers -> totals row
         return True
     return "total" in text         # or a row labelled 'Total...'
+
 
 def parse_rows(rows, log):
     records = []
@@ -127,6 +171,7 @@ def parse_rows(rows, log):
 
         records.append({
             "name": format_name(name),
+            "is_business": is_business(name),           # flag kept for later use
             "ref_no": ref,
             "principal": principal,
             "interest": interest,
@@ -138,5 +183,11 @@ def parse_rows(rows, log):
 
     log.info("Valid rows: %d | skipped (principal + interest = 0): %d",
              len(records), skipped_zero)
-    return pd.DataFrame(records, columns=["name", "ref_no", "principal",
+    return pd.DataFrame(records, columns=["name", "is_business", "ref_no", "principal",
                                           "interest", "direct_payment"])
+
+if __name__ == "__main__":
+    for n in ["Coleman", "Incorporate", "Acme Inc.", "Smith, Inc", "Theodore Smith",
+              "The Smith Family", "City of Atlanta", "John Doe d/b/a Cuts",
+              "Ross, Stuart & Dawson", "Tabitha Wood"]:
+        print(f"{n!r:35} business={is_business(n)}  ->  {format_name(n)}")
