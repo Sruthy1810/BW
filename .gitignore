@@ -14,5 +14,5 @@ __pycache__/
 .vscode/
 
 # Generated logs and output files
-logs/*
+
 output/*

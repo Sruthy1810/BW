@@ -1,0 +1,803 @@
+2026-10-14 11:17:50,511 | INFO | ===== Temp1 run started =====
+2026-10-14 11:17:50,675 | INFO | Valid rows: 834 | skipped (principal + interest = 0): 259
+2026-10-14 11:17:50,816 | INFO | Saved Payment Sheet to output/temp1_payment_sheet.xlsx
+2026-10-14 11:17:50,822 | INFO | ===== Temp1 run finished =====
+2026-10-14 11:28:02,407 | INFO | ===== Temp1 run started =====
+2026-10-14 11:28:02,908 | INFO | Valid rows: 834 | skipped (principal + interest = 0): 259
+2026-10-14 11:28:03,496 | INFO | Saved Payment Sheet to output/temp1_payment_sheet.xlsx
+2026-10-14 11:28:03,506 | INFO | ===== Temp1 run finished =====
+2026-10-14 11:28:14,760 | INFO | ===== Temp1 run started =====
+2026-10-14 11:28:15,067 | INFO | Valid rows: 834 | skipped (principal + interest = 0): 259
+2026-10-14 11:28:15,442 | INFO | Saved Payment Sheet to output/temp1_payment_sheet.xlsx
+2026-10-14 11:28:15,448 | INFO | ===== Temp1 run finished =====
+2026-10-14 11:57:31,122 | INFO | ===== Temp1 run started =====
+2026-10-14 11:57:31,142 | INFO | Master match 'cash link usa, llc': client 70.00% | BW 30.00%
+2026-10-14 11:57:31,376 | INFO | Valid rows: 834 | skipped (principal + interest = 0): 259
+2026-10-14 11:57:31,571 | ERROR | Temp1 run failed
+Traceback (most recent call last):
+  File "C:\Users\Admin\OneDrive - StayAhead\Documents\Projects\B&W\Combined\B-W\main_temp1.py", line 28, in main
+    write_payment_sheet(payment_sheet, output_file)  # then the Excel
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\OneDrive - StayAhead\Documents\Projects\B&W\Combined\B-W\temp1\src1\t1_writer.py", line 46, in write_payment_sheet
+    with pd.ExcelWriter(output_file, engine="openpyxl", mode="a",
+         ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                        if_sheet_exists="overlay") as xw:
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python313\Lib\site-packages\pandas\io\excel\_openpyxl.py", line 61, in __init__
+    super().__init__(
+    ~~~~~~~~~~~~~~~~^
+        path,
+        ^^^^^
+    ...<3 lines>...
+        engine_kwargs=engine_kwargs,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python313\Lib\site-packages\pandas\io\excel\_base.py", line 1246, in __init__
+    self._handles = get_handle(
+                    ~~~~~~~~~~^
+        path, mode, storage_options=storage_options, is_text=False
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python313\Lib\site-packages\pandas\io\common.py", line 882, in get_handle
+    handle = open(handle, ioargs.mode)
+PermissionError: [Errno 13] Permission denied: 'output\\temp1_payment_sheet.xlsx'
+2026-10-14 11:57:31,635 | INFO | ===== Temp1 run finished =====
+2026-10-14 11:57:58,867 | INFO | ===== Temp1 run started =====
+2026-10-14 11:57:58,879 | INFO | Master match 'cash link usa, llc': client 70.00% | BW 30.00%
+2026-10-14 11:57:58,991 | INFO | Valid rows: 834 | skipped (principal + interest = 0): 259
+2026-10-14 11:57:59,283 | INFO | Saved Payment Sheet to output/temp1_payment_sheet.xlsx
+2026-10-14 11:57:59,288 | INFO | ===== Temp1 run finished =====
+2026-10-14 12:08:37,475 | INFO | ===== Temp1 run started =====
+2026-10-14 12:08:37,487 | INFO | Master match 'cash link usa, llc': client 70.00% | BW 30.00%
+2026-10-14 12:08:37,619 | INFO | Totals row reached (after-marker row 978): 109676.29000000001 0 24127.82 76809.76 310.34000000000003 7278.1900000000005 0 27311.850000000002 78151.62 30374.49 - stopping
+2026-10-14 12:08:37,621 | WARNING | Totals mismatch: report P=7278.19 I=0.00 | collected P=24127.82 I=76809.76
+2026-10-14 12:08:37,623 | INFO | Valid rows: 232 | skipped (principal + interest = 0): 257
+2026-10-14 12:08:39,233 | INFO | Saved Payment Sheet to output/temp1_payment_sheet.xlsx
+2026-10-14 12:08:39,242 | INFO | ===== Temp1 run finished =====
+2026-10-14 12:10:59,675 | INFO | ===== Temp1 run started =====
+2026-10-14 12:10:59,682 | INFO | Master match 'cash link usa, llc': client 70.00% | BW 30.00%
+2026-10-14 12:10:59,746 | INFO | Totals row reached (after-marker row 978): 109676.29000000001 0 24127.82 76809.76 310.34000000000003 7278.1900000000005 0 27311.850000000002 78151.62 30374.49 - stopping
+2026-10-14 12:10:59,748 | WARNING | Totals mismatch: report P=7278.19 I=0.00 | collected P=24127.82 I=76809.76
+2026-10-14 12:10:59,748 | INFO | Valid rows: 232 | skipped (principal + interest = 0): 257
+2026-10-14 12:11:00,028 | INFO | Saved Payment Sheet to output/temp1_payment_sheet.xlsx
+2026-10-14 12:11:00,034 | INFO | ===== Temp1 run finished =====
+2026-10-14 12:13:47,121 | INFO | ===== Temp1 run started =====
+2026-10-14 12:13:47,133 | INFO | Master match 'cash link usa, llc': client 70.00% | BW 30.00%
+2026-10-14 12:13:47,223 | INFO | Totals row reached (after-marker row 978): 109676.29000000001 0 24127.82 76809.76 310.34000000000003 7278.1900000000005 0 27311.850000000002 78151.62 30374.49 - stopping
+2026-10-14 12:13:47,223 | WARNING | Totals mismatch: report P=7278.19 I=0.00 | collected P=24127.82 I=76809.76
+2026-10-14 12:13:47,223 | INFO | Valid rows: 232 | skipped (principal + interest = 0): 257
+2026-10-14 12:13:47,224 | ERROR | Temp1 run failed
+Traceback (most recent call last):
+  File "C:\Users\Admin\OneDrive - StayAhead\Documents\Projects\B&W\Combined\B-W\main_temp1.py", line 27, in main
+    payment_sheet = build_payment_sheet(data)
+TypeError: build_payment_sheet() missing 1 required positional argument: 'client_pct'
+2026-10-14 12:13:47,225 | INFO | ===== Temp1 run finished =====
+2026-10-14 12:15:42,212 | INFO | ===== Temp1 run started =====
+2026-10-14 12:15:42,229 | INFO | Master match 'cash link usa, llc': client 70.00% | BW 30.00%
+2026-10-14 12:15:42,312 | INFO | Totals row reached (after-marker row 978): 109676.29000000001 0 24127.82 76809.76 310.34000000000003 7278.1900000000005 0 27311.850000000002 78151.62 30374.49 - stopping
+2026-10-14 12:15:42,312 | WARNING | Totals mismatch: report P=7278.19 I=0.00 | collected P=24127.82 I=76809.76
+2026-10-14 12:15:42,312 | INFO | Valid rows: 232 | skipped (principal + interest = 0): 257
+2026-10-14 12:15:42,445 | INFO | Saved Payment Sheet to output/temp1_payment_sheet.xlsx
+2026-10-14 12:15:42,455 | INFO | ===== Temp1 run finished =====
+2026-10-14 12:33:20,096 | INFO | ===== Temp1 run started =====
+2026-10-14 12:33:20,104 | INFO | Master match 'cash link usa, llc': client 70.00% | BW 30.00%
+2026-10-14 12:33:20,226 | INFO | Totals row reached (after-marker row 978): 109676.29000000001 0 24127.82 76809.76 310.34000000000003 7278.1900000000005 0 27311.850000000002 78151.62 30374.49 - stopping
+2026-10-14 12:33:20,239 | WARNING | Totals mismatch: report P=0.00 I=0.00 | collected P=78151.62 I=30374.49
+2026-10-14 12:33:20,251 | INFO | Valid rows: 242 | skipped (principal + interest = 0): 247
+2026-10-14 12:33:20,463 | INFO | Saved Payment Sheet to output/temp1_payment_sheet.xlsx
+2026-10-14 12:33:20,475 | INFO | ===== Temp1 run finished =====
+2026-10-14 12:39:11,053 | INFO | ===== Temp1 run started =====
+2026-10-14 12:39:11,070 | INFO | Master match 'cash link usa, llc': client 70.00% | BW 30.00%
+2026-10-14 12:39:11,256 | INFO | Totals row reached (after-marker row 978): 109676.29000000001 0 24127.82 76809.76 310.34000000000003 7278.1900000000005 0 27311.850000000002 78151.62 30374.49 - stopping
+2026-10-14 12:39:11,257 | WARNING | Totals mismatch: report P=0.00 I=0.00 | collected P=78151.62 I=30374.49
+2026-10-14 12:39:11,257 | INFO | Valid rows: 242 | skipped (principal + interest = 0): 247
+2026-10-14 12:39:11,584 | INFO | Saved Payment Sheet to output/temp1_payment_sheet.xlsx
+2026-10-14 12:39:11,597 | INFO | ===== Temp1 run finished =====
+2026-10-14 14:10:18,415 | INFO | ===== Temp1 run started =====
+2026-10-14 14:10:18,434 | INFO | Master match 'cash link usa, llc': client 70.00% | BW 30.00%
+2026-10-14 14:10:18,642 | INFO | Totals row reached (after-marker row 978): 109676.29000000001 0 24127.82 76809.76 310.34000000000003 7278.1900000000005 0 27311.850000000002 78151.62 30374.49 - stopping
+2026-10-14 14:10:18,642 | WARNING | Totals mismatch: report P=0.00 I=0.00 | collected P=78151.62 I=30374.49
+2026-10-14 14:10:18,643 | INFO | Valid rows: 242 | skipped (principal + interest = 0): 247
+2026-10-14 14:10:18,906 | INFO | Wrote 242 rows to 'Payment Sheet' in C:\Users\Admin\OneDrive - StayAhead\Documents\Projects\B&W\Combined\B-W\output\temp1_payment_sheet.xlsx
+2026-10-14 14:10:18,906 | INFO | Saved Payment Sheet to output/temp1_payment_sheet.xlsx
+2026-10-14 14:10:19,012 | INFO | 'Cost Detail Report' found on sheet 'Sheet1', row 1048
+2026-10-14 14:10:19,100 | INFO | Cost totals row reached (row 1649): total costs expended 27311.850000000002 - stopping
+2026-10-14 14:10:19,100 | INFO | Cost rows: 498
+2026-10-14 14:10:19,436 | INFO | Wrote 498 rows to 'Cost' in C:\Users\Admin\OneDrive - StayAhead\Documents\Projects\B&W\Combined\B-W\output\temp1_payment_sheet.xlsx
+2026-10-14 14:10:19,437 | INFO | Saved Cost sheet to output/temp1_payment_sheet.xlsx
+2026-10-14 14:10:19,440 | INFO | ===== Temp1 run finished =====
+2026-10-14 14:18:12,020 | INFO | ===== Temp1 run started =====
+2026-10-14 14:18:12,028 | INFO | Master match 'cash link usa, llc': client 70.00% | BW 30.00%
+2026-10-14 14:18:12,105 | INFO | Totals row reached (after-marker row 978): 109676.29000000001 0 24127.82 76809.76 310.34000000000003 7278.1900000000005 0 27311.850000000002 78151.62 30374.49 - stopping
+2026-10-14 14:18:12,105 | WARNING | Totals mismatch: report P=0.00 I=0.00 | collected P=78151.62 I=30374.49
+2026-10-14 14:18:12,105 | INFO | Valid rows: 242 | skipped (principal + interest = 0): 247
+2026-10-14 14:18:12,437 | INFO | Wrote 242 rows to 'Payment Sheet' in C:\Users\Admin\OneDrive - StayAhead\Documents\Projects\B&W\Combined\B-W\output\temp1_payment_sheet.xlsx
+2026-10-14 14:18:12,438 | INFO | Saved Payment Sheet to output/temp1_payment_sheet.xlsx
+2026-10-14 14:18:12,495 | INFO | 'Cost Detail Report' found on sheet 'Sheet1', row 1048
+2026-10-14 14:18:12,556 | INFO | Cost totals row reached (row 1649): total costs expended 27311.850000000002 - stopping
+2026-10-14 14:18:12,556 | INFO | Cost rows: 498
+2026-10-14 14:18:12,958 | INFO | Wrote 498 rows to 'Cost' in C:\Users\Admin\OneDrive - StayAhead\Documents\Projects\B&W\Combined\B-W\output\temp1_payment_sheet.xlsx
+2026-10-14 14:18:12,958 | INFO | Saved Cost sheet to output/temp1_payment_sheet.xlsx
+2026-10-14 14:18:12,961 | INFO | ===== Temp1 run finished =====
+2026-10-14 15:21:24,040 | INFO | ===== Temp1 run started =====
+2026-10-14 15:21:24,042 | INFO | Input files found: 2
+2026-10-14 15:21:24,042 | INFO | ----- Processing cash link usa, llc.xls -----
+2026-10-14 15:21:24,060 | INFO | Master match 'cash link usa, llc': client 70.00% | BW 30.00%
+2026-10-14 15:21:24,064 | INFO | Template copied to C:\Users\Admin\OneDrive - StayAhead\Documents\Projects\B&W\Combined\B-W\output\cash link usa, llc.xlsx
+2026-10-14 15:21:24,336 | INFO | Totals row reached (after-marker row 978): 109676.29000000001 0 24127.82 76809.76 310.34000000000003 7278.1900000000005 0 27311.850000000002 78151.62 30374.49 - stopping
+2026-10-14 15:21:24,336 | WARNING | Totals mismatch: report P=0.00 I=0.00 | collected P=78151.62 I=30374.49
+2026-10-14 15:21:24,338 | INFO | Valid rows: 242 | skipped (principal + interest = 0): 247
+2026-10-14 15:21:25,145 | INFO | Payment sheet: 242 rows written
+2026-10-14 15:21:25,254 | INFO | 'Cost Detail Report' found on sheet 'Sheet1', row 1048
+2026-10-14 15:21:25,398 | INFO | Cost totals row reached (row 1649): total costs expended 27311.850000000002 - stopping
+2026-10-14 15:21:25,398 | INFO | Cost rows: 498
+2026-10-14 15:21:25,611 | INFO | Cost sheet: 498 rows written
+2026-10-14 15:21:25,612 | INFO | ----- Processing jameson and dunagan, p.c..xls -----
+2026-10-14 15:21:25,618 | INFO | Master match 'jameson and dunagan, p.c.': client 80.00% | BW 20.00%
+2026-10-14 15:21:25,621 | INFO | Template copied to C:\Users\Admin\OneDrive - StayAhead\Documents\Projects\B&W\Combined\B-W\output\jameson and dunagan, p.c..xlsx
+2026-10-14 15:21:25,631 | INFO | Totals row reached (after-marker row 2): 700 0 531.2 0 168.8 0 0 0 700 140 - stopping
+2026-10-14 15:21:25,632 | WARNING | Totals mismatch: report P=0.00 I=0.00 | collected P=700.00 I=140.00
+2026-10-14 15:21:25,633 | INFO | Valid rows: 1 | skipped (principal + interest = 0): 0
+2026-10-14 15:21:25,810 | INFO | Payment sheet: 1 rows written
+2026-10-14 15:21:25,818 | WARNING | 'Cost Detail Report' not found - Cost sheet will be empty
+2026-10-14 15:21:25,819 | INFO | Cost rows: 0
+2026-10-14 15:21:25,916 | INFO | Cost sheet: 0 rows written
+2026-10-14 15:21:25,916 | INFO | Done: 2 | Failed: 0 
+2026-10-14 15:21:25,916 | INFO | ===== Temp1 run finished =====
+2026-10-14 15:23:39,223 | INFO | ===== Temp1 run started =====
+2026-10-14 15:23:39,224 | INFO | Input files found: 6
+2026-10-14 15:23:39,224 | INFO | ----- Processing aubrey thrasher- ia.xls -----
+2026-10-14 15:23:39,230 | INFO | Master match 'aubrey thrasher- ia': client 80.00% | BW 20.00%
+2026-10-14 15:23:39,233 | INFO | Template copied to C:\Users\Admin\OneDrive - StayAhead\Documents\Projects\B&W\Combined\B-W\output\aubrey thrasher- ia.xlsx
+2026-10-14 15:23:39,244 | INFO | Totals row reached (after-marker row 3): 18345 0 17416.96 0 750 178.04 0 321.67 14676 3669 - stopping
+2026-10-14 15:23:39,245 | WARNING | Totals mismatch: report P=0.00 I=0.00 | collected P=14676.00 I=3669.00
+2026-10-14 15:23:39,245 | INFO | Valid rows: 2 | skipped (principal + interest = 0): 1
+2026-10-14 15:23:39,485 | INFO | Payment sheet: 2 rows written
+2026-10-14 15:23:39,491 | INFO | 'Cost Detail Report' found on sheet 'Sheet1', row 63
+2026-10-14 15:23:39,494 | INFO | Cost totals row reached (row 67): total costs expended 321.67 - stopping
+2026-10-14 15:23:39,494 | INFO | Cost rows: 3
+2026-10-14 15:23:39,632 | INFO | Cost sheet: 3 rows written
+2026-10-14 15:23:39,633 | INFO | ----- Processing aubrey thrasher.xls -----
+2026-10-14 15:23:39,641 | INFO | Master match 'aubrey thrasher': client 80.00% | BW 20.00%
+2026-10-14 15:23:39,645 | INFO | Template copied to C:\Users\Admin\OneDrive - StayAhead\Documents\Projects\B&W\Combined\B-W\output\aubrey thrasher.xlsx
+2026-10-14 15:23:39,655 | INFO | Totals row reached (after-marker row 32): 44478.76 5100 19036.75 9.3 29480.5 1052.21 0 485 35688.31 9810.45 - stopping
+2026-10-14 15:23:39,655 | WARNING | Totals mismatch: report P=0.00 I=0.00 | collected P=35688.31 I=9810.45
+2026-10-14 15:23:39,655 | INFO | Valid rows: 10 | skipped (principal + interest = 0): 6
+2026-10-14 15:23:39,750 | INFO | Payment sheet: 10 rows written
+2026-10-14 15:23:39,757 | INFO | 'Cost Detail Report' found on sheet 'Sheet1', row 101
+2026-10-14 15:23:39,805 | INFO | Cost totals row reached (row 117): total costs expended 485 - stopping
+2026-10-14 15:23:39,828 | INFO | Cost rows: 10
+2026-10-14 15:23:39,965 | INFO | Cost sheet: 10 rows written
+2026-10-14 15:23:39,965 | INFO | ----- Processing cash link usa, llc.xls -----
+2026-10-14 15:23:39,971 | INFO | Master match 'cash link usa, llc': client 70.00% | BW 30.00%
+2026-10-14 15:23:39,973 | INFO | Template copied to C:\Users\Admin\OneDrive - StayAhead\Documents\Projects\B&W\Combined\B-W\output\cash link usa, llc.xlsx
+2026-10-14 15:23:40,100 | INFO | Totals row reached (after-marker row 978): 109676.29000000001 0 24127.82 76809.76 310.34000000000003 7278.1900000000005 0 27311.850000000002 78151.62 30374.49 - stopping
+2026-10-14 15:23:40,100 | WARNING | Totals mismatch: report P=0.00 I=0.00 | collected P=78151.62 I=30374.49
+2026-10-14 15:23:40,101 | INFO | Valid rows: 242 | skipped (principal + interest = 0): 247
+2026-10-14 15:23:40,216 | INFO | Payment sheet: 242 rows written
+2026-10-14 15:23:40,264 | INFO | 'Cost Detail Report' found on sheet 'Sheet1', row 1048
+2026-10-14 15:23:40,303 | INFO | Cost totals row reached (row 1649): total costs expended 27311.850000000002 - stopping
+2026-10-14 15:23:40,304 | INFO | Cost rows: 498
+2026-10-14 15:23:40,457 | INFO | Cost sheet: 498 rows written
+2026-10-14 15:23:40,458 | INFO | ----- Processing jameson and dunagan, p.c..xls -----
+2026-10-14 15:23:40,465 | INFO | Master match 'jameson and dunagan, p.c.': client 80.00% | BW 20.00%
+2026-10-14 15:23:40,467 | INFO | Template copied to C:\Users\Admin\OneDrive - StayAhead\Documents\Projects\B&W\Combined\B-W\output\jameson and dunagan, p.c..xlsx
+2026-10-14 15:23:40,480 | INFO | Totals row reached (after-marker row 2): 700 0 531.2 0 168.8 0 0 0 700 140 - stopping
+2026-10-14 15:23:40,481 | WARNING | Totals mismatch: report P=0.00 I=0.00 | collected P=700.00 I=140.00
+2026-10-14 15:23:40,481 | INFO | Valid rows: 1 | skipped (principal + interest = 0): 0
+2026-10-14 15:23:40,552 | INFO | Payment sheet: 1 rows written
+2026-10-14 15:23:40,558 | WARNING | 'Cost Detail Report' not found - Cost sheet will be empty
+2026-10-14 15:23:40,558 | INFO | Cost rows: 0
+2026-10-14 15:23:40,622 | INFO | Cost sheet: 0 rows written
+2026-10-14 15:23:40,623 | INFO | ----- Processing r-g federal credit union.xls -----
+2026-10-14 15:23:40,627 | INFO | Master match 'r-g federal credit union': client 75.00% | BW 25.00%
+2026-10-14 15:23:40,629 | INFO | Template copied to C:\Users\Admin\OneDrive - StayAhead\Documents\Projects\B&W\Combined\B-W\output\r-g federal credit union.xlsx
+2026-10-14 15:23:40,638 | INFO | Totals row reached (after-marker row 14): 4542.2 0 3285.9 0 877.82 378.48 0 20.5 3501.26 1040.94 - stopping
+2026-10-14 15:23:40,639 | WARNING | Totals mismatch: report P=0.00 I=0.00 | collected P=3501.26 I=1040.94
+2026-10-14 15:23:40,639 | INFO | Valid rows: 6 | skipped (principal + interest = 0): 1
+2026-10-14 15:23:40,728 | INFO | Payment sheet: 6 rows written
+2026-10-14 15:23:40,733 | INFO | 'Cost Detail Report' found on sheet 'Sheet1', row 79
+2026-10-14 15:23:40,733 | INFO | Cost totals row reached (row 83): total costs expended 20.5 - stopping
+2026-10-14 15:23:40,733 | INFO | Cost rows: 2
+2026-10-14 15:23:40,834 | INFO | Cost sheet: 2 rows written
+2026-10-14 15:23:40,835 | INFO | ----- Processing Ross, Stuart & Dawson, Inc..xls -----
+2026-10-14 15:23:40,840 | INFO | Master match 'ross, stuart & dawson, inc.': client 82.00% | BW 18.00%
+2026-10-14 15:23:40,842 | INFO | Template copied to C:\Users\Admin\OneDrive - StayAhead\Documents\Projects\B&W\Combined\B-W\output\Ross, Stuart & Dawson, Inc..xlsx
+2026-10-14 15:23:40,849 | INFO | Totals row reached (after-marker row 4): 500 0 0 0 500 0 0 15 410 90 - stopping
+2026-10-14 15:23:40,849 | WARNING | Totals mismatch: report P=0.00 I=0.00 | collected P=410.00 I=90.00
+2026-10-14 15:23:40,850 | INFO | Valid rows: 1 | skipped (principal + interest = 0): 1
+2026-10-14 15:23:40,948 | INFO | Payment sheet: 1 rows written
+2026-10-14 15:23:40,954 | INFO | 'Cost Detail Report' found on sheet 'Sheet1', row 67
+2026-10-14 15:23:40,954 | INFO | Cost totals row reached (row 69): total costs expended 15 - stopping
+2026-10-14 15:23:40,955 | INFO | Cost rows: 1
+2026-10-14 15:23:41,050 | INFO | Cost sheet: 1 rows written
+2026-10-14 15:23:41,051 | INFO | Done: 6 | Failed: 0 
+2026-10-14 15:23:41,051 | INFO | ===== Temp1 run finished =====
+2026-10-14 15:32:30,309 | INFO | ===== Temp1 run started =====
+2026-10-14 15:32:30,311 | INFO | Input files found: 6
+2026-10-14 15:32:30,312 | INFO | ----- Processing aubrey thrasher- ia.xls -----
+2026-10-14 15:32:30,325 | INFO | Master match 'aubrey thrasher- ia': client 80.00% | BW 20.00%
+2026-10-14 15:32:30,328 | INFO | Template copied to C:\Users\Admin\OneDrive - StayAhead\Documents\Projects\B&W\Combined\B-W\output\aubrey thrasher- ia.xlsx
+2026-10-14 15:32:30,341 | INFO | Totals row reached (after-marker row 3): 18345 0 17416.96 0 750 178.04 0 321.67 14676 3669 - stopping
+2026-10-14 15:32:30,342 | WARNING | Totals mismatch: report P=0.00 I=0.00 | collected P=14676.00 I=3669.00
+2026-10-14 15:32:30,343 | INFO | Valid rows: 2 | skipped (principal + interest = 0): 1
+2026-10-14 15:32:30,786 | INFO | Payment sheet: 2 rows written
+2026-10-14 15:32:30,815 | INFO | 'Cost Detail Report' found on sheet 'Sheet1', row 63
+2026-10-14 15:32:30,820 | INFO | Cost totals row reached (row 67): total costs expended 321.67 - stopping
+2026-10-14 15:32:30,820 | INFO | Cost rows: 3
+2026-10-14 15:32:31,059 | INFO | Cost sheet: 3 rows written
+2026-10-14 15:32:31,060 | INFO | ----- Processing aubrey thrasher.xls -----
+2026-10-14 15:32:31,073 | INFO | Master match 'aubrey thrasher': client 80.00% | BW 20.00%
+2026-10-14 15:32:31,077 | INFO | Template copied to C:\Users\Admin\OneDrive - StayAhead\Documents\Projects\B&W\Combined\B-W\output\aubrey thrasher.xlsx
+2026-10-14 15:32:31,098 | INFO | Totals row reached (after-marker row 32): 44478.76 5100 19036.75 9.3 29480.5 1052.21 0 485 35688.31 9810.45 - stopping
+2026-10-14 15:32:31,098 | WARNING | Totals mismatch: report P=0.00 I=0.00 | collected P=35688.31 I=9810.45
+2026-10-14 15:32:31,098 | INFO | Valid rows: 10 | skipped (principal + interest = 0): 6
+2026-10-14 15:32:31,298 | INFO | Payment sheet: 10 rows written
+2026-10-14 15:32:31,310 | INFO | 'Cost Detail Report' found on sheet 'Sheet1', row 101
+2026-10-14 15:32:31,327 | INFO | Cost totals row reached (row 117): total costs expended 485 - stopping
+2026-10-14 15:32:31,328 | INFO | Cost rows: 10
+2026-10-14 15:32:31,471 | INFO | Cost sheet: 10 rows written
+2026-10-14 15:32:31,471 | INFO | ----- Processing cash link usa, llc.xls -----
+2026-10-14 15:32:31,483 | INFO | Master match 'cash link usa, llc': client 70.00% | BW 30.00%
+2026-10-14 15:32:31,486 | INFO | Template copied to C:\Users\Admin\OneDrive - StayAhead\Documents\Projects\B&W\Combined\B-W\output\cash link usa, llc.xlsx
+2026-10-14 15:32:31,625 | INFO | Totals row reached (after-marker row 978): 109676.29000000001 0 24127.82 76809.76 310.34000000000003 7278.1900000000005 0 27311.850000000002 78151.62 30374.49 - stopping
+2026-10-14 15:32:31,625 | WARNING | Totals mismatch: report P=0.00 I=0.00 | collected P=78151.62 I=30374.49
+2026-10-14 15:32:31,625 | INFO | Valid rows: 242 | skipped (principal + interest = 0): 247
+2026-10-14 15:32:31,776 | INFO | Payment sheet: 242 rows written
+2026-10-14 15:32:31,857 | INFO | 'Cost Detail Report' found on sheet 'Sheet1', row 1048
+2026-10-14 15:32:31,942 | INFO | Cost totals row reached (row 1649): total costs expended 27311.850000000002 - stopping
+2026-10-14 15:32:31,942 | INFO | Cost rows: 498
+2026-10-14 15:32:32,188 | INFO | Cost sheet: 498 rows written
+2026-10-14 15:32:32,189 | INFO | ----- Processing jameson and dunagan, p.c..xls -----
+2026-10-14 15:32:32,200 | INFO | Master match 'jameson and dunagan, p.c.': client 80.00% | BW 20.00%
+2026-10-14 15:32:32,204 | INFO | Template copied to C:\Users\Admin\OneDrive - StayAhead\Documents\Projects\B&W\Combined\B-W\output\jameson and dunagan, p.c..xlsx
+2026-10-14 15:32:32,219 | INFO | Totals row reached (after-marker row 2): 700 0 531.2 0 168.8 0 0 0 700 140 - stopping
+2026-10-14 15:32:32,219 | WARNING | Totals mismatch: report P=0.00 I=0.00 | collected P=700.00 I=140.00
+2026-10-14 15:32:32,220 | INFO | Valid rows: 1 | skipped (principal + interest = 0): 0
+2026-10-14 15:32:32,342 | INFO | Payment sheet: 1 rows written
+2026-10-14 15:32:32,350 | WARNING | 'Cost Detail Report' not found - Cost sheet will be empty
+2026-10-14 15:32:32,351 | INFO | Cost rows: 0
+2026-10-14 15:32:32,462 | INFO | Cost sheet: 0 rows written
+2026-10-14 15:32:32,463 | INFO | ----- Processing r-g federal credit union.xls -----
+2026-10-14 15:32:32,471 | INFO | Master match 'r-g federal credit union': client 75.00% | BW 25.00%
+2026-10-14 15:32:32,475 | INFO | Template copied to C:\Users\Admin\OneDrive - StayAhead\Documents\Projects\B&W\Combined\B-W\output\r-g federal credit union.xlsx
+2026-10-14 15:32:32,486 | INFO | Totals row reached (after-marker row 14): 4542.2 0 3285.9 0 877.82 378.48 0 20.5 3501.26 1040.94 - stopping
+2026-10-14 15:32:32,487 | WARNING | Totals mismatch: report P=0.00 I=0.00 | collected P=3501.26 I=1040.94
+2026-10-14 15:32:32,487 | INFO | Valid rows: 6 | skipped (principal + interest = 0): 1
+2026-10-14 15:32:32,600 | INFO | Payment sheet: 6 rows written
+2026-10-14 15:32:32,612 | INFO | 'Cost Detail Report' found on sheet 'Sheet1', row 79
+2026-10-14 15:32:32,614 | INFO | Cost totals row reached (row 83): total costs expended 20.5 - stopping
+2026-10-14 15:32:32,617 | INFO | Cost rows: 2
+2026-10-14 15:32:32,712 | INFO | Cost sheet: 2 rows written
+2026-10-14 15:32:32,713 | INFO | ----- Processing Ross, Stuart & Dawson, Inc..xls -----
+2026-10-14 15:32:32,719 | INFO | Master match 'ross, stuart & dawson, inc.': client 82.00% | BW 18.00%
+2026-10-14 15:32:32,721 | INFO | Template copied to C:\Users\Admin\OneDrive - StayAhead\Documents\Projects\B&W\Combined\B-W\output\Ross, Stuart & Dawson, Inc..xlsx
+2026-10-14 15:32:32,735 | INFO | Totals row reached (after-marker row 4): 500 0 0 0 500 0 0 15 410 90 - stopping
+2026-10-14 15:32:32,736 | WARNING | Totals mismatch: report P=0.00 I=0.00 | collected P=410.00 I=90.00
+2026-10-14 15:32:32,736 | INFO | Valid rows: 1 | skipped (principal + interest = 0): 1
+2026-10-14 15:32:32,838 | INFO | Payment sheet: 1 rows written
+2026-10-14 15:32:32,847 | INFO | 'Cost Detail Report' found on sheet 'Sheet1', row 67
+2026-10-14 15:32:32,847 | INFO | Cost totals row reached (row 69): total costs expended 15 - stopping
+2026-10-14 15:32:32,848 | INFO | Cost rows: 1
+2026-10-14 15:32:32,933 | INFO | Cost sheet: 1 rows written
+2026-10-14 15:32:32,934 | INFO | Done: 6 | Failed: 0 
+2026-10-14 15:32:32,934 | INFO | ===== Temp1 run finished =====
+2026-10-14 15:43:37,441 | INFO | ===== Run started =====
+2026-10-14 15:43:37,442 | INFO | Reading file: input/Consumer Collection Management, Inc. 2.xls
+2026-10-14 15:43:37,455 | INFO | Sheets found: ['Sheet1']
+2026-10-14 15:43:37,456 | WARNING | Sheet 'Remittance Report' not found, scanning all sheets for debtor rows
+2026-10-14 15:43:37,474 | INFO | Using sheet: Sheet1
+2026-10-14 15:43:37,542 | INFO | Debtor rows read: 246
+2026-10-14 15:43:37,550 | INFO | Column 5: expected 49090.97, got 49090.97 -> PASS
+2026-10-14 15:43:37,551 | INFO | Column 6: expected 6689.97, got 6689.97 -> PASS
+2026-10-14 15:43:37,556 | INFO | Rule: BOTH | columns 5 and 6 | total: 246 | valid: 20 | removed: 226
+2026-10-14 15:43:37,631 | INFO | Saved valid data to output/valid_remittance.xlsx
+2026-10-14 15:43:37,677 | INFO | ===== Run finished =====
+2026-10-14 15:55:52,614 | INFO | ===== Temp1 run started =====
+2026-10-14 15:55:52,617 | INFO | Input files found: 6
+2026-10-14 15:55:52,618 | INFO | ----- Processing aubrey thrasher- ia.xls -----
+2026-10-14 15:55:52,644 | INFO | Master match 'aubrey thrasher- ia': client 80.00% | BW 20.00%
+2026-10-14 15:55:52,649 | INFO | Template copied to C:\Users\Admin\OneDrive - StayAhead\Documents\Projects\B&W\Combined\B-W\output\aubrey thrasher- ia.xlsx
+2026-10-14 15:55:52,675 | INFO | Totals row reached (after-marker row 3): 18345 0 17416.96 0 750 178.04 0 321.67 14676 3669 - stopping
+2026-10-14 15:55:52,675 | WARNING | Totals mismatch: report P=0.00 I=0.00 | collected P=14676.00 I=3669.00
+2026-10-14 15:55:52,684 | INFO | Valid rows: 2 | skipped (principal + interest = 0): 1
+2026-10-14 15:55:53,021 | INFO | Payment sheet: 2 rows written
+2026-10-14 15:55:53,032 | INFO | 'Cost Detail Report' found on sheet 'Sheet1', row 63
+2026-10-14 15:55:53,034 | INFO | Cost totals row reached (row 67): total costs expended 321.67 - stopping
+2026-10-14 15:55:53,035 | INFO | Cost rows: 3
+2026-10-14 15:55:53,194 | INFO | Cost sheet: 3 rows written
+2026-10-14 15:55:53,195 | INFO | ----- Processing aubrey thrasher.xls -----
+2026-10-14 15:55:53,208 | INFO | Master match 'aubrey thrasher': client 80.00% | BW 20.00%
+2026-10-14 15:55:53,211 | INFO | Template copied to C:\Users\Admin\OneDrive - StayAhead\Documents\Projects\B&W\Combined\B-W\output\aubrey thrasher.xlsx
+2026-10-14 15:55:53,233 | INFO | Totals row reached (after-marker row 32): 44478.76 5100 19036.75 9.3 29480.5 1052.21 0 485 35688.31 9810.45 - stopping
+2026-10-14 15:55:53,233 | WARNING | Totals mismatch: report P=0.00 I=0.00 | collected P=35688.31 I=9810.45
+2026-10-14 15:55:53,233 | INFO | Valid rows: 10 | skipped (principal + interest = 0): 6
+2026-10-14 15:55:53,354 | INFO | Payment sheet: 10 rows written
+2026-10-14 15:55:53,366 | INFO | 'Cost Detail Report' found on sheet 'Sheet1', row 101
+2026-10-14 15:55:53,378 | INFO | Cost totals row reached (row 117): total costs expended 485 - stopping
+2026-10-14 15:55:53,379 | INFO | Cost rows: 10
+2026-10-14 15:55:53,478 | INFO | Cost sheet: 10 rows written
+2026-10-14 15:55:53,480 | INFO | ----- Processing cash link usa, llc.xls -----
+2026-10-14 15:55:53,486 | INFO | Master match 'cash link usa, llc': client 70.00% | BW 30.00%
+2026-10-14 15:55:53,489 | INFO | Template copied to C:\Users\Admin\OneDrive - StayAhead\Documents\Projects\B&W\Combined\B-W\output\cash link usa, llc.xlsx
+2026-10-14 15:55:53,582 | INFO | Totals row reached (after-marker row 978): 109676.29000000001 0 24127.82 76809.76 310.34000000000003 7278.1900000000005 0 27311.850000000002 78151.62 30374.49 - stopping
+2026-10-14 15:55:53,582 | WARNING | Totals mismatch: report P=0.00 I=0.00 | collected P=78151.62 I=30374.49
+2026-10-14 15:55:53,583 | INFO | Valid rows: 242 | skipped (principal + interest = 0): 247
+2026-10-14 15:55:53,750 | INFO | Payment sheet: 242 rows written
+2026-10-14 15:55:53,815 | INFO | 'Cost Detail Report' found on sheet 'Sheet1', row 1048
+2026-10-14 15:55:53,882 | INFO | Cost totals row reached (row 1649): total costs expended 27311.850000000002 - stopping
+2026-10-14 15:55:53,883 | INFO | Cost rows: 498
+2026-10-14 15:55:54,098 | INFO | Cost sheet: 498 rows written
+2026-10-14 15:55:54,099 | INFO | ----- Processing jameson and dunagan, p.c..xls -----
+2026-10-14 15:55:54,106 | INFO | Master match 'jameson and dunagan, p.c.': client 80.00% | BW 20.00%
+2026-10-14 15:55:54,109 | INFO | Template copied to C:\Users\Admin\OneDrive - StayAhead\Documents\Projects\B&W\Combined\B-W\output\jameson and dunagan, p.c..xlsx
+2026-10-14 15:55:54,122 | INFO | Totals row reached (after-marker row 2): 700 0 531.2 0 168.8 0 0 0 700 140 - stopping
+2026-10-14 15:55:54,124 | WARNING | Totals mismatch: report P=0.00 I=0.00 | collected P=700.00 I=140.00
+2026-10-14 15:55:54,125 | INFO | Valid rows: 1 | skipped (principal + interest = 0): 0
+2026-10-14 15:55:54,225 | INFO | Payment sheet: 1 rows written
+2026-10-14 15:55:54,236 | WARNING | 'Cost Detail Report' not found - Cost sheet will be empty
+2026-10-14 15:55:54,238 | INFO | Cost rows: 0
+2026-10-14 15:55:54,325 | INFO | Cost sheet: 0 rows written
+2026-10-14 15:55:54,326 | INFO | ----- Processing r-g federal credit union.xls -----
+2026-10-14 15:55:54,336 | INFO | Master match 'r-g federal credit union': client 75.00% | BW 25.00%
+2026-10-14 15:55:54,339 | INFO | Template copied to C:\Users\Admin\OneDrive - StayAhead\Documents\Projects\B&W\Combined\B-W\output\r-g federal credit union.xlsx
+2026-10-14 15:55:54,353 | INFO | Totals row reached (after-marker row 14): 4542.2 0 3285.9 0 877.82 378.48 0 20.5 3501.26 1040.94 - stopping
+2026-10-14 15:55:54,353 | WARNING | Totals mismatch: report P=0.00 I=0.00 | collected P=3501.26 I=1040.94
+2026-10-14 15:55:54,354 | INFO | Valid rows: 6 | skipped (principal + interest = 0): 1
+2026-10-14 15:55:54,449 | INFO | Payment sheet: 6 rows written
+2026-10-14 15:55:54,456 | INFO | 'Cost Detail Report' found on sheet 'Sheet1', row 79
+2026-10-14 15:55:54,458 | INFO | Cost totals row reached (row 83): total costs expended 20.5 - stopping
+2026-10-14 15:55:54,459 | INFO | Cost rows: 2
+2026-10-14 15:55:54,548 | INFO | Cost sheet: 2 rows written
+2026-10-14 15:55:54,548 | INFO | ----- Processing Ross, Stuart & Dawson, Inc..xls -----
+2026-10-14 15:55:54,554 | INFO | Master match 'ross, stuart & dawson, inc.': client 82.00% | BW 18.00%
+2026-10-14 15:55:54,556 | INFO | Template copied to C:\Users\Admin\OneDrive - StayAhead\Documents\Projects\B&W\Combined\B-W\output\Ross, Stuart & Dawson, Inc..xlsx
+2026-10-14 15:55:54,564 | INFO | Totals row reached (after-marker row 4): 500 0 0 0 500 0 0 15 410 90 - stopping
+2026-10-14 15:55:54,564 | WARNING | Totals mismatch: report P=0.00 I=0.00 | collected P=410.00 I=90.00
+2026-10-14 15:55:54,564 | INFO | Valid rows: 1 | skipped (principal + interest = 0): 1
+2026-10-14 15:55:54,648 | INFO | Payment sheet: 1 rows written
+2026-10-14 15:55:54,652 | INFO | 'Cost Detail Report' found on sheet 'Sheet1', row 67
+2026-10-14 15:55:54,653 | INFO | Cost totals row reached (row 69): total costs expended 15 - stopping
+2026-10-14 15:55:54,653 | INFO | Cost rows: 1
+2026-10-14 15:55:54,736 | INFO | Cost sheet: 1 rows written
+2026-10-14 15:55:54,737 | INFO | Done: 6 | Failed: 0 
+2026-10-14 15:55:54,737 | INFO | ===== Temp1 run finished =====
+2026-10-14 15:55:54,744 | INFO | ===== Run started =====
+2026-10-14 15:55:54,744 | INFO | Reading file: input/Consumer Collection Management, Inc. 2.xls
+2026-10-14 15:55:54,756 | INFO | Sheets found: ['Sheet1']
+2026-10-14 15:55:54,756 | WARNING | Sheet 'Remittance Report' not found, scanning all sheets for debtor rows
+2026-10-14 15:55:54,769 | INFO | Using sheet: Sheet1
+2026-10-14 15:55:54,809 | INFO | Debtor rows read: 246
+2026-10-14 15:55:54,810 | INFO | Column 5: expected 49090.97, got 49090.97 -> PASS
+2026-10-14 15:55:54,810 | INFO | Column 6: expected 6689.97, got 6689.97 -> PASS
+2026-10-14 15:55:54,812 | INFO | Rule: BOTH | columns 5 and 6 | total: 246 | valid: 20 | removed: 226
+2026-10-14 15:55:54,842 | INFO | Saved valid data to output/valid_remittance.xlsx
+2026-10-14 15:55:54,852 | INFO | ===== Run finished =====
+2026-10-14 16:14:47,843 | INFO | ===== Temp1 run started =====
+2026-10-14 16:14:47,846 | INFO | Input files found: 6
+2026-10-14 16:14:47,847 | INFO | ----- Processing aubrey thrasher- ia.xls -----
+2026-10-14 16:14:47,865 | INFO | Master match 'aubrey thrasher- ia': client 80.00% | BW 20.00%
+2026-10-14 16:14:47,873 | INFO | Template copied to C:\Users\Admin\OneDrive - StayAhead\Documents\Projects\B&W\Combined\B-W\output\aubrey thrasher- ia.xlsx
+2026-10-14 16:14:47,900 | INFO | Totals row reached (after-marker row 3): 18345 0 17416.96 0 750 178.04 0 321.67 14676 3669 - stopping
+2026-10-14 16:14:47,900 | WARNING | Totals mismatch: report P=0.00 I=0.00 | collected P=14676.00 I=3669.00
+2026-10-14 16:14:47,900 | INFO | Valid rows: 2 | skipped (principal + interest = 0): 1
+2026-10-14 16:14:48,159 | INFO | Payment sheet: 2 rows written
+2026-10-14 16:14:48,167 | INFO | 'Cost Detail Report' found on sheet 'Sheet1', row 63
+2026-10-14 16:14:48,170 | INFO | Cost totals row reached (row 67): total costs expended 321.67 - stopping
+2026-10-14 16:14:48,170 | INFO | Cost rows: 3
+2026-10-14 16:14:48,304 | INFO | Cost sheet: 3 rows written
+2026-10-14 16:14:48,305 | INFO | ----- Processing aubrey thrasher.xls -----
+2026-10-14 16:14:48,324 | INFO | Master match 'aubrey thrasher': client 80.00% | BW 20.00%
+2026-10-14 16:14:48,328 | INFO | Template copied to C:\Users\Admin\OneDrive - StayAhead\Documents\Projects\B&W\Combined\B-W\output\aubrey thrasher.xlsx
+2026-10-14 16:14:48,348 | INFO | Totals row reached (after-marker row 32): 44478.76 5100 19036.75 9.3 29480.5 1052.21 0 485 35688.31 9810.45 - stopping
+2026-10-14 16:14:48,349 | WARNING | Totals mismatch: report P=0.00 I=0.00 | collected P=35688.31 I=9810.45
+2026-10-14 16:14:48,350 | INFO | Valid rows: 10 | skipped (principal + interest = 0): 6
+2026-10-14 16:14:48,467 | INFO | Payment sheet: 10 rows written
+2026-10-14 16:14:48,480 | INFO | 'Cost Detail Report' found on sheet 'Sheet1', row 101
+2026-10-14 16:14:48,493 | INFO | Cost totals row reached (row 117): total costs expended 485 - stopping
+2026-10-14 16:14:48,493 | INFO | Cost rows: 10
+2026-10-14 16:14:48,609 | INFO | Cost sheet: 10 rows written
+2026-10-14 16:14:48,610 | INFO | ----- Processing cash link usa, llc.xls -----
+2026-10-14 16:14:48,619 | INFO | Master match 'cash link usa, llc': client 70.00% | BW 30.00%
+2026-10-14 16:14:48,622 | INFO | Template copied to C:\Users\Admin\OneDrive - StayAhead\Documents\Projects\B&W\Combined\B-W\output\cash link usa, llc.xlsx
+2026-10-14 16:14:48,732 | INFO | Totals row reached (after-marker row 978): 109676.29000000001 0 24127.82 76809.76 310.34000000000003 7278.1900000000005 0 27311.850000000002 78151.62 30374.49 - stopping
+2026-10-14 16:14:48,733 | WARNING | Totals mismatch: report P=0.00 I=0.00 | collected P=78151.62 I=30374.49
+2026-10-14 16:14:48,733 | INFO | Valid rows: 242 | skipped (principal + interest = 0): 247
+2026-10-14 16:14:48,911 | INFO | Payment sheet: 242 rows written
+2026-10-14 16:14:48,983 | INFO | 'Cost Detail Report' found on sheet 'Sheet1', row 1048
+2026-10-14 16:14:49,037 | INFO | Cost totals row reached (row 1649): total costs expended 27311.850000000002 - stopping
+2026-10-14 16:14:49,037 | INFO | Cost rows: 498
+2026-10-14 16:14:49,237 | INFO | Cost sheet: 498 rows written
+2026-10-14 16:14:49,238 | INFO | ----- Processing jameson and dunagan, p.c..xls -----
+2026-10-14 16:14:49,244 | INFO | Master match 'jameson and dunagan, p.c.': client 80.00% | BW 20.00%
+2026-10-14 16:14:49,247 | INFO | Template copied to C:\Users\Admin\OneDrive - StayAhead\Documents\Projects\B&W\Combined\B-W\output\jameson and dunagan, p.c..xlsx
+2026-10-14 16:14:49,259 | INFO | Totals row reached (after-marker row 2): 700 0 531.2 0 168.8 0 0 0 700 140 - stopping
+2026-10-14 16:14:49,259 | WARNING | Totals mismatch: report P=0.00 I=0.00 | collected P=700.00 I=140.00
+2026-10-14 16:14:49,259 | INFO | Valid rows: 1 | skipped (principal + interest = 0): 0
+2026-10-14 16:14:49,346 | INFO | Payment sheet: 1 rows written
+2026-10-14 16:14:49,358 | WARNING | 'Cost Detail Report' not found - Cost sheet will be empty
+2026-10-14 16:14:49,359 | INFO | Cost rows: 0
+2026-10-14 16:14:49,452 | INFO | Cost sheet: 0 rows written
+2026-10-14 16:14:49,452 | INFO | ----- Processing r-g federal credit union.xls -----
+2026-10-14 16:14:49,459 | INFO | Master match 'r-g federal credit union': client 75.00% | BW 25.00%
+2026-10-14 16:14:49,463 | INFO | Template copied to C:\Users\Admin\OneDrive - StayAhead\Documents\Projects\B&W\Combined\B-W\output\r-g federal credit union.xlsx
+2026-10-14 16:14:49,478 | INFO | Totals row reached (after-marker row 14): 4542.2 0 3285.9 0 877.82 378.48 0 20.5 3501.26 1040.94 - stopping
+2026-10-14 16:14:49,478 | WARNING | Totals mismatch: report P=0.00 I=0.00 | collected P=3501.26 I=1040.94
+2026-10-14 16:14:49,478 | INFO | Valid rows: 6 | skipped (principal + interest = 0): 1
+2026-10-14 16:14:49,564 | INFO | Payment sheet: 6 rows written
+2026-10-14 16:14:49,574 | INFO | 'Cost Detail Report' found on sheet 'Sheet1', row 79
+2026-10-14 16:14:49,576 | INFO | Cost totals row reached (row 83): total costs expended 20.5 - stopping
+2026-10-14 16:14:49,577 | INFO | Cost rows: 2
+2026-10-14 16:14:49,682 | INFO | Cost sheet: 2 rows written
+2026-10-14 16:14:49,683 | INFO | ----- Processing Ross, Stuart & Dawson, Inc..xls -----
+2026-10-14 16:14:49,690 | INFO | Master match 'ross, stuart & dawson, inc.': client 82.00% | BW 18.00%
+2026-10-14 16:14:49,693 | INFO | Template copied to C:\Users\Admin\OneDrive - StayAhead\Documents\Projects\B&W\Combined\B-W\output\Ross, Stuart & Dawson, Inc..xlsx
+2026-10-14 16:14:49,703 | INFO | Totals row reached (after-marker row 4): 500 0 0 0 500 0 0 15 410 90 - stopping
+2026-10-14 16:14:49,703 | WARNING | Totals mismatch: report P=0.00 I=0.00 | collected P=410.00 I=90.00
+2026-10-14 16:14:49,703 | INFO | Valid rows: 1 | skipped (principal + interest = 0): 1
+2026-10-14 16:14:49,797 | INFO | Payment sheet: 1 rows written
+2026-10-14 16:14:49,803 | INFO | 'Cost Detail Report' found on sheet 'Sheet1', row 67
+2026-10-14 16:14:49,804 | INFO | Cost totals row reached (row 69): total costs expended 15 - stopping
+2026-10-14 16:14:49,804 | INFO | Cost rows: 1
+2026-10-14 16:14:49,914 | INFO | Cost sheet: 1 rows written
+2026-10-14 16:14:49,915 | INFO | Done: 6 | Failed: 0 
+2026-10-14 16:14:49,916 | INFO | ===== Temp1 run finished =====
+2026-10-14 16:14:49,932 | INFO | ===== Run started =====
+2026-10-14 16:14:49,933 | INFO | Reading file: input/Consumer Collection Management, Inc. 2.xls
+2026-10-14 16:14:49,960 | INFO | Sheets found: ['Sheet1']
+2026-10-14 16:14:49,960 | WARNING | Sheet 'Remittance Report' not found, scanning all sheets for debtor rows
+2026-10-14 16:14:49,981 | INFO | Using sheet: Sheet1
+2026-10-14 16:14:50,065 | INFO | Debtor rows read: 246
+2026-10-14 16:14:50,067 | INFO | Column 5: expected 49090.97, got 49090.97 -> PASS
+2026-10-14 16:14:50,067 | INFO | Column 6: expected 6689.97, got 6689.97 -> PASS
+2026-10-14 16:14:50,069 | INFO | Rule: BOTH | columns 5 and 6 | total: 246 | valid: 20 | removed: 226
+2026-10-14 16:14:50,116 | INFO | Saved valid data to output/valid_remittance.xlsx
+2026-10-14 16:14:50,134 | INFO | ===== Run finished =====
+2026-10-14 16:31:17,983 | INFO | ===== Temp1 run started =====
+2026-10-14 16:31:17,984 | INFO | Input files found: 6
+2026-10-14 16:31:17,985 | INFO | ----- Processing aubrey thrasher- ia.xls -----
+2026-10-14 16:31:17,996 | INFO | Master match 'aubrey thrasher- ia': client 80.00% | BW 20.00%
+2026-10-14 16:31:17,998 | INFO | Template copied to C:\Users\Admin\OneDrive - StayAhead\Documents\Projects\B&W\Combined\B-W\output\aubrey thrasher- ia.xlsx
+2026-10-14 16:31:18,014 | INFO | Totals row reached (after-marker row 3): 18345 0 17416.96 0 750 178.04 0 321.67 14676 3669 - stopping
+2026-10-14 16:31:18,014 | WARNING | Totals mismatch: report P=0.00 I=0.00 | collected P=14676.00 I=3669.00
+2026-10-14 16:31:18,015 | INFO | Valid rows: 2 | skipped (principal + interest = 0): 1
+2026-10-14 16:31:18,171 | INFO | Payment sheet: 2 rows written
+2026-10-14 16:31:18,178 | INFO | 'Cost Detail Report' found on sheet 'Sheet1', row 63
+2026-10-14 16:31:18,180 | INFO | Cost totals row reached (row 67): total costs expended 321.67 - stopping
+2026-10-14 16:31:18,180 | INFO | Cost rows: 3
+2026-10-14 16:31:18,279 | INFO | Cost sheet: 3 rows written
+2026-10-14 16:31:18,280 | INFO | ----- Processing aubrey thrasher.xls -----
+2026-10-14 16:31:18,286 | INFO | Master match 'aubrey thrasher': client 80.00% | BW 20.00%
+2026-10-14 16:31:18,289 | INFO | Template copied to C:\Users\Admin\OneDrive - StayAhead\Documents\Projects\B&W\Combined\B-W\output\aubrey thrasher.xlsx
+2026-10-14 16:31:18,308 | INFO | Totals row reached (after-marker row 32): 44478.76 5100 19036.75 9.3 29480.5 1052.21 0 485 35688.31 9810.45 - stopping
+2026-10-14 16:31:18,309 | WARNING | Totals mismatch: report P=0.00 I=0.00 | collected P=35688.31 I=9810.45
+2026-10-14 16:31:18,309 | INFO | Valid rows: 10 | skipped (principal + interest = 0): 6
+2026-10-14 16:31:18,406 | INFO | Payment sheet: 10 rows written
+2026-10-14 16:31:18,418 | INFO | 'Cost Detail Report' found on sheet 'Sheet1', row 101
+2026-10-14 16:31:18,424 | INFO | Cost totals row reached (row 117): total costs expended 485 - stopping
+2026-10-14 16:31:18,425 | INFO | Cost rows: 10
+2026-10-14 16:31:18,511 | INFO | Cost sheet: 10 rows written
+2026-10-14 16:31:18,512 | INFO | ----- Processing cash link usa, llc.xls -----
+2026-10-14 16:31:18,518 | INFO | Master match 'cash link usa, llc': client 70.00% | BW 30.00%
+2026-10-14 16:31:18,520 | INFO | Template copied to C:\Users\Admin\OneDrive - StayAhead\Documents\Projects\B&W\Combined\B-W\output\cash link usa, llc.xlsx
+2026-10-14 16:31:18,611 | INFO | Totals row reached (after-marker row 978): 109676.29000000001 0 24127.82 76809.76 310.34000000000003 7278.1900000000005 0 27311.850000000002 78151.62 30374.49 - stopping
+2026-10-14 16:31:18,611 | WARNING | Totals mismatch: report P=0.00 I=0.00 | collected P=78151.62 I=30374.49
+2026-10-14 16:31:18,612 | INFO | Valid rows: 242 | skipped (principal + interest = 0): 247
+2026-10-14 16:31:18,760 | INFO | Payment sheet: 242 rows written
+2026-10-14 16:31:18,830 | INFO | 'Cost Detail Report' found on sheet 'Sheet1', row 1048
+2026-10-14 16:31:18,891 | INFO | Cost totals row reached (row 1649): total costs expended 27311.850000000002 - stopping
+2026-10-14 16:31:18,891 | INFO | Cost rows: 498
+2026-10-14 16:31:19,091 | INFO | Cost sheet: 498 rows written
+2026-10-14 16:31:19,093 | INFO | ----- Processing jameson and dunagan, p.c..xls -----
+2026-10-14 16:31:19,104 | INFO | Master match 'jameson and dunagan, p.c.': client 80.00% | BW 20.00%
+2026-10-14 16:31:19,108 | INFO | Template copied to C:\Users\Admin\OneDrive - StayAhead\Documents\Projects\B&W\Combined\B-W\output\jameson and dunagan, p.c..xlsx
+2026-10-14 16:31:19,120 | INFO | Totals row reached (after-marker row 2): 700 0 531.2 0 168.8 0 0 0 700 140 - stopping
+2026-10-14 16:31:19,120 | WARNING | Totals mismatch: report P=0.00 I=0.00 | collected P=700.00 I=140.00
+2026-10-14 16:31:19,120 | INFO | Valid rows: 1 | skipped (principal + interest = 0): 0
+2026-10-14 16:31:19,235 | INFO | Payment sheet: 1 rows written
+2026-10-14 16:31:19,247 | WARNING | 'Cost Detail Report' not found - Cost sheet will be empty
+2026-10-14 16:31:19,249 | INFO | Cost rows: 0
+2026-10-14 16:31:19,413 | INFO | Cost sheet: 0 rows written
+2026-10-14 16:31:19,414 | INFO | ----- Processing r-g federal credit union.xls -----
+2026-10-14 16:31:19,436 | INFO | Master match 'r-g federal credit union': client 75.00% | BW 25.00%
+2026-10-14 16:31:19,442 | INFO | Template copied to C:\Users\Admin\OneDrive - StayAhead\Documents\Projects\B&W\Combined\B-W\output\r-g federal credit union.xlsx
+2026-10-14 16:31:19,461 | INFO | Totals row reached (after-marker row 14): 4542.2 0 3285.9 0 877.82 378.48 0 20.5 3501.26 1040.94 - stopping
+2026-10-14 16:31:19,461 | WARNING | Totals mismatch: report P=0.00 I=0.00 | collected P=3501.26 I=1040.94
+2026-10-14 16:31:19,462 | INFO | Valid rows: 6 | skipped (principal + interest = 0): 1
+2026-10-14 16:31:19,628 | INFO | Payment sheet: 6 rows written
+2026-10-14 16:31:19,637 | INFO | 'Cost Detail Report' found on sheet 'Sheet1', row 79
+2026-10-14 16:31:19,642 | INFO | Cost totals row reached (row 83): total costs expended 20.5 - stopping
+2026-10-14 16:31:19,646 | INFO | Cost rows: 2
+2026-10-14 16:31:19,783 | INFO | Cost sheet: 2 rows written
+2026-10-14 16:31:19,784 | INFO | ----- Processing Ross, Stuart & Dawson, Inc..xls -----
+2026-10-14 16:31:19,796 | INFO | Master match 'ross, stuart & dawson, inc.': client 82.00% | BW 18.00%
+2026-10-14 16:31:19,799 | INFO | Template copied to C:\Users\Admin\OneDrive - StayAhead\Documents\Projects\B&W\Combined\B-W\output\Ross, Stuart & Dawson, Inc..xlsx
+2026-10-14 16:31:19,813 | INFO | Totals row reached (after-marker row 4): 500 0 0 0 500 0 0 15 410 90 - stopping
+2026-10-14 16:31:19,814 | WARNING | Totals mismatch: report P=0.00 I=0.00 | collected P=410.00 I=90.00
+2026-10-14 16:31:19,814 | INFO | Valid rows: 1 | skipped (principal + interest = 0): 1
+2026-10-14 16:31:19,898 | INFO | Payment sheet: 1 rows written
+2026-10-14 16:31:19,904 | INFO | 'Cost Detail Report' found on sheet 'Sheet1', row 67
+2026-10-14 16:31:19,905 | INFO | Cost totals row reached (row 69): total costs expended 15 - stopping
+2026-10-14 16:31:19,905 | INFO | Cost rows: 1
+2026-10-14 16:31:19,971 | INFO | Cost sheet: 1 rows written
+2026-10-14 16:31:19,971 | INFO | Done: 6 | Failed: 0 
+2026-10-14 16:31:19,971 | INFO | ===== Temp1 run finished =====
+2026-10-14 16:31:19,978 | INFO | ===== Run started =====
+2026-10-14 16:31:19,978 | INFO | Reading file: input/Consumer Collection Management, Inc. 2.xls
+2026-10-14 16:31:19,987 | INFO | Sheets found: ['Sheet1']
+2026-10-14 16:31:19,988 | WARNING | Sheet 'Remittance Report' not found, scanning all sheets for debtor rows
+2026-10-14 16:31:20,000 | INFO | Using sheet: Sheet1
+2026-10-14 16:31:20,034 | INFO | Debtor rows read: 246
+2026-10-14 16:31:20,035 | INFO | Column 5: expected 49090.97, got 49090.97 -> PASS
+2026-10-14 16:31:20,035 | INFO | Column 6: expected 6689.97, got 6689.97 -> PASS
+2026-10-14 16:31:20,037 | INFO | Rule: BOTH | columns 5 and 6 | total: 246 | valid: 20 | removed: 226
+2026-10-14 16:31:20,069 | INFO | Saved valid data to output/valid_remittance.xlsx
+2026-10-14 16:31:20,078 | INFO | ===== Run finished =====
+2026-10-14 16:44:23,258 | INFO | ===== Temp1 run started =====
+2026-10-14 16:44:23,261 | INFO | Input files found: 6
+2026-10-14 16:44:23,262 | INFO | ----- Processing aubrey thrasher- ia.xls -----
+2026-10-14 16:44:23,276 | INFO | Master match 'aubrey thrasher- ia': client 80.00% | BW 20.00%
+2026-10-14 16:44:23,284 | INFO | Template copied to C:\Users\Admin\OneDrive - StayAhead\Documents\Projects\B&W\Combined\B-W\output\aubrey thrasher- ia.xlsx
+2026-10-14 16:44:23,302 | INFO | Totals row reached (after-marker row 3): 18345 0 17416.96 0 750 178.04 0 321.67 14676 3669 - stopping
+2026-10-14 16:44:23,303 | WARNING | Totals mismatch: report P=0.00 I=0.00 | collected P=14676.00 I=3669.00
+2026-10-14 16:44:23,303 | INFO | Valid rows: 2 | skipped (principal + interest = 0): 1
+2026-10-14 16:44:23,492 | INFO | Payment sheet: 2 rows written
+2026-10-14 16:44:23,498 | INFO | 'Cost Detail Report' found on sheet 'Sheet1', row 63
+2026-10-14 16:44:23,500 | INFO | Cost totals row reached (row 67): total costs expended 321.67 - stopping
+2026-10-14 16:44:23,500 | INFO | Cost rows: 3
+2026-10-14 16:44:23,589 | INFO | Cost sheet: 3 rows written
+2026-10-14 16:44:23,589 | INFO | ----- Processing aubrey thrasher.xls -----
+2026-10-14 16:44:23,595 | INFO | Master match 'aubrey thrasher': client 80.00% | BW 20.00%
+2026-10-14 16:44:23,598 | INFO | Template copied to C:\Users\Admin\OneDrive - StayAhead\Documents\Projects\B&W\Combined\B-W\output\aubrey thrasher.xlsx
+2026-10-14 16:44:23,609 | INFO | Totals row reached (after-marker row 32): 44478.76 5100 19036.75 9.3 29480.5 1052.21 0 485 35688.31 9810.45 - stopping
+2026-10-14 16:44:23,609 | WARNING | Totals mismatch: report P=0.00 I=0.00 | collected P=35688.31 I=9810.45
+2026-10-14 16:44:23,609 | INFO | Valid rows: 10 | skipped (principal + interest = 0): 6
+2026-10-14 16:44:23,689 | INFO | Payment sheet: 10 rows written
+2026-10-14 16:44:23,698 | INFO | 'Cost Detail Report' found on sheet 'Sheet1', row 101
+2026-10-14 16:44:23,706 | INFO | Cost totals row reached (row 117): total costs expended 485 - stopping
+2026-10-14 16:44:23,706 | INFO | Cost rows: 10
+2026-10-14 16:44:23,783 | INFO | Cost sheet: 10 rows written
+2026-10-14 16:44:23,784 | INFO | ----- Processing cash link usa, llc.xls -----
+2026-10-14 16:44:23,789 | INFO | Master match 'cash link usa, llc': client 70.00% | BW 30.00%
+2026-10-14 16:44:23,792 | INFO | Template copied to C:\Users\Admin\OneDrive - StayAhead\Documents\Projects\B&W\Combined\B-W\output\cash link usa, llc.xlsx
+2026-10-14 16:44:23,874 | INFO | Totals row reached (after-marker row 978): 109676.29000000001 0 24127.82 76809.76 310.34000000000003 7278.1900000000005 0 27311.850000000002 78151.62 30374.49 - stopping
+2026-10-14 16:44:23,875 | WARNING | Totals mismatch: report P=0.00 I=0.00 | collected P=78151.62 I=30374.49
+2026-10-14 16:44:23,875 | INFO | Valid rows: 242 | skipped (principal + interest = 0): 247
+2026-10-14 16:44:24,014 | INFO | Payment sheet: 242 rows written
+2026-10-14 16:44:24,076 | INFO | 'Cost Detail Report' found on sheet 'Sheet1', row 1048
+2026-10-14 16:44:24,145 | INFO | Cost totals row reached (row 1649): total costs expended 27311.850000000002 - stopping
+2026-10-14 16:44:24,146 | INFO | Cost rows: 498
+2026-10-14 16:44:24,327 | INFO | Cost sheet: 498 rows written
+2026-10-14 16:44:24,329 | INFO | ----- Processing jameson and dunagan, p.c..xls -----
+2026-10-14 16:44:24,334 | INFO | Master match 'jameson and dunagan, p.c.': client 80.00% | BW 20.00%
+2026-10-14 16:44:24,336 | INFO | Template copied to C:\Users\Admin\OneDrive - StayAhead\Documents\Projects\B&W\Combined\B-W\output\jameson and dunagan, p.c..xlsx
+2026-10-14 16:44:24,348 | INFO | Totals row reached (after-marker row 2): 700 0 531.2 0 168.8 0 0 0 700 140 - stopping
+2026-10-14 16:44:24,349 | WARNING | Totals mismatch: report P=0.00 I=0.00 | collected P=700.00 I=140.00
+2026-10-14 16:44:24,349 | INFO | Valid rows: 1 | skipped (principal + interest = 0): 0
+2026-10-14 16:44:24,434 | INFO | Payment sheet: 1 rows written
+2026-10-14 16:44:24,439 | WARNING | 'Cost Detail Report' not found - Cost sheet will be empty
+2026-10-14 16:44:24,440 | INFO | Cost rows: 0
+2026-10-14 16:44:24,522 | INFO | Cost sheet: 0 rows written
+2026-10-14 16:44:24,523 | INFO | ----- Processing r-g federal credit union.xls -----
+2026-10-14 16:44:24,530 | INFO | Master match 'r-g federal credit union': client 75.00% | BW 25.00%
+2026-10-14 16:44:24,532 | INFO | Template copied to C:\Users\Admin\OneDrive - StayAhead\Documents\Projects\B&W\Combined\B-W\output\r-g federal credit union.xlsx
+2026-10-14 16:44:24,543 | INFO | Totals row reached (after-marker row 14): 4542.2 0 3285.9 0 877.82 378.48 0 20.5 3501.26 1040.94 - stopping
+2026-10-14 16:44:24,544 | WARNING | Totals mismatch: report P=0.00 I=0.00 | collected P=3501.26 I=1040.94
+2026-10-14 16:44:24,544 | INFO | Valid rows: 6 | skipped (principal + interest = 0): 1
+2026-10-14 16:44:24,620 | INFO | Payment sheet: 6 rows written
+2026-10-14 16:44:24,625 | INFO | 'Cost Detail Report' found on sheet 'Sheet1', row 79
+2026-10-14 16:44:24,627 | INFO | Cost totals row reached (row 83): total costs expended 20.5 - stopping
+2026-10-14 16:44:24,627 | INFO | Cost rows: 2
+2026-10-14 16:44:24,712 | INFO | Cost sheet: 2 rows written
+2026-10-14 16:44:24,712 | INFO | ----- Processing Ross, Stuart & Dawson, Inc..xls -----
+2026-10-14 16:44:24,718 | INFO | Master match 'ross, stuart & dawson, inc.': client 82.00% | BW 18.00%
+2026-10-14 16:44:24,720 | INFO | Template copied to C:\Users\Admin\OneDrive - StayAhead\Documents\Projects\B&W\Combined\B-W\output\Ross, Stuart & Dawson, Inc..xlsx
+2026-10-14 16:44:24,732 | INFO | Totals row reached (after-marker row 4): 500 0 0 0 500 0 0 15 410 90 - stopping
+2026-10-14 16:44:24,733 | WARNING | Totals mismatch: report P=0.00 I=0.00 | collected P=410.00 I=90.00
+2026-10-14 16:44:24,733 | INFO | Valid rows: 1 | skipped (principal + interest = 0): 1
+2026-10-14 16:44:24,850 | INFO | Payment sheet: 1 rows written
+2026-10-14 16:44:24,874 | INFO | 'Cost Detail Report' found on sheet 'Sheet1', row 67
+2026-10-14 16:44:24,875 | INFO | Cost totals row reached (row 69): total costs expended 15 - stopping
+2026-10-14 16:44:24,875 | INFO | Cost rows: 1
+2026-10-14 16:44:24,970 | INFO | Cost sheet: 1 rows written
+2026-10-14 16:44:24,971 | INFO | Done: 6 | Failed: 0 
+2026-10-14 16:44:24,971 | INFO | ===== Temp1 run finished =====
+2026-10-14 16:44:24,979 | INFO | ===== Run started =====
+2026-10-14 16:44:24,980 | INFO | Reading file: input/Consumer Collection Management, Inc. 2.xls
+2026-10-14 16:44:24,994 | INFO | Sheets found: ['Sheet1']
+2026-10-14 16:44:24,995 | WARNING | Sheet 'Remittance Report' not found, scanning all sheets for debtor rows
+2026-10-14 16:44:25,010 | INFO | Using sheet: Sheet1
+2026-10-14 16:44:25,061 | INFO | Debtor rows read: 246
+2026-10-14 16:44:25,063 | INFO | Column 5: expected 49090.97, got 49090.97 -> PASS
+2026-10-14 16:44:25,063 | INFO | Column 6: expected 6689.97, got 6689.97 -> PASS
+2026-10-14 16:44:25,065 | INFO | Rule: BOTH | columns 5 and 6 | total: 246 | valid: 20 | removed: 226
+2026-10-14 16:44:25,095 | INFO | Saved valid data to output/valid_remittance.xlsx
+2026-10-14 16:44:25,109 | INFO | ===== Run finished =====
+2026-10-15 10:09:20,055 | INFO | ===== Temp1 run started =====
+2026-10-15 10:09:20,057 | INFO | Input files found: 6
+2026-10-15 10:09:20,057 | INFO | ----- Processing aubrey thrasher- ia.xls -----
+2026-10-15 10:09:20,074 | INFO | Master match 'aubrey thrasher- ia': client 80.00% | BW 20.00%
+2026-10-15 10:09:20,090 | INFO | Template copied to C:\Users\Admin\OneDrive - StayAhead\Documents\Projects\B&W\Combined\B-W\output\aubrey thrasher- ia.xlsx
+2026-10-15 10:09:20,131 | INFO | Totals row reached (after-marker row 3): 18345 0 17416.96 0 750 178.04 0 321.67 14676 3669 - stopping
+2026-10-15 10:09:20,132 | WARNING | Totals mismatch: report P=0.00 I=0.00 | collected P=14676.00 I=3669.00
+2026-10-15 10:09:20,132 | INFO | Valid rows: 2 | skipped (principal + interest = 0): 1
+2026-10-15 10:09:20,317 | INFO | Payment sheet: 2 rows written
+2026-10-15 10:09:20,323 | INFO | 'Cost Detail Report' found on sheet 'Sheet1', row 63
+2026-10-15 10:09:20,325 | INFO | Cost totals row reached (row 67): total costs expended 321.67 - stopping
+2026-10-15 10:09:20,326 | INFO | Cost rows: 3
+2026-10-15 10:09:20,418 | INFO | Cost sheet: 3 rows written
+2026-10-15 10:09:20,419 | INFO | ----- Processing aubrey thrasher.xls -----
+2026-10-15 10:09:20,425 | INFO | Master match 'aubrey thrasher': client 80.00% | BW 20.00%
+2026-10-15 10:09:20,427 | INFO | Template copied to C:\Users\Admin\OneDrive - StayAhead\Documents\Projects\B&W\Combined\B-W\output\aubrey thrasher.xlsx
+2026-10-15 10:09:20,460 | INFO | Totals row reached (after-marker row 32): 44478.76 5100 19036.75 9.3 29480.5 1052.21 0 485 35688.31 9810.45 - stopping
+2026-10-15 10:09:20,461 | WARNING | Totals mismatch: report P=0.00 I=0.00 | collected P=35688.31 I=9810.45
+2026-10-15 10:09:20,461 | INFO | Valid rows: 10 | skipped (principal + interest = 0): 6
+2026-10-15 10:09:20,580 | INFO | Payment sheet: 10 rows written
+2026-10-15 10:09:20,593 | INFO | 'Cost Detail Report' found on sheet 'Sheet1', row 101
+2026-10-15 10:09:20,606 | INFO | Cost totals row reached (row 117): total costs expended 485 - stopping
+2026-10-15 10:09:20,606 | INFO | Cost rows: 10
+2026-10-15 10:09:20,740 | INFO | Cost sheet: 10 rows written
+2026-10-15 10:09:20,741 | INFO | ----- Processing cash link usa, llc.xls -----
+2026-10-15 10:09:20,749 | INFO | Master match 'cash link usa, llc': client 70.00% | BW 30.00%
+2026-10-15 10:09:20,752 | INFO | Template copied to C:\Users\Admin\OneDrive - StayAhead\Documents\Projects\B&W\Combined\B-W\output\cash link usa, llc.xlsx
+2026-10-15 10:09:20,846 | INFO | Totals row reached (after-marker row 978): 109676.29000000001 0 24127.82 76809.76 310.34000000000003 7278.1900000000005 0 27311.850000000002 78151.62 30374.49 - stopping
+2026-10-15 10:09:20,847 | WARNING | Totals mismatch: report P=0.00 I=0.00 | collected P=78151.62 I=30374.49
+2026-10-15 10:09:20,847 | INFO | Valid rows: 242 | skipped (principal + interest = 0): 247
+2026-10-15 10:09:20,951 | INFO | Payment sheet: 242 rows written
+2026-10-15 10:09:20,992 | INFO | 'Cost Detail Report' found on sheet 'Sheet1', row 1048
+2026-10-15 10:09:21,030 | INFO | Cost totals row reached (row 1649): total costs expended 27311.850000000002 - stopping
+2026-10-15 10:09:21,030 | INFO | Cost rows: 498
+2026-10-15 10:09:21,177 | INFO | Cost sheet: 498 rows written
+2026-10-15 10:09:21,178 | INFO | ----- Processing jameson and dunagan, p.c..xls -----
+2026-10-15 10:09:21,183 | INFO | Master match 'jameson and dunagan, p.c.': client 80.00% | BW 20.00%
+2026-10-15 10:09:21,186 | INFO | Template copied to C:\Users\Admin\OneDrive - StayAhead\Documents\Projects\B&W\Combined\B-W\output\jameson and dunagan, p.c..xlsx
+2026-10-15 10:09:21,206 | INFO | Totals row reached (after-marker row 2): 700 0 531.2 0 168.8 0 0 0 700 140 - stopping
+2026-10-15 10:09:21,206 | WARNING | Totals mismatch: report P=0.00 I=0.00 | collected P=700.00 I=140.00
+2026-10-15 10:09:21,206 | INFO | Valid rows: 1 | skipped (principal + interest = 0): 0
+2026-10-15 10:09:21,286 | INFO | Payment sheet: 1 rows written
+2026-10-15 10:09:21,291 | WARNING | 'Cost Detail Report' not found - Cost sheet will be empty
+2026-10-15 10:09:21,291 | INFO | Cost rows: 0
+2026-10-15 10:09:21,376 | INFO | Cost sheet: 0 rows written
+2026-10-15 10:09:21,377 | INFO | ----- Processing r-g federal credit union.xls -----
+2026-10-15 10:09:21,382 | INFO | Master match 'r-g federal credit union': client 75.00% | BW 25.00%
+2026-10-15 10:09:21,384 | INFO | Template copied to C:\Users\Admin\OneDrive - StayAhead\Documents\Projects\B&W\Combined\B-W\output\r-g federal credit union.xlsx
+2026-10-15 10:09:21,416 | INFO | Totals row reached (after-marker row 14): 4542.2 0 3285.9 0 877.82 378.48 0 20.5 3501.26 1040.94 - stopping
+2026-10-15 10:09:21,417 | WARNING | Totals mismatch: report P=0.00 I=0.00 | collected P=3501.26 I=1040.94
+2026-10-15 10:09:21,417 | INFO | Valid rows: 6 | skipped (principal + interest = 0): 1
+2026-10-15 10:09:21,490 | INFO | Payment sheet: 6 rows written
+2026-10-15 10:09:21,495 | INFO | 'Cost Detail Report' found on sheet 'Sheet1', row 79
+2026-10-15 10:09:21,496 | INFO | Cost totals row reached (row 83): total costs expended 20.5 - stopping
+2026-10-15 10:09:21,497 | INFO | Cost rows: 2
+2026-10-15 10:09:21,581 | INFO | Cost sheet: 2 rows written
+2026-10-15 10:09:21,581 | INFO | ----- Processing Ross, Stuart & Dawson, Inc..xls -----
+2026-10-15 10:09:21,586 | INFO | Master match 'ross, stuart & dawson, inc.': client 82.00% | BW 18.00%
+2026-10-15 10:09:21,589 | INFO | Template copied to C:\Users\Admin\OneDrive - StayAhead\Documents\Projects\B&W\Combined\B-W\output\Ross, Stuart & Dawson, Inc..xlsx
+2026-10-15 10:09:21,618 | INFO | Totals row reached (after-marker row 4): 500 0 0 0 500 0 0 15 410 90 - stopping
+2026-10-15 10:09:21,618 | WARNING | Totals mismatch: report P=0.00 I=0.00 | collected P=410.00 I=90.00
+2026-10-15 10:09:21,618 | INFO | Valid rows: 1 | skipped (principal + interest = 0): 1
+2026-10-15 10:09:21,695 | INFO | Payment sheet: 1 rows written
+2026-10-15 10:09:21,699 | INFO | 'Cost Detail Report' found on sheet 'Sheet1', row 67
+2026-10-15 10:09:21,700 | INFO | Cost totals row reached (row 69): total costs expended 15 - stopping
+2026-10-15 10:09:21,700 | INFO | Cost rows: 1
+2026-10-15 10:09:21,791 | INFO | Cost sheet: 1 rows written
+2026-10-15 10:09:21,792 | INFO | Done: 6 | Failed: 0 
+2026-10-15 10:09:21,792 | INFO | ===== Temp1 run finished =====
+2026-10-15 10:09:21,797 | INFO | ===== Run started =====
+2026-10-15 10:09:21,798 | INFO | Reading file: input/Consumer Collection Management, Inc. 2.xls
+2026-10-15 10:09:21,832 | INFO | Sheets found: ['Sheet1']
+2026-10-15 10:09:21,832 | WARNING | Sheet 'Remittance Report' not found, scanning all sheets for debtor rows
+2026-10-15 10:09:21,843 | INFO | Using sheet: Sheet1
+2026-10-15 10:09:21,866 | INFO | Totals row found at row 558, skipping it: [59097.99, 106.53, 49090.97, 6689.97, 1057.02, 2004.94, 0, 9659.09, 44513.340000000004, 14239.01]
+2026-10-15 10:09:21,875 | INFO | Totals row found at row 939, skipping it: [59097.99, 106.53, 49090.97, 6689.97, 1057.02, 2004.94, 0, 9659.09, 44513.340000000004, 14239.01]
+2026-10-15 10:09:21,876 | INFO | Totals row found at row 940, skipping it: [59097.99, 106.53, 49090.97, 6689.97, 1057.02, 2004.94, 0, 9659.09, 44513.340000000004, 14239.01]
+2026-10-15 10:09:21,877 | INFO | Debtor rows read: 246
+2026-10-15 10:09:21,879 | INFO | Column 5: expected 49090.97, got 49090.97 -> PASS
+2026-10-15 10:09:21,879 | INFO | Column 6: expected 6689.97, got 6689.97 -> PASS
+2026-10-15 10:09:21,880 | INFO | Rule: BOTH | columns 5 and 6 | total: 246 | valid: 20 | removed: 226
+2026-10-15 10:09:21,894 | ERROR | Run failed
+Traceback (most recent call last):
+  File "C:\Users\Admin\OneDrive - StayAhead\Documents\Projects\B&W\Combined\B-W\temp2\src2\main_temp2.py", line 37, in run_temp2
+    config["client_share_pct"] = get_client_share(
+                                 ~~~~~~~~~~~~~~~~^
+        config.get("master_file", "input/MasterDatatable_1.xlsx"),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<2 lines>...
+        config.get("master_share_column", "BWShare"),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Admin\OneDrive - StayAhead\Documents\Projects\B&W\Combined\B-W\temp2\src2\client_share.py", line 23, in get_client_share
+    raise ValueError(f"Sheet '{sheet_name}' not found. Sheets: {xls.sheet_names}")
+ValueError: Sheet 'InterestPercentage_Temp2' not found. Sheets: ['IntrestPercentage', 'IntrestPercentage_Temp2']
+2026-10-15 10:09:21,895 | INFO | ===== Run finished =====
+2026-10-15 10:50:48,804 | INFO | ===== Temp1 run started =====
+2026-10-15 10:50:48,807 | INFO | Input files found: 6
+2026-10-15 10:50:48,807 | INFO | ----- Processing aubrey thrasher- ia.xls -----
+2026-10-15 10:50:48,831 | INFO | Master match 'aubrey thrasher- ia': client 80.00% | BW 20.00%
+2026-10-15 10:50:48,849 | INFO | Template copied to C:\Users\Admin\OneDrive - StayAhead\Documents\Projects\B&W\Combined\B-W\output\aubrey thrasher- ia.xlsx
+2026-10-15 10:50:48,893 | INFO | Totals row reached (after-marker row 3): 18345 0 17416.96 0 750 178.04 0 321.67 14676 3669 - stopping
+2026-10-15 10:50:48,893 | WARNING | Totals mismatch: report P=0.00 I=0.00 | collected P=14676.00 I=3669.00
+2026-10-15 10:50:48,893 | INFO | Valid rows: 2 | skipped (principal + interest = 0): 1
+2026-10-15 10:50:49,106 | INFO | Payment sheet: 2 rows written
+2026-10-15 10:50:49,116 | INFO | 'Cost Detail Report' found on sheet 'Sheet1', row 63
+2026-10-15 10:50:49,120 | INFO | Cost totals row reached (row 67): total costs expended 321.67 - stopping
+2026-10-15 10:50:49,120 | INFO | Cost rows: 3
+2026-10-15 10:50:49,234 | INFO | Cost sheet: 3 rows written
+2026-10-15 10:50:49,236 | INFO | ----- Processing aubrey thrasher.xls -----
+2026-10-15 10:50:49,243 | INFO | Master match 'aubrey thrasher': client 80.00% | BW 20.00%
+2026-10-15 10:50:49,247 | INFO | Template copied to C:\Users\Admin\OneDrive - StayAhead\Documents\Projects\B&W\Combined\B-W\output\aubrey thrasher.xlsx
+2026-10-15 10:50:49,274 | INFO | Totals row reached (after-marker row 32): 44478.76 5100 19036.75 9.3 29480.5 1052.21 0 485 35688.31 9810.45 - stopping
+2026-10-15 10:50:49,274 | WARNING | Totals mismatch: report P=0.00 I=0.00 | collected P=35688.31 I=9810.45
+2026-10-15 10:50:49,274 | INFO | Valid rows: 10 | skipped (principal + interest = 0): 6
+2026-10-15 10:50:49,390 | INFO | Payment sheet: 10 rows written
+2026-10-15 10:50:49,403 | INFO | 'Cost Detail Report' found on sheet 'Sheet1', row 101
+2026-10-15 10:50:49,416 | INFO | Cost totals row reached (row 117): total costs expended 485 - stopping
+2026-10-15 10:50:49,417 | INFO | Cost rows: 10
+2026-10-15 10:50:49,540 | INFO | Cost sheet: 10 rows written
+2026-10-15 10:50:49,541 | INFO | ----- Processing cash link usa, llc.xls -----
+2026-10-15 10:50:49,552 | INFO | Master match 'cash link usa, llc': client 70.00% | BW 30.00%
+2026-10-15 10:50:49,556 | INFO | Template copied to C:\Users\Admin\OneDrive - StayAhead\Documents\Projects\B&W\Combined\B-W\output\cash link usa, llc.xlsx
+2026-10-15 10:50:49,778 | INFO | Totals row reached (after-marker row 978): 109676.29000000001 0 24127.82 76809.76 310.34000000000003 7278.1900000000005 0 27311.850000000002 78151.62 30374.49 - stopping
+2026-10-15 10:50:49,782 | WARNING | Totals mismatch: report P=0.00 I=0.00 | collected P=78151.62 I=30374.49
+2026-10-15 10:50:49,783 | INFO | Valid rows: 242 | skipped (principal + interest = 0): 247
+2026-10-15 10:50:50,647 | INFO | Payment sheet: 242 rows written
+2026-10-15 10:50:50,832 | INFO | 'Cost Detail Report' found on sheet 'Sheet1', row 1048
+2026-10-15 10:50:50,986 | INFO | Cost totals row reached (row 1649): total costs expended 27311.850000000002 - stopping
+2026-10-15 10:50:50,987 | INFO | Cost rows: 498
+2026-10-15 10:50:51,238 | INFO | Cost sheet: 498 rows written
+2026-10-15 10:50:51,240 | INFO | ----- Processing jameson and dunagan, p.c..xls -----
+2026-10-15 10:50:51,254 | INFO | Master match 'jameson and dunagan, p.c.': client 80.00% | BW 20.00%
+2026-10-15 10:50:51,259 | INFO | Template copied to C:\Users\Admin\OneDrive - StayAhead\Documents\Projects\B&W\Combined\B-W\output\jameson and dunagan, p.c..xlsx
+2026-10-15 10:50:51,286 | INFO | Totals row reached (after-marker row 2): 700 0 531.2 0 168.8 0 0 0 700 140 - stopping
+2026-10-15 10:50:51,287 | WARNING | Totals mismatch: report P=0.00 I=0.00 | collected P=700.00 I=140.00
+2026-10-15 10:50:51,288 | INFO | Valid rows: 1 | skipped (principal + interest = 0): 0
+2026-10-15 10:50:51,407 | INFO | Payment sheet: 1 rows written
+2026-10-15 10:50:51,416 | WARNING | 'Cost Detail Report' not found - Cost sheet will be empty
+2026-10-15 10:50:51,417 | INFO | Cost rows: 0
+2026-10-15 10:50:51,546 | INFO | Cost sheet: 0 rows written
+2026-10-15 10:50:51,549 | INFO | ----- Processing r-g federal credit union.xls -----
+2026-10-15 10:50:51,561 | INFO | Master match 'r-g federal credit union': client 75.00% | BW 25.00%
+2026-10-15 10:50:51,568 | INFO | Template copied to C:\Users\Admin\OneDrive - StayAhead\Documents\Projects\B&W\Combined\B-W\output\r-g federal credit union.xlsx
+2026-10-15 10:50:51,638 | INFO | Totals row reached (after-marker row 14): 4542.2 0 3285.9 0 877.82 378.48 0 20.5 3501.26 1040.94 - stopping
+2026-10-15 10:50:51,639 | WARNING | Totals mismatch: report P=0.00 I=0.00 | collected P=3501.26 I=1040.94
+2026-10-15 10:50:51,639 | INFO | Valid rows: 6 | skipped (principal + interest = 0): 1
+2026-10-15 10:50:51,790 | INFO | Payment sheet: 6 rows written
+2026-10-15 10:50:51,801 | INFO | 'Cost Detail Report' found on sheet 'Sheet1', row 79
+2026-10-15 10:50:51,804 | INFO | Cost totals row reached (row 83): total costs expended 20.5 - stopping
+2026-10-15 10:50:51,805 | INFO | Cost rows: 2
+2026-10-15 10:50:51,897 | INFO | Cost sheet: 2 rows written
+2026-10-15 10:50:51,898 | INFO | ----- Processing Ross, Stuart & Dawson, Inc..xls -----
+2026-10-15 10:50:51,905 | INFO | Master match 'ross, stuart & dawson, inc.': client 82.00% | BW 18.00%
+2026-10-15 10:50:51,907 | INFO | Template copied to C:\Users\Admin\OneDrive - StayAhead\Documents\Projects\B&W\Combined\B-W\output\Ross, Stuart & Dawson, Inc..xlsx
+2026-10-15 10:50:51,959 | INFO | Totals row reached (after-marker row 4): 500 0 0 0 500 0 0 15 410 90 - stopping
+2026-10-15 10:50:51,959 | WARNING | Totals mismatch: report P=0.00 I=0.00 | collected P=410.00 I=90.00
+2026-10-15 10:50:51,959 | INFO | Valid rows: 1 | skipped (principal + interest = 0): 1
+2026-10-15 10:50:52,071 | INFO | Payment sheet: 1 rows written
+2026-10-15 10:50:52,076 | INFO | 'Cost Detail Report' found on sheet 'Sheet1', row 67
+2026-10-15 10:50:52,077 | INFO | Cost totals row reached (row 69): total costs expended 15 - stopping
+2026-10-15 10:50:52,078 | INFO | Cost rows: 1
+2026-10-15 10:50:52,163 | INFO | Cost sheet: 1 rows written
+2026-10-15 10:50:52,164 | INFO | Done: 6 | Failed: 0 
+2026-10-15 10:50:52,164 | INFO | ===== Temp1 run finished =====
+2026-10-15 10:50:52,171 | INFO | ===== Run started =====
+2026-10-15 10:50:52,171 | INFO | Reading file: input/Consumer Collection Management, Inc. 2.xls
+2026-10-15 10:50:52,204 | INFO | Sheets found: ['Sheet1']
+2026-10-15 10:50:52,205 | INFO | Using sheet: Sheet1
+2026-10-15 10:50:52,232 | INFO | Totals row found at row 558, skipping it: [59097.99, 106.53, 49090.97, 6689.97, 1057.02, 2004.94, 0, 9659.09, 44513.340000000004, 14239.01]
+2026-10-15 10:50:52,246 | INFO | Totals row found at row 939, skipping it: [59097.99, 106.53, 49090.97, 6689.97, 1057.02, 2004.94, 0, 9659.09, 44513.340000000004, 14239.01]
+2026-10-15 10:50:52,247 | INFO | Totals row found at row 940, skipping it: [59097.99, 106.53, 49090.97, 6689.97, 1057.02, 2004.94, 0, 9659.09, 44513.340000000004, 14239.01]
+2026-10-15 10:50:52,248 | INFO | Debtor rows read: 246
+2026-10-15 10:50:52,249 | INFO | Column 5: expected 49090.97, got 49090.97 -> PASS
+2026-10-15 10:50:52,249 | INFO | Column 6: expected 6689.97, got 6689.97 -> PASS
+2026-10-15 10:50:52,251 | INFO | Rule: SUM | columns 5 and 6 | total: 246 | valid: 135 | removed: 111
+2026-10-15 10:50:52,275 | INFO | Client share for 'Consumer Collection Management, Inc. 2' = 85.00% (column 'BWShare', sheet 'IntrestPercentage_Temp2')
+2026-10-15 10:50:52,329 | INFO | Saved valid data to output/valid_remittance.xlsx
+2026-10-15 10:50:52,402 | INFO | First sheet formatted with 116 rows
+2026-10-15 10:50:52,438 | INFO | Identifier 'Cost Detail Report' found on sheet 'Sheet1', row 568
+2026-10-15 10:50:52,448 | INFO | Cost rows read: 179 | total: 9659.09
+2026-10-15 10:50:52,449 | INFO | Cost total: expected 9659.09, got 9659.09 -> PASS
+2026-10-15 10:50:52,541 | INFO | Sheet 'Cost' written with 179 rows
+2026-10-15 10:50:52,541 | INFO | Cost sheet added to output/valid_remittance.xlsx
+2026-10-15 10:50:52,549 | INFO | ===== Run finished =====
