@@ -1,18 +1,18 @@
 from pathlib import Path
-from temp2.src.payment_writer import format_payment_sheet
+from temp2.src2.payment_writer import format_payment_sheet
 from config.config_loader import load_config
-from temp2.src.logger_setup import setup_logger
-from temp2.src.reader import read_report
-from temp2.src.validator import check_totals
-from temp2.src.cleaner import keep_valid_rows
-from temp2.src.validator import check_cost_total
-from temp2.src.cost_reader import read_costs
-from temp2.src.cost_writer import write_cost_sheet
+from temp2.src2.logger_setup import setup_logger
+from temp2.src2.reader import read_report
+from temp2.src2.validator import check_totals
+from temp2.src2.cleaner import keep_valid_rows
+from temp2.src2.validator import check_cost_total
+from temp2.src2.cost_reader import read_costs
+from temp2.src2.cost_writer import write_cost_sheet
 from pathlib import Path
-from temp2.src.client_share import get_client_share
+from temp2.src2.client_share import get_client_share
 
 
-def main():
+def run_temp2():
     config = load_config()
     log = setup_logger(config["log_file"], config["log_level"])
     log.info("===== Run started =====")
@@ -64,4 +64,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    run_temp2()
