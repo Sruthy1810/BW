@@ -1,6 +1,6 @@
 import sys
 
-from main_temp1 import run_temp1
+from temp1.src1.main_temp1 import run_temp1
 from main_temp2 import run_temp2
 
 FLOWS = {
