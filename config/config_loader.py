@@ -74,11 +74,23 @@ TEMP1_DEFAULTS = {
     "log_level": "INFO",
 }
 
+ROOT_DIR = Path(__file__).resolve().parent.parent
+
+PATH_KEYS = ["input_file_temp1", "input_folder_temp1", "output_folder_temp1",
+             "output_template1", "MasterDatatable"]
+
+
+def resolve_path(value) -> str:
+    """Absolute paths stay as they are; relative paths are resolved from the project root,
+    so they work on any computer no matter where Python is started."""
+    p = Path(str(value).strip().strip('"'))
+    return str(p if p.is_absolute() else (ROOT_DIR / p).resolve())
 
 def load_temp1_config() -> dict:
     values = {}
-    if CONFIG_PATH.exists():
-        df = pd.read_excel(CONFIG_PATH, dtype=str)
+    cfg_path = ROOT_DIR / "config" / "config.xlsx"            # <-- was CONFIG_PATH (depends on where you run)
+    if cfg_path.exists():
+        df = pd.read_excel(cfg_path, dtype=str)
         df = df.dropna(subset=["key"])
         values = dict(zip(df["key"].str.strip(), df["value"].fillna("").str.strip()))
 
@@ -93,4 +105,8 @@ def load_temp1_config() -> dict:
         raise ValueError("'output_template1' is missing in config/config.xlsx")
     if not config["MasterDatatable"]:
         raise ValueError("'MasterDatatable' is missing in config/config.xlsx")
+
+    for key in PATH_KEYS:                                     # <-- new: make every path absolute
+        if config.get(key):
+            config[key] = resolve_path(config[key])
     return config
