@@ -13,7 +13,7 @@ from temp1.src1.t1_cost import find_cost_rows, parse_cost_rows
 def process_file(input_file, config, log):
     title = Path(input_file).stem.upper()                          # 'CASH LINK USA, LLC'
     output_file = Path(config["output_folder_temp1"]) / f"{Path(input_file).stem}.xlsx"
-    client_pct, bw_pct = get_shares(config["MasterDatatable"], input_file, log)
+    client_pct, bw_pct = get_shares(config["MasterDatatable"], input_file, log, sheet_name="IntrestPercentage")
 
     prepare_output(config["output_template1"], output_file, log)   # copy template -> same name as input
 

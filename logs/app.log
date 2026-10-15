@@ -950,3 +950,200 @@ FileNotFoundError: Temp1 input folder not found: Combined\Input
 2026-10-15 12:03:34,358 | INFO | Sheet 'Cost' written with 179 rows
 2026-10-15 12:03:34,358 | INFO | Cost sheet added to output/valid_remittance.xlsx
 2026-10-15 12:03:34,373 | INFO | ===== Run finished =====
+2026-10-15 14:24:44,332 | INFO | ===== Temp1 run started =====
+2026-10-15 14:24:44,337 | INFO | Input files found: 6
+2026-10-15 14:24:44,337 | INFO | ----- Processing aubrey thrasher- ia.xls -----
+2026-10-15 14:24:44,344 | ERROR | Failed: C:\Users\Admin\OneDrive - StayAhead\Documents\Projects\B&W\Combined\Input\aubrey thrasher- ia.xls
+Traceback (most recent call last):
+  File "C:\Users\Admin\OneDrive - StayAhead\Documents\Projects\B&W\Combined\B-W\temp1\src1\main_temp1.py", line 50, in run_temp1
+    process_file(input_file, config, log)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\OneDrive - StayAhead\Documents\Projects\B&W\Combined\B-W\temp1\src1\main_temp1.py", line 16, in process_file
+    client_pct, bw_pct = get_shares(config["MasterDatatable"], input_file, log, sheet_name="SomeOtherSheet")
+                         ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\OneDrive - StayAhead\Documents\Projects\B&W\Combined\B-W\temp1\src1\t1_master.py", line 35, in get_shares
+    sheet = _find_sheet(master_file, sheet_name)
+  File "C:\Users\Admin\OneDrive - StayAhead\Documents\Projects\B&W\Combined\B-W\temp1\src1\t1_master.py", line 28, in _find_sheet
+    raise ValueError(f"Sheet '{wanted}' not found in MasterDatatable. Available sheets: {names}")
+ValueError: Sheet 'SomeOtherSheet' not found in MasterDatatable. Available sheets: ['IntrestPercentage', 'IntrestPercentage_Temp2']
+2026-10-15 14:24:44,346 | INFO | ----- Processing aubrey thrasher.xls -----
+2026-10-15 14:24:44,354 | ERROR | Failed: C:\Users\Admin\OneDrive - StayAhead\Documents\Projects\B&W\Combined\Input\aubrey thrasher.xls
+Traceback (most recent call last):
+  File "C:\Users\Admin\OneDrive - StayAhead\Documents\Projects\B&W\Combined\B-W\temp1\src1\main_temp1.py", line 50, in run_temp1
+    process_file(input_file, config, log)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\OneDrive - StayAhead\Documents\Projects\B&W\Combined\B-W\temp1\src1\main_temp1.py", line 16, in process_file
+    client_pct, bw_pct = get_shares(config["MasterDatatable"], input_file, log, sheet_name="SomeOtherSheet")
+                         ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\OneDrive - StayAhead\Documents\Projects\B&W\Combined\B-W\temp1\src1\t1_master.py", line 35, in get_shares
+    sheet = _find_sheet(master_file, sheet_name)
+  File "C:\Users\Admin\OneDrive - StayAhead\Documents\Projects\B&W\Combined\B-W\temp1\src1\t1_master.py", line 28, in _find_sheet
+    raise ValueError(f"Sheet '{wanted}' not found in MasterDatatable. Available sheets: {names}")
+ValueError: Sheet 'SomeOtherSheet' not found in MasterDatatable. Available sheets: ['IntrestPercentage', 'IntrestPercentage_Temp2']
+2026-10-15 14:24:44,358 | INFO | ----- Processing cash link usa, llc.xls -----
+2026-10-15 14:24:44,366 | ERROR | Failed: C:\Users\Admin\OneDrive - StayAhead\Documents\Projects\B&W\Combined\Input\cash link usa, llc.xls
+Traceback (most recent call last):
+  File "C:\Users\Admin\OneDrive - StayAhead\Documents\Projects\B&W\Combined\B-W\temp1\src1\main_temp1.py", line 50, in run_temp1
+    process_file(input_file, config, log)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\OneDrive - StayAhead\Documents\Projects\B&W\Combined\B-W\temp1\src1\main_temp1.py", line 16, in process_file
+    client_pct, bw_pct = get_shares(config["MasterDatatable"], input_file, log, sheet_name="SomeOtherSheet")
+                         ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\OneDrive - StayAhead\Documents\Projects\B&W\Combined\B-W\temp1\src1\t1_master.py", line 35, in get_shares
+    sheet = _find_sheet(master_file, sheet_name)
+  File "C:\Users\Admin\OneDrive - StayAhead\Documents\Projects\B&W\Combined\B-W\temp1\src1\t1_master.py", line 28, in _find_sheet
+    raise ValueError(f"Sheet '{wanted}' not found in MasterDatatable. Available sheets: {names}")
+ValueError: Sheet 'SomeOtherSheet' not found in MasterDatatable. Available sheets: ['IntrestPercentage', 'IntrestPercentage_Temp2']
+2026-10-15 14:24:44,370 | INFO | ----- Processing jameson and dunagan, p.c..xls -----
+2026-10-15 14:24:44,383 | ERROR | Failed: C:\Users\Admin\OneDrive - StayAhead\Documents\Projects\B&W\Combined\Input\jameson and dunagan, p.c..xls
+Traceback (most recent call last):
+  File "C:\Users\Admin\OneDrive - StayAhead\Documents\Projects\B&W\Combined\B-W\temp1\src1\main_temp1.py", line 50, in run_temp1
+    process_file(input_file, config, log)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\OneDrive - StayAhead\Documents\Projects\B&W\Combined\B-W\temp1\src1\main_temp1.py", line 16, in process_file
+    client_pct, bw_pct = get_shares(config["MasterDatatable"], input_file, log, sheet_name="SomeOtherSheet")
+                         ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\OneDrive - StayAhead\Documents\Projects\B&W\Combined\B-W\temp1\src1\t1_master.py", line 35, in get_shares
+    sheet = _find_sheet(master_file, sheet_name)
+  File "C:\Users\Admin\OneDrive - StayAhead\Documents\Projects\B&W\Combined\B-W\temp1\src1\t1_master.py", line 28, in _find_sheet
+    raise ValueError(f"Sheet '{wanted}' not found in MasterDatatable. Available sheets: {names}")
+ValueError: Sheet 'SomeOtherSheet' not found in MasterDatatable. Available sheets: ['IntrestPercentage', 'IntrestPercentage_Temp2']
+2026-10-15 14:24:44,384 | INFO | ----- Processing r-g federal credit union.xls -----
+2026-10-15 14:24:44,394 | ERROR | Failed: C:\Users\Admin\OneDrive - StayAhead\Documents\Projects\B&W\Combined\Input\r-g federal credit union.xls
+Traceback (most recent call last):
+  File "C:\Users\Admin\OneDrive - StayAhead\Documents\Projects\B&W\Combined\B-W\temp1\src1\main_temp1.py", line 50, in run_temp1
+    process_file(input_file, config, log)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\OneDrive - StayAhead\Documents\Projects\B&W\Combined\B-W\temp1\src1\main_temp1.py", line 16, in process_file
+    client_pct, bw_pct = get_shares(config["MasterDatatable"], input_file, log, sheet_name="SomeOtherSheet")
+                         ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\OneDrive - StayAhead\Documents\Projects\B&W\Combined\B-W\temp1\src1\t1_master.py", line 35, in get_shares
+    sheet = _find_sheet(master_file, sheet_name)
+  File "C:\Users\Admin\OneDrive - StayAhead\Documents\Projects\B&W\Combined\B-W\temp1\src1\t1_master.py", line 28, in _find_sheet
+    raise ValueError(f"Sheet '{wanted}' not found in MasterDatatable. Available sheets: {names}")
+ValueError: Sheet 'SomeOtherSheet' not found in MasterDatatable. Available sheets: ['IntrestPercentage', 'IntrestPercentage_Temp2']
+2026-10-15 14:24:44,395 | INFO | ----- Processing Ross, Stuart & Dawson, Inc..xls -----
+2026-10-15 14:24:44,402 | ERROR | Failed: C:\Users\Admin\OneDrive - StayAhead\Documents\Projects\B&W\Combined\Input\Ross, Stuart & Dawson, Inc..xls
+Traceback (most recent call last):
+  File "C:\Users\Admin\OneDrive - StayAhead\Documents\Projects\B&W\Combined\B-W\temp1\src1\main_temp1.py", line 50, in run_temp1
+    process_file(input_file, config, log)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\OneDrive - StayAhead\Documents\Projects\B&W\Combined\B-W\temp1\src1\main_temp1.py", line 16, in process_file
+    client_pct, bw_pct = get_shares(config["MasterDatatable"], input_file, log, sheet_name="SomeOtherSheet")
+                         ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\OneDrive - StayAhead\Documents\Projects\B&W\Combined\B-W\temp1\src1\t1_master.py", line 35, in get_shares
+    sheet = _find_sheet(master_file, sheet_name)
+  File "C:\Users\Admin\OneDrive - StayAhead\Documents\Projects\B&W\Combined\B-W\temp1\src1\t1_master.py", line 28, in _find_sheet
+    raise ValueError(f"Sheet '{wanted}' not found in MasterDatatable. Available sheets: {names}")
+ValueError: Sheet 'SomeOtherSheet' not found in MasterDatatable. Available sheets: ['IntrestPercentage', 'IntrestPercentage_Temp2']
+2026-10-15 14:24:44,403 | INFO | Done: 0 | Failed: 6 ['aubrey thrasher- ia.xls', 'aubrey thrasher.xls', 'cash link usa, llc.xls', 'jameson and dunagan, p.c..xls', 'r-g federal credit union.xls', 'Ross, Stuart & Dawson, Inc..xls']
+2026-10-15 14:24:44,404 | INFO | ===== Temp1 run finished =====
+2026-10-15 14:24:44,413 | INFO | ===== Run started =====
+2026-10-15 14:24:44,415 | INFO | Reading file: input/Consumer Collection Management, Inc. 2.xls
+2026-10-15 14:24:44,436 | INFO | Sheets found: ['Sheet1']
+2026-10-15 14:24:44,436 | INFO | Using sheet: Sheet1
+2026-10-15 14:24:44,480 | INFO | Totals row found at row 558, skipping it: [59097.99, 106.53, 49090.97, 6689.97, 1057.02, 2004.94, 0, 9659.09, 44513.340000000004, 14239.01]
+2026-10-15 14:24:44,500 | INFO | Totals row found at row 939, skipping it: [59097.99, 106.53, 49090.97, 6689.97, 1057.02, 2004.94, 0, 9659.09, 44513.340000000004, 14239.01]
+2026-10-15 14:24:44,500 | INFO | Totals row found at row 940, skipping it: [59097.99, 106.53, 49090.97, 6689.97, 1057.02, 2004.94, 0, 9659.09, 44513.340000000004, 14239.01]
+2026-10-15 14:24:44,502 | INFO | Debtor rows read: 246
+2026-10-15 14:24:44,503 | INFO | Column 5: expected 49090.97, got 49090.97 -> PASS
+2026-10-15 14:24:44,503 | INFO | Column 6: expected 6689.97, got 6689.97 -> PASS
+2026-10-15 14:24:44,506 | INFO | Rule: SUM | columns 5 and 6 | total: 246 | valid: 135 | removed: 111
+2026-10-15 14:24:44,522 | INFO | Client share for 'Consumer Collection Management, Inc. 2' = 85.00% (column 'BWShare', sheet 'IntrestPercentage_Temp2')
+2026-10-15 14:24:44,583 | INFO | Saved valid data to output/valid_remittance.xlsx
+2026-10-15 14:24:44,662 | INFO | First sheet formatted with 116 rows
+2026-10-15 14:24:44,704 | INFO | Identifier 'Cost Detail Report' found on sheet 'Sheet1', row 568
+2026-10-15 14:24:44,715 | INFO | Cost rows read: 179 | total: 9659.09
+2026-10-15 14:24:44,715 | INFO | Cost total: expected 9659.09, got 9659.09 -> PASS
+2026-10-15 14:24:44,819 | INFO | Sheet 'Cost' written with 179 rows
+2026-10-15 14:24:44,819 | INFO | Cost sheet added to output/valid_remittance.xlsx
+2026-10-15 14:24:44,830 | INFO | ===== Run finished =====
+2026-10-15 14:26:53,381 | INFO | ===== Temp1 run started =====
+2026-10-15 14:26:53,381 | INFO | Input files found: 6
+2026-10-15 14:26:53,382 | INFO | ----- Processing aubrey thrasher- ia.xls -----
+2026-10-15 14:26:53,397 | INFO | Master match 'aubrey thrasher- ia' (sheet 'IntrestPercentage'): client 80.00% | BW 20.00%
+2026-10-15 14:26:53,402 | INFO | Template copied to C:\Users\Admin\OneDrive - StayAhead\Documents\Projects\B&W\Combined\B-W\output\aubrey thrasher- ia.xlsx
+2026-10-15 14:26:53,419 | INFO | Totals row reached (after-marker row 3): 18345 0 17416.96 0 750 178.04 0 321.67 14676 3669 - stopping
+2026-10-15 14:26:53,420 | WARNING | Totals mismatch: report P=0.00 I=0.00 | collected P=14676.00 I=3669.00
+2026-10-15 14:26:53,420 | INFO | Valid rows: 2 | skipped (principal + interest = 0): 1
+2026-10-15 14:26:53,545 | INFO | Payment sheet: 2 rows written
+2026-10-15 14:26:53,550 | INFO | 'Cost Detail Report' found on sheet 'Sheet1', row 63
+2026-10-15 14:26:53,550 | INFO | Cost totals row reached (row 67): total costs expended 321.67 - stopping
+2026-10-15 14:26:53,551 | INFO | Cost rows: 3
+2026-10-15 14:26:53,616 | INFO | Cost sheet: 3 rows written
+2026-10-15 14:26:53,616 | INFO | ----- Processing aubrey thrasher.xls -----
+2026-10-15 14:26:53,625 | INFO | Master match 'aubrey thrasher' (sheet 'IntrestPercentage'): client 80.00% | BW 20.00%
+2026-10-15 14:26:53,628 | INFO | Template copied to C:\Users\Admin\OneDrive - StayAhead\Documents\Projects\B&W\Combined\B-W\output\aubrey thrasher.xlsx
+2026-10-15 14:26:53,638 | INFO | Totals row reached (after-marker row 32): 44478.76 5100 19036.75 9.3 29480.5 1052.21 0 485 35688.31 9810.45 - stopping
+2026-10-15 14:26:53,638 | WARNING | Totals mismatch: report P=0.00 I=0.00 | collected P=35688.31 I=9810.45
+2026-10-15 14:26:53,639 | INFO | Valid rows: 10 | skipped (principal + interest = 0): 6
+2026-10-15 14:26:53,710 | INFO | Payment sheet: 10 rows written
+2026-10-15 14:26:53,717 | INFO | 'Cost Detail Report' found on sheet 'Sheet1', row 101
+2026-10-15 14:26:53,725 | INFO | Cost totals row reached (row 117): total costs expended 485 - stopping
+2026-10-15 14:26:53,726 | INFO | Cost rows: 10
+2026-10-15 14:26:53,789 | INFO | Cost sheet: 10 rows written
+2026-10-15 14:26:53,790 | INFO | ----- Processing cash link usa, llc.xls -----
+2026-10-15 14:26:53,798 | INFO | Master match 'cash link usa, llc' (sheet 'IntrestPercentage'): client 70.00% | BW 30.00%
+2026-10-15 14:26:53,802 | INFO | Template copied to C:\Users\Admin\OneDrive - StayAhead\Documents\Projects\B&W\Combined\B-W\output\cash link usa, llc.xlsx
+2026-10-15 14:26:53,873 | INFO | Totals row reached (after-marker row 978): 109676.29000000001 0 24127.82 76809.76 310.34000000000003 7278.1900000000005 0 27311.850000000002 78151.62 30374.49 - stopping
+2026-10-15 14:26:53,874 | WARNING | Totals mismatch: report P=0.00 I=0.00 | collected P=78151.62 I=30374.49
+2026-10-15 14:26:53,874 | INFO | Valid rows: 242 | skipped (principal + interest = 0): 247
+2026-10-15 14:26:53,985 | INFO | Payment sheet: 242 rows written
+2026-10-15 14:26:54,028 | INFO | 'Cost Detail Report' found on sheet 'Sheet1', row 1048
+2026-10-15 14:26:54,079 | INFO | Cost totals row reached (row 1649): total costs expended 27311.850000000002 - stopping
+2026-10-15 14:26:54,079 | INFO | Cost rows: 498
+2026-10-15 14:26:54,241 | INFO | Cost sheet: 498 rows written
+2026-10-15 14:26:54,242 | INFO | ----- Processing jameson and dunagan, p.c..xls -----
+2026-10-15 14:26:54,256 | INFO | Master match 'jameson and dunagan, p.c.' (sheet 'IntrestPercentage'): client 80.00% | BW 20.00%
+2026-10-15 14:26:54,259 | INFO | Template copied to C:\Users\Admin\OneDrive - StayAhead\Documents\Projects\B&W\Combined\B-W\output\jameson and dunagan, p.c..xlsx
+2026-10-15 14:26:54,267 | INFO | Totals row reached (after-marker row 2): 700 0 531.2 0 168.8 0 0 0 700 140 - stopping
+2026-10-15 14:26:54,267 | WARNING | Totals mismatch: report P=0.00 I=0.00 | collected P=700.00 I=140.00
+2026-10-15 14:26:54,267 | INFO | Valid rows: 1 | skipped (principal + interest = 0): 0
+2026-10-15 14:26:54,346 | INFO | Payment sheet: 1 rows written
+2026-10-15 14:26:54,351 | WARNING | 'Cost Detail Report' not found - Cost sheet will be empty
+2026-10-15 14:26:54,352 | INFO | Cost rows: 0
+2026-10-15 14:26:54,426 | INFO | Cost sheet: 0 rows written
+2026-10-15 14:26:54,427 | INFO | ----- Processing r-g federal credit union.xls -----
+2026-10-15 14:26:54,439 | INFO | Master match 'r-g federal credit union' (sheet 'IntrestPercentage'): client 75.00% | BW 25.00%
+2026-10-15 14:26:54,442 | INFO | Template copied to C:\Users\Admin\OneDrive - StayAhead\Documents\Projects\B&W\Combined\B-W\output\r-g federal credit union.xlsx
+2026-10-15 14:26:54,452 | INFO | Totals row reached (after-marker row 14): 4542.2 0 3285.9 0 877.82 378.48 0 20.5 3501.26 1040.94 - stopping
+2026-10-15 14:26:54,453 | WARNING | Totals mismatch: report P=0.00 I=0.00 | collected P=3501.26 I=1040.94
+2026-10-15 14:26:54,453 | INFO | Valid rows: 6 | skipped (principal + interest = 0): 1
+2026-10-15 14:26:54,534 | INFO | Payment sheet: 6 rows written
+2026-10-15 14:26:54,539 | INFO | 'Cost Detail Report' found on sheet 'Sheet1', row 79
+2026-10-15 14:26:54,540 | INFO | Cost totals row reached (row 83): total costs expended 20.5 - stopping
+2026-10-15 14:26:54,541 | INFO | Cost rows: 2
+2026-10-15 14:26:54,605 | INFO | Cost sheet: 2 rows written
+2026-10-15 14:26:54,605 | INFO | ----- Processing Ross, Stuart & Dawson, Inc..xls -----
+2026-10-15 14:26:54,614 | INFO | Master match 'ross, stuart & dawson, inc.' (sheet 'IntrestPercentage'): client 82.00% | BW 18.00%
+2026-10-15 14:26:54,616 | INFO | Template copied to C:\Users\Admin\OneDrive - StayAhead\Documents\Projects\B&W\Combined\B-W\output\Ross, Stuart & Dawson, Inc..xlsx
+2026-10-15 14:26:54,622 | INFO | Totals row reached (after-marker row 4): 500 0 0 0 500 0 0 15 410 90 - stopping
+2026-10-15 14:26:54,623 | WARNING | Totals mismatch: report P=0.00 I=0.00 | collected P=410.00 I=90.00
+2026-10-15 14:26:54,623 | INFO | Valid rows: 1 | skipped (principal + interest = 0): 1
+2026-10-15 14:26:54,702 | INFO | Payment sheet: 1 rows written
+2026-10-15 14:26:54,707 | INFO | 'Cost Detail Report' found on sheet 'Sheet1', row 67
+2026-10-15 14:26:54,707 | INFO | Cost totals row reached (row 69): total costs expended 15 - stopping
+2026-10-15 14:26:54,707 | INFO | Cost rows: 1
+2026-10-15 14:26:54,789 | INFO | Cost sheet: 1 rows written
+2026-10-15 14:26:54,789 | INFO | Done: 6 | Failed: 0 
+2026-10-15 14:26:54,789 | INFO | ===== Temp1 run finished =====
+2026-10-15 14:26:54,794 | INFO | ===== Run started =====
+2026-10-15 14:26:54,795 | INFO | Reading file: input/Consumer Collection Management, Inc. 2.xls
+2026-10-15 14:26:54,804 | INFO | Sheets found: ['Sheet1']
+2026-10-15 14:26:54,804 | INFO | Using sheet: Sheet1
+2026-10-15 14:26:54,827 | INFO | Totals row found at row 558, skipping it: [59097.99, 106.53, 49090.97, 6689.97, 1057.02, 2004.94, 0, 9659.09, 44513.340000000004, 14239.01]
+2026-10-15 14:26:54,839 | INFO | Totals row found at row 939, skipping it: [59097.99, 106.53, 49090.97, 6689.97, 1057.02, 2004.94, 0, 9659.09, 44513.340000000004, 14239.01]
+2026-10-15 14:26:54,839 | INFO | Totals row found at row 940, skipping it: [59097.99, 106.53, 49090.97, 6689.97, 1057.02, 2004.94, 0, 9659.09, 44513.340000000004, 14239.01]
+2026-10-15 14:26:54,841 | INFO | Debtor rows read: 246
+2026-10-15 14:26:54,841 | INFO | Column 5: expected 49090.97, got 49090.97 -> PASS
+2026-10-15 14:26:54,841 | INFO | Column 6: expected 6689.97, got 6689.97 -> PASS
+2026-10-15 14:26:54,842 | INFO | Rule: SUM | columns 5 and 6 | total: 246 | valid: 135 | removed: 111
+2026-10-15 14:26:54,848 | INFO | Client share for 'Consumer Collection Management, Inc. 2' = 85.00% (column 'BWShare', sheet 'IntrestPercentage_Temp2')
+2026-10-15 14:26:54,902 | INFO | Saved valid data to output/valid_remittance.xlsx
+2026-10-15 14:26:54,975 | INFO | First sheet formatted with 116 rows
+2026-10-15 14:26:55,005 | INFO | Identifier 'Cost Detail Report' found on sheet 'Sheet1', row 568
+2026-10-15 14:26:55,012 | INFO | Cost rows read: 179 | total: 9659.09
+2026-10-15 14:26:55,013 | INFO | Cost total: expected 9659.09, got 9659.09 -> PASS
+2026-10-15 14:26:55,093 | INFO | Sheet 'Cost' written with 179 rows
+2026-10-15 14:26:55,093 | INFO | Cost sheet added to output/valid_remittance.xlsx
+2026-10-15 14:26:55,099 | INFO | ===== Run finished =====
