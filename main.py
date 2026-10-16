@@ -1,4 +1,9 @@
+import os
 import sys
+from pathlib import Path
+
+APP_DIR = Path(sys.executable).parent if getattr(sys, "frozen", False) else Path(__file__).resolve().parent
+os.chdir(APP_DIR)
 
 from temp1.src1.main_temp1 import run_temp1
 from temp2.src2.main_temp2 import run_temp2
@@ -34,4 +39,8 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    finally:
+        if getattr(sys, "frozen", False):          # only for the exe: stop the window closing instantly
+            input("\nPress Enter to close...")

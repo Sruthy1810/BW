@@ -1,6 +1,7 @@
 from pathlib import Path
 import pandas as pd
- 
+import sys
+
 CONFIG_PATH = Path("config/config.xlsx")
  
 DEFAULTS = [
@@ -74,7 +75,11 @@ TEMP1_DEFAULTS = {
     "log_level": "INFO",
 }
 
-ROOT_DIR = Path(__file__).resolve().parent.parent
+# project root: next to the .exe when packaged, otherwise the folder that contains config/
+if getattr(sys, "frozen", False):
+    ROOT_DIR = Path(sys.executable).parent
+else:
+    ROOT_DIR = Path(__file__).resolve().parent.parent
 
 PATH_KEYS = ["input_file_temp1", "input_folder_temp1", "output_folder_temp1",
              "output_template1", "MasterDatatable"]
