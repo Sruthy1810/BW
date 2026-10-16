@@ -100,8 +100,11 @@ def _payment_block(ws, header_row, title, client_pct, bw_pct):
     ws["E4"].number_format = _pct_format(client_pct)
     ws["F4"].number_format = _pct_format(bw_pct)
     ws["B5"] = "Total"
-    for col in "CDEF":
+    for col in "CD":                                   # Amount Paid, Direct Payment: sum of the rows
         ws[f"{col}5"] = f"=SUM({col}{first}:{col}{last})"
+    ws["E5"] = "=ROUND(C5*E4,2)"                       # client total = Amount Paid total x client %
+    ws["F5"] = "=ROUND(C5*F4,2)"                       # BW total = Amount Paid total x BW %
+    for col in "CDEF":
         ws[f"{col}5"].number_format = CURRENCY_FORMAT
     for ref in ("A1", "A2", "E4", "F4", "B5", "C5", "D5", "E5", "F5"):
         ws[ref].font = Font(bold=True)

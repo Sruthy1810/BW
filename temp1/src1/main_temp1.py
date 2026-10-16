@@ -21,7 +21,7 @@ def process_file(input_file, config, log):
     raw = read_raw(input_file)
     rows = rows_after_marker(raw)
     data = parse_rows(rows, log)
-    payment_sheet = build_payment_sheet(data, client_pct)
+    payment_sheet = build_payment_sheet(data, client_pct, bw_pct) 
     write_payment_sheet(payment_sheet, output_file, log, title, client_pct, bw_pct)
 
     # ---- Cost sheet ----
@@ -59,7 +59,8 @@ def run_temp1():
         log.info("Done: %d | Failed: %d %s", len(done), len(failed), failed or "")
         log.info("===== Temp1 run finished =====")
         print(f"\nDone: {len(done)} | Failed: {len(failed)} {failed or ''}")
-
+        if failed:
+            raise RuntimeError(f"{len(failed)} file(s) failed: {failed}")
 
 if __name__ == "__main__":
     run_temp1()

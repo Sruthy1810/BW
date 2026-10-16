@@ -1,4 +1,5 @@
 import pandas as pd
+from decimal import Decimal, ROUND_HALF_UP
 
 PAYMENT_COLUMNS = [
     "DEFENDANT'S NAME", "REF NO.", "AMOUNT PAID", "DIRECT PAYMENT",
@@ -7,20 +8,26 @@ PAYMENT_COLUMNS = [
 
 COST_COLUMNS = ["DEFENDANT'S NAME", "REF NO.", "AMOUNT", "COST REASON", "Date", "Notes"]
 
-def build_payment_sheet(data, client_pct):
+
+def _share(amount, pct):
+    """Excel-style ROUND(amount * pct, 2): a half cent rounds up, using exact decimals (no float error)."""
+    value = Decimal(str(round(amount, 2))) * Decimal(str(round(pct, 6)))
+    return float(value.quantize(Decimal("0.01"), rounding=ROUND_HALF_UP))
+
+
+def build_payment_sheet(data, client_pct, bw_pct):
     out = pd.DataFrame(columns=PAYMENT_COLUMNS)
     if data.empty:
         return out
 
     amount = (data["principal"] + data["interest"]).round(2)
-    client = (amount * client_pct).round(2)          # Amount Paid x client % from the master
 
     out["DEFENDANT'S NAME"] = data["name"]
     out["REF NO."] = data["ref_no"]
     out["AMOUNT PAID"] = amount
     out["DIRECT PAYMENT"] = data["direct_payment"]
-    out["CLIENT SHARE"] = client                      # <-- was ""
-    out["BW, LLP SHARE"] = (amount - client).round(2)  # <-- was "" (remainder, so the two add up)
+    out["CLIENT SHARE"] = amount.apply(lambda a: _share(a, client_pct))   # each share rounded on its own
+    out["BW, LLP SHARE"] = amount.apply(lambda a: _share(a, bw_pct))
     out["Notes"] = ""
     return out
 
