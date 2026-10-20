@@ -4,7 +4,6 @@ import io
 import os
 import re
 import smtplib
-import socket
 import ssl
 import zipfile
 from datetime import datetime
@@ -12,6 +11,20 @@ from email.message import EmailMessage
 from pathlib import Path
 
 from logs.logger_setup import get_execution_log
+
+FILE_STATS = {}
+
+
+def record_files(flow, found, done, failed):
+    FILE_STATS[flow] = {
+        "found": found,
+        "done": done,
+        "failed": failed
+    }
+
+
+def get_file_stats(flow):
+    return FILE_STATS.get(flow)
 
 
 class Notifier:
@@ -53,13 +66,13 @@ class Notifier:
             if not to:
                 print("Mail skipped: mail_to is empty in config.xlsx")
                 return
-            password = os.environ.get(self.cfg.get("mail_password_env", ""), "")
+            password = self.cfg.get("sender_password", "").strip()
             if not password:
                 print(f"Mail skipped: environment variable {self.cfg.get('mail_password_env')} is not set")
                 return
 
             msg = EmailMessage()
-            msg["Subject"] = f"{self.cfg['mail_subject_prefix']} {kind} - {datetime.now():%d-%b-%Y %H:%M}"
+            msg["Subject"] = f"{self.cfg['mail_subject_prefix']} {kind}"
             msg["From"] = self.cfg.get("mail_from") or self.cfg["smtp_user"]
             msg["To"] = ", ".join(to)
             cc = self._split(self.cfg.get("mail_cc"))
@@ -140,13 +153,52 @@ class Notifier:
         self._send(f"FAILED - {flow}", body, html_body=self._exception_html(flow, exc, traceback_text))
 
     def end(self, results):
-        failed = [n for n, (status, _) in results.items() if status != "Success"]
+        failed_flows = [
+            name for name, (status, _) in results.items()
+            if status != "Success"
+        ]
+
         took = datetime.now() - self.started
-        lines = [f"  {name:<8} {status}" + (f"  -> {err}" if err else "")
-                 for name, (status, err) in results.items()]
-        body = (f"The B&W bot has finished {'WITH ERRORS' if failed else 'successfully'}.\n\n" +
-                self._info() +
-                f"Duration : {str(took).split('.')[0]}\n\n"
-                "Result per flow:\n" + "\n".join(lines) + "\n\n"
-                "The execution log is attached.\n")
-        self._send("FINISHED - " + ("WITH ERRORS" if failed else "SUCCESS"), body)
+
+        lines = [
+            f"  {name:<8} {status}" + (f"  -> {err}" if err else "")
+            for name, (status, err) in results.items()
+        ]
+
+        # Collect file statistics
+        stats_lines = []
+
+        for flow in results:
+            stats = get_file_stats(flow)
+
+            if stats:
+                stats_lines.append(
+                    f"  {flow:<8} "
+                    f"Found: {stats['found']} | "
+                    f"Success: {stats['done']} | "
+                    f"Failed: {stats['failed']}"
+                )
+
+        stats_section = (
+            "\nFile Statistics:\n" + "\n".join(stats_lines) + "\n"
+            if stats_lines
+            else "\nFile Statistics:\nNo file statistics recorded.\n"
+        )
+
+        body = (
+            f"The B&W bot has finished "
+            f"{'WITH ERRORS' if failed_flows else 'successfully'}.\n\n"
+            + self._info()
+            + f"Duration : {str(took).split('.')[0]}\n\n"
+            + "Result per flow:\n"
+            + "\n".join(lines)
+            + "\n"
+            + stats_section
+            + "\nThe execution log is attached.\n"
+        )
+
+        self._send(
+            "COMPLETED - "
+            + ("WITH ERRORS" if failed_flows else "SUCCESS"),
+            body
+        )

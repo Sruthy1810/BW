@@ -1,5 +1,5 @@
 from pathlib import Path
-
+from notify.mail import record_files
 from config.config_loader import load_temp1_config
 from logs.logger_setup import setup_logger
 from temp1.src1.t1_reader import get_input_files, read_raw, rows_after_marker
@@ -56,9 +56,13 @@ def run_temp1():
         log.exception("Temp1 run failed")
         raise
     finally:
+        record_files("temp1", len(files) if "files" in locals() else 0,
+                     len(done), len(failed))
+
         log.info("Done: %d | Failed: %d %s", len(done), len(failed), failed or "")
         log.info("===== Temp1 run finished =====")
         print(f"\nDone: {len(done)} | Failed: {len(failed)} {failed or ''}")
+
         if failed:
             raise RuntimeError(f"{len(failed)} file(s) failed: {failed}")
 

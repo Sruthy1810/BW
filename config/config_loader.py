@@ -21,7 +21,7 @@ MAIL_DEFAULTS = {
     "mail_to": "",
     "mail_cc": "",
     "mail_subject_prefix": "[B&W Bot]",
-    "mail_password_env": "BW_BOT_MAIL_PASSWORD",
+    "sender_password": "",
 }
 
 

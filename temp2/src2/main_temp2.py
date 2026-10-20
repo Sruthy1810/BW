@@ -2,7 +2,7 @@ from pathlib import Path
 from shutil import copyfile
 from datetime import datetime
 import pandas as pd
-
+from notify.mail import record_files
 from config.config_loader import load_config, resolve_path
 from logs.logger_setup import setup_logger
 from temp2.src2.reader import (
@@ -273,6 +273,12 @@ def run_temp2():
     log.info("Input files found: %d -> %s", len(files), [p.name for p in files])
 
     done, failed = [], []
+
+    if not files:
+        record_files("temp2", 0, 0, 0)
+        raise FileNotFoundError(
+            f"No input Excel files found in Temp2 folder: {folder}"
+        )
     for path in files:
         try:
             process_file(path, config, out_dir, log)
@@ -281,11 +287,16 @@ def run_temp2():
             log.exception("FAILED: %s", path.name)
             failed.append(path.name)
 
-    log.info("Finished. Success: %d | Failed: %d %s", len(done), len(failed), failed)
+    record_files("temp2", len(files), len(done), len(failed))
+
+    log.info(
+        "Finished. Success: %d | Failed: %d %s",
+        len(done), len(failed), failed
+    )
     print(f"\nSuccess: {len(done)} | Failed: {len(failed)} {failed}")
     log.info("===== Run finished =====")
 
-    if failed:                                     # so main.py reports temp2 as failed too
+    if failed:
         raise RuntimeError(f"{len(failed)} file(s) failed: {failed}")
 
 
