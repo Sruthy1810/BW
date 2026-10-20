@@ -9,7 +9,33 @@ else:
 
 CONFIG_PATH = ROOT_DIR / "config_file" / "config.xlsx"
 
+# =====================================================================
+# MAIL  - settings for the trigger / exception / end mails
+# =====================================================================
+MAIL_DEFAULTS = {
+    "mail_enabled": "false",
+    "smtp_host": "smtp.gmail.com",
+    "smtp_port": "587",
+    "smtp_user": "",
+    "mail_from": "",
+    "mail_to": "",
+    "mail_cc": "",
+    "mail_subject_prefix": "[B&W Bot]",
+    "mail_password_env": "BW_BOT_MAIL_PASSWORD",
+}
 
+
+def load_mail_config() -> dict:
+    values = {}
+    try:
+        if CONFIG_PATH.exists():
+            df = pd.read_excel(CONFIG_PATH, dtype=str).dropna(subset=["key"])
+            values = dict(zip(df["key"].str.strip(), df["value"].fillna("").str.strip()))
+    except Exception as exc:
+        print(f"Mail config could not be read ({exc}) - mails are disabled")
+        return {**MAIL_DEFAULTS, "mail_enabled": "false"}
+
+    return {key: (values.get(key) or default) for key, default in MAIL_DEFAULTS.items()}
 
 # =====================================================================
 # TEMP1  - loads ONLY the temp1 keys, ignores all of her settings

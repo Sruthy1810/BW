@@ -1,0 +1,65 @@
+2026-10-20 12:37:29,352 | INFO | Execution log: C:\Users\Admin\OneDrive - StayAhead\Documents\Projects\B&W\Combined\B-W\logs\executions\execution_20261020_123729.txt
+2026-10-20 12:37:29,386 | INFO | ########## Running temp1 ##########
+2026-10-20 12:37:29,528 | ERROR | Flow temp1 FAILED: [Errno 13] Permission denied: 'C:\\Users\\Admin\\OneDrive - StayAhead\\Documents\\Projects\\B&W\\Combined\\config_file\\config.xlsx'
+Traceback (most recent call last):
+  File "C:\Users\Admin\OneDrive - StayAhead\Documents\Projects\B&W\Combined\B-W\main.py", line 45, in main
+    FLOWS[name]()
+    ~~~~~~~~~~~^^
+  File "C:\Users\Admin\OneDrive - StayAhead\Documents\Projects\B&W\Combined\B-W\temp1\src1\main_temp1.py", line 38, in run_temp1
+    config = load_temp1_config()
+  File "C:\Users\Admin\OneDrive - StayAhead\Documents\Projects\B&W\Combined\B-W\config\config_loader.py", line 71, in load_temp1_config
+    df = pd.read_excel(cfg_path, dtype=str)
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python313\Lib\site-packages\pandas\io\excel\_base.py", line 495, in read_excel
+    io = ExcelFile(
+        io,
+    ...<2 lines>...
+        engine_kwargs=engine_kwargs,
+    )
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python313\Lib\site-packages\pandas\io\excel\_base.py", line 1550, in __init__
+    ext = inspect_excel_format(
+        content_or_path=path_or_buffer, storage_options=storage_options
+    )
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python313\Lib\site-packages\pandas\io\excel\_base.py", line 1402, in inspect_excel_format
+    with get_handle(
+         ~~~~~~~~~~^
+        content_or_path, "rb", storage_options=storage_options, is_text=False
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ) as handle:
+    ^
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python313\Lib\site-packages\pandas\io\common.py", line 882, in get_handle
+    handle = open(handle, ioargs.mode)
+PermissionError: [Errno 13] Permission denied: 'C:\\Users\\Admin\\OneDrive - StayAhead\\Documents\\Projects\\B&W\\Combined\\config_file\\config.xlsx'
+
+2026-10-20 12:37:29,529 | INFO | ########## Running temp2 ##########
+2026-10-20 12:37:29,537 | ERROR | Flow temp2 FAILED: [Errno 13] Permission denied: 'C:\\Users\\Admin\\OneDrive - StayAhead\\Documents\\Projects\\B&W\\Combined\\config_file\\config.xlsx'
+Traceback (most recent call last):
+  File "C:\Users\Admin\OneDrive - StayAhead\Documents\Projects\B&W\Combined\B-W\main.py", line 45, in main
+    FLOWS[name]()
+    ~~~~~~~~~~~^^
+  File "C:\Users\Admin\OneDrive - StayAhead\Documents\Projects\B&W\Combined\B-W\temp2\src2\main_temp2.py", line 248, in run_temp2
+    config = {**TEMP2_FIXED, **load_config()}      # a row in config.xlsx overrides a fixed value
+                               ~~~~~~~~~~~^^
+  File "C:\Users\Admin\OneDrive - StayAhead\Documents\Projects\B&W\Combined\B-W\config\config_loader.py", line 151, in load_config
+    df = pd.read_excel(CONFIG_PATH, dtype=str)
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python313\Lib\site-packages\pandas\io\excel\_base.py", line 495, in read_excel
+    io = ExcelFile(
+        io,
+    ...<2 lines>...
+        engine_kwargs=engine_kwargs,
+    )
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python313\Lib\site-packages\pandas\io\excel\_base.py", line 1550, in __init__
+    ext = inspect_excel_format(
+        content_or_path=path_or_buffer, storage_options=storage_options
+    )
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python313\Lib\site-packages\pandas\io\excel\_base.py", line 1402, in inspect_excel_format
+    with get_handle(
+         ~~~~~~~~~~^
+        content_or_path, "rb", storage_options=storage_options, is_text=False
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ) as handle:
+    ^
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python313\Lib\site-packages\pandas\io\common.py", line 882, in get_handle
+    handle = open(handle, ioargs.mode)
+PermissionError: [Errno 13] Permission denied: 'C:\\Users\\Admin\\OneDrive - StayAhead\\Documents\\Projects\\B&W\\Combined\\config_file\\config.xlsx'
+
+2026-10-20 12:37:29,538 | INFO | Finished. Succeeded: [] | Failed: ['temp1', 'temp2']
