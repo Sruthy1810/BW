@@ -16,4 +16,8 @@ __pycache__/
 # Generated logs and output files
 
 output/*
-logs/app.log
+# Ignore everything inside logs folder
+logs/*
+
+# Allow only logger_setup.py
+!logs/logger_setup.py
