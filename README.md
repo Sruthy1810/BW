@@ -32,3 +32,10 @@ with a logged error; percentages are not silently defaulted.
 
 Input/output paths, the template, and the master workbook are configured in
 `config/config.xlsx`.
+
+Generated Temp1 and Temp2 workbooks show the firm logo only on Summary sheets,
+using `Assets/image.png`. Keep this asset alongside the application when deploying it.
+
+Empty or all-zero `Payments`, `Cost`, and `IntOnly` sheets are removed from generated
+Temp1 and Temp2 workbooks; Summary sheets are retained, and their formulas referencing
+a removed sheet are set to zero. Input workbooks remain unchanged.

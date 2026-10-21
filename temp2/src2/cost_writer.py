@@ -2,6 +2,7 @@ import logging
 from copy import copy
 from datetime import datetime
 from openpyxl import load_workbook
+from statement_logo import ensure_statement_logo
 
 log = logging.getLogger("remittance")
 
@@ -32,6 +33,7 @@ def write_cost_sheet(path, sheet_name, cost_df, title, thru_date):
         for c, value in enumerate(row, start=1):
             ws.cell(row=r, column=c, value=value)
 
+    ensure_statement_logo(ws)
     wb.calculation.fullCalcOnLoad = True
     wb.calculation.forceFullCalc = True
     wb.save(path)

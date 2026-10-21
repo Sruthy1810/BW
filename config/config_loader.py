@@ -25,18 +25,41 @@ MAIL_DEFAULTS = {
 }
 
 
+
+
 def load_mail_config() -> dict:
     values = {}
+
     try:
-        if CONFIG_PATH.exists():
-            df = pd.read_excel(CONFIG_PATH, dtype=str).dropna(subset=["key"])
-            values = dict(zip(df["key"].str.strip(), df["value"].fillna("").str.strip()))
+        if not CONFIG_PATH.exists():
+            print(f"Mail config not found: {CONFIG_PATH}")
+            return {**MAIL_DEFAULTS, "mail_enabled": "false"}
+
+        df = pd.read_excel(CONFIG_PATH, dtype=str)
+        df.columns = df.columns.str.strip().str.lower()
+
+        if "key" not in df.columns or "value" not in df.columns:
+            raise ValueError("Excel must contain 'key' and 'value' columns.")
+
+        df = df.dropna(subset=["key"])
+
+        values = dict(
+            zip(
+                df["key"].str.strip(),
+                df["value"].fillna("").str.strip()
+            )
+        )
+
     except Exception as exc:
         print(f"Mail config could not be read ({exc}) - mails are disabled")
         return {**MAIL_DEFAULTS, "mail_enabled": "false"}
 
-    return {key: (values.get(key) or default) for key, default in MAIL_DEFAULTS.items()}
+    config = {
+        key: values.get(key) or default
+        for key, default in MAIL_DEFAULTS.items()
+    }
 
+    return config
 # =====================================================================
 # TEMP1  - loads ONLY the temp1 keys, ignores all of her settings
 # =====================================================================

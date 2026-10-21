@@ -3,6 +3,11 @@ import pandas as pd
 
 START_MARKER = "remittance report"
 
+
+def excel_engine(path):
+    return "xlrd" if Path(path).suffix.lower() == ".xls" else None
+
+
 def get_input_file(config):
     """Single input file from config key 'input_file_temp1' (used only if no folder is set)."""
     path = Path(str(config["input_file_temp1"]).strip().strip('"'))
@@ -30,7 +35,8 @@ def get_input_files(config):
 
 def read_raw(input_file):
     """Read the first sheet with no header, so every row is raw data."""
-    return pd.read_excel(input_file, sheet_name=0, header=None, dtype=object)
+    return pd.read_excel(input_file, sheet_name=0, header=None, dtype=object,
+                         engine=excel_engine(input_file))
 
 
 def rows_after_marker(df):

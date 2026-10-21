@@ -3,6 +3,7 @@ import warnings
 import pandas as pd
 
 from temp1.src1.t1_parser import to_number, clean_text, cell, format_name   # adjust to your layout
+from temp1.src1.t1_reader import excel_engine
 
 MARKER = "cost detail report"
 
@@ -25,7 +26,8 @@ SKIP_STARTS = ("page ",)     # page footers etc. are not notes
 
 def find_cost_rows(input_file, log):
     """Find the 'Cost Detail Report' row (on any sheet) and return the rows after it."""
-    sheets = pd.read_excel(input_file, sheet_name=None, header=None, dtype=object)
+    sheets = pd.read_excel(input_file, sheet_name=None, header=None, dtype=object,
+                           engine=excel_engine(input_file))
     for sheet_name, df in sheets.items():
         for pos in range(len(df)):
             cells = [str(v).lower() for v in df.iloc[pos].tolist() if pd.notna(v)]

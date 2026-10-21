@@ -1,6 +1,7 @@
 import re
 import logging
 import pandas as pd
+from temp2.src2.reader import excel_engine
 
 log = logging.getLogger("remittance")
 
@@ -35,7 +36,7 @@ def _find_identifier(xls, identifier):
 
 
 def read_costs(path, identifier, end_marker, plaintiff_map) -> pd.DataFrame:
-    xls = pd.ExcelFile(path)
+    xls = pd.ExcelFile(path, engine=excel_engine(path))
     raw, start = _find_identifier(xls, identifier)
 
     records = []

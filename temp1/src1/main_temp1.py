@@ -5,13 +5,20 @@ from logs.logger_setup import setup_logger
 from temp1.src1.t1_reader import get_input_files, read_raw, rows_after_marker
 from temp1.src1.t1_parser import parse_rows
 from temp1.src1.t1_builder import build_payment_sheet, build_cost_sheet
-from temp1.src1.t1_writer import prepare_output, write_payment_sheet, write_cost_sheet
+from temp1.src1.t1_writer import (
+    prepare_output,
+    format_payment_share_precision,
+    remove_empty_data_sheets,
+    write_payment_sheet,
+    write_cost_sheet,
+    write_statement_address,
+)
 from temp1.src1.t1_master import get_shares
 from temp1.src1.t1_cost import find_cost_rows, parse_cost_rows
 
 
 def process_file(input_file, config, log):
-    title = Path(input_file).stem.upper()                          # 'CASH LINK USA, LLC'
+    title = Path(input_file).stem.upper()                         
     output_file = Path(config["output_folder_temp1"]) / f"{Path(input_file).stem}.xlsx"
     client_pct, bw_pct = get_shares(config["MasterDatatable"], input_file, log, sheet_name="IntrestPercentage")
 
@@ -29,6 +36,9 @@ def process_file(input_file, config, log):
     cost_data = parse_cost_rows(cost_rows, log)
     cost_sheet = build_cost_sheet(cost_data)
     write_cost_sheet(cost_sheet, output_file, log, title)
+    write_statement_address(output_file, input_file, log)
+    remove_empty_data_sheets(output_file, log)
+    format_payment_share_precision(output_file)
 
     print(f"{Path(input_file).name}: payment rows {len(payment_sheet)}, "
           f"cost rows {len(cost_sheet)} -> {output_file}")

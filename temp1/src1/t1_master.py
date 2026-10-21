@@ -1,5 +1,6 @@
 from pathlib import Path
 import pandas as pd
+from temp1.src1.t1_reader import excel_engine
 
 SHEET_NAME = "IntrestPercentage" 
 NAME_COL, CLIENT_COL, BW_COL = 0, 1, 2     # A = file name, B = client %, C = BW %
@@ -21,7 +22,7 @@ def _to_pct(value):
 
 def _find_sheet(master_file, wanted):
     """Match the sheet name ignoring case and extra spaces."""
-    names = pd.ExcelFile(master_file).sheet_names
+    names = pd.ExcelFile(master_file, engine=excel_engine(master_file)).sheet_names
     for name in names:
         if _norm(name) == _norm(wanted):
             return name
@@ -33,7 +34,8 @@ def get_shares(master_file, input_file, log, sheet_name=SHEET_NAME):
     Returns (client_pct, bw_pct) as fractions, e.g. (0.70, 0.30)."""
     key = _norm(Path(input_file).stem)               # 'cash link usa, llc'
     sheet = _find_sheet(master_file, sheet_name)
-    df = pd.read_excel(master_file, sheet_name=sheet, header=None, dtype=object)
+    df = pd.read_excel(master_file, sheet_name=sheet, header=None, dtype=object,
+                       engine=excel_engine(master_file))
 
     for _, row in df.iterrows():
         if pd.isna(row[NAME_COL]):

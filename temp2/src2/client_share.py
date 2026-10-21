@@ -1,5 +1,6 @@
 import logging
 import pandas as pd
+from temp2.src2.reader import excel_engine
 
 log = logging.getLogger("remittance")
 
@@ -16,7 +17,7 @@ def _to_fraction(value) -> float:
 
 
 def get_client_share(master_path, sheet_name, client_name, share_column) -> float:
-    xls = pd.ExcelFile(master_path)
+    xls = pd.ExcelFile(master_path, engine=excel_engine(master_path))
     lookup = {s.strip().lower(): s for s in xls.sheet_names}
     real = lookup.get(sheet_name.strip().lower())
     if real is None:

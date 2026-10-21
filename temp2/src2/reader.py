@@ -1,9 +1,14 @@
 import re
 import logging
+from pathlib import Path
 import pandas as pd
 
 log = logging.getLogger("remittance")
 CLAIM_RE = re.compile(r"^\d{7}\.\d{3}$")
+
+
+def excel_engine(path):
+    return "xlrd" if Path(path).suffix.lower() == ".xls" else None
 
 
 def _to_number(value):
@@ -83,7 +88,7 @@ def _is_totals_row(vals, n):
 
 def read_report(path: str, sheet_name: str, columns: list) -> pd.DataFrame:
     log.info("Reading file: %s", path)
-    with pd.ExcelFile(path) as xls:
+    with pd.ExcelFile(path, engine=excel_engine(path)) as xls:
         sheet = _pick_sheet(xls, sheet_name)
         log.info("Using sheet: %s", sheet)
         raw = xls.parse(sheet, header=None)

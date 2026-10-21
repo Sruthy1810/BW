@@ -12,7 +12,7 @@ from logs.logger_setup import start_execution_log
 from notify.mail import Notifier
 from temp1.src1.main_temp1 import run_temp1
 from temp2.src2.main_temp2 import run_temp2
-
+from notify.process_killer import kill_excel
 FLOWS = {
     "temp1": run_temp1,
     "temp2": run_temp2,
@@ -32,6 +32,8 @@ def main():
     execution_log = start_execution_log()                      # this run's execution .txt
     log = logging.getLogger("remittance")
     log.info("Execution log: %s", execution_log)
+
+    kill_excel()  
 
     mail_cfg = load_mail_config()
     notifier = Notifier(mail_cfg)

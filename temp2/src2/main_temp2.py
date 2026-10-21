@@ -9,10 +9,11 @@ from temp2.src2.reader import (
     _is_totals_row,
     _pick_sheet,
     _to_number,
+    excel_engine,
     read_report,
 )
 from temp2.src2.validator import check_totals, check_cost_total
-from temp2.src2.cleaner import keep_valid_rows
+from temp2.src2.cleaner import keep_valid_rows, remove_empty_data_sheets
 from temp2.src2.client_share import get_client_share
 from temp2.src2.payment_writer import format_payment_sheet
 from temp2.src2.cost_reader import read_costs
@@ -98,7 +99,7 @@ def find_expected_totals(path, sheet_name, columns, principal_idx, interest_idx,
     result = {"principal": None, "interest": None, "cost": None}
     n = len(columns)
 
-    with pd.ExcelFile(path) as xls:
+    with pd.ExcelFile(path, engine=excel_engine(path)) as xls:
         sheet = _pick_sheet(xls, sheet_name)
         raw = xls.parse(sheet, header=None)
 
@@ -239,6 +240,8 @@ def process_file(input_path: Path, config: dict, out_dir: Path, log):
         write_cost_sheet(cfg["output_file"], cfg["cost_sheet_name"],
                          cost_df, cfg["cost_title"], cfg["cost_thru_date"])
         log.info("Cost sheet added to %s", cfg["output_file"])
+
+    remove_empty_data_sheets(cfg["output_file"], log)
 
     print(f"{input_path.name}: valid rows {len(valid)}, "
           f"cost rows {0 if cost_df is None else len(cost_df)} -> {cfg['output_file']}")

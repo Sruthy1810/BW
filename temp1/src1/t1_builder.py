@@ -10,10 +10,9 @@ COST_COLUMNS = ["DEFENDANT'S NAME", "REF NO.", "AMOUNT", "COST REASON", "Date", 
 
 
 def _share(amount, pct):
-    """Excel-style ROUND(amount * pct, 2): a half cent rounds up, using exact decimals (no float error)."""
+    """Calculate each allocated share to three decimal places."""
     value = Decimal(str(round(amount, 2))) * Decimal(str(round(pct, 6)))
-    return float(value.quantize(Decimal("0.01"), rounding=ROUND_HALF_UP))
-
+    return float(value.quantize(Decimal("0.001"), rounding=ROUND_HALF_UP))
 
 def build_payment_sheet(data, client_pct, bw_pct):
     out = pd.DataFrame(columns=PAYMENT_COLUMNS)

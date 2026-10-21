@@ -3,6 +3,7 @@ import re
 from copy import copy
 from datetime import datetime
 from openpyxl import load_workbook
+from statement_logo import ensure_statement_logo
 
 log = logging.getLogger("remittance")
 MONEY_FMT = '"$"#,##0.00'
@@ -204,6 +205,9 @@ def format_payment_sheet(path, df, cfg, intonly_df=None):      # <-- new argumen
         summary = wb[sheet_name]
         summary["A15"] = cfg["pay_title"].upper()
         summary["A20"] = f"Statement Thru {thru}"
+
+    for sheet_name in required_sheets:
+        ensure_statement_logo(wb[sheet_name])
 
     wb.calculation.fullCalcOnLoad = True
     wb.calculation.forceFullCalc = True
