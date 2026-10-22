@@ -1,11 +1,13 @@
 from pathlib import Path
 from shutil import copyfile
+import shutil
 from datetime import datetime
 import pandas as pd
 from notify.mail import record_files
 from config.config_loader import load_config, resolve_path
 from logs.logger_setup import setup_logger
 from temp2.src2.reader import (
+    StartMarkerNotFoundError,
     _is_totals_row,
     _pick_sheet,
     _to_number,
@@ -255,7 +257,8 @@ def run_temp2():
     config["master_file"] = config["master_table_file"]
     config["output_template_temp2"] = config["template_file"]
 
-    for key in ("input_folder", "master_file", "output_template_temp2", "output_file"):
+    for key in ("input_folder", "master_file", "output_template_temp2",
+                "output_file", "failed_temp2"):
         config[key] = resolve_path(config[key])    # relative paths -> from the project root
 
     log = setup_logger(config["log_file"], config["log_level"])
@@ -286,6 +289,18 @@ def run_temp2():
         try:
             process_file(path, config, out_dir, log)
             done.append(path.name)
+        except StartMarkerNotFoundError:
+            failed_folder = Path(config["failed_temp2"])
+            failed_folder.mkdir(parents=True, exist_ok=True)
+            destination = failed_folder / path.name
+            suffix = 1
+            if path.resolve().parent != failed_folder.resolve():
+                while destination.exists():
+                    destination = failed_folder / f"{path.stem}_{suffix}{path.suffix}"
+                    suffix += 1
+                shutil.move(str(path), str(destination))
+            log.exception("Missing remittance marker; moved to %s", destination)
+            failed.append(path.name)
         except Exception:
             log.exception("FAILED: %s", path.name)
             failed.append(path.name)

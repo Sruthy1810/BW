@@ -4,6 +4,10 @@ import pandas as pd
 START_MARKER = "remittance report"
 
 
+class StartMarkerNotFoundError(ValueError):
+    """Raised when an input workbook does not contain the remittance report marker."""
+
+
 def excel_engine(path):
     return "xlrd" if Path(path).suffix.lower() == ".xls" else None
 
@@ -45,4 +49,4 @@ def rows_after_marker(df):
         cells = [str(v).lower() for v in df.iloc[pos].tolist() if pd.notna(v)]
         if any(START_MARKER in c for c in cells):
             return df.iloc[pos + 1:].reset_index(drop=True)
-    raise ValueError("'Remittance Report' row not found in the input file")
+    raise StartMarkerNotFoundError("'Remittance Report' row not found in the input file")

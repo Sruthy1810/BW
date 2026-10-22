@@ -67,6 +67,7 @@ TEMP1_DEFAULTS = {
     "input_file_temp1": "",
     "input_folder_temp1": "",                # folder with the input Excel files
     "output_folder_temp1": "output",
+    "failed_temp1": "Failed/temp1",
     "output_template1": "",
     "MasterDatatable": "",
     "log_file": "logs/app.log",
@@ -76,7 +77,7 @@ TEMP1_DEFAULTS = {
 
 
 PATH_KEYS = ["input_file_temp1", "input_folder_temp1", "output_folder_temp1",
-             "output_template1", "MasterDatatable"]
+             "failed_temp1", "output_template1", "MasterDatatable"]
 
 
 def resolve_path(value) -> str:
@@ -150,6 +151,7 @@ DEFAULTS = [
     ("input_directory", "input"),
     ("sheet_name", "Remittance Report"),
     ("output_file", "output/valid_remittance.xlsx"),
+    ("failed_temp2", "Failed/temp2"),
     ("template_file", "Output_Template/OutputFile_Temp2.xlsx"),
     ("master_table_file", "MasterDataTable/MasterDatatable_1.xlsx"),
     ("log_file", "logs/app.log"),
@@ -193,5 +195,7 @@ def load_config() -> dict:
 
     for key, value in DEFAULTS:          # fill anything missing
         config.setdefault(key, value)
+    if not isinstance(config.get("failed_temp2"), str) or not config["failed_temp2"].strip():
+        config["failed_temp2"] = dict(DEFAULTS)["failed_temp2"]
     config["report_columns"] = REPORT_COLUMNS
     return config

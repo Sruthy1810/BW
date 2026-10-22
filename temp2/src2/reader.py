@@ -5,6 +5,11 @@ import pandas as pd
 
 log = logging.getLogger("remittance")
 CLAIM_RE = re.compile(r"^\d{7}\.\d{3}$")
+START_MARKER = "remittance report"
+
+
+class StartMarkerNotFoundError(ValueError):
+    """Raised when an input workbook does not contain the remittance report marker."""
 
 
 def excel_engine(path):
@@ -92,6 +97,15 @@ def read_report(path: str, sheet_name: str, columns: list) -> pd.DataFrame:
         sheet = _pick_sheet(xls, sheet_name)
         log.info("Using sheet: %s", sheet)
         raw = xls.parse(sheet, header=None)
+
+    if not any(
+        START_MARKER in str(value).lower()
+        for value in raw.values.flatten()
+        if pd.notna(value)
+    ):
+        raise StartMarkerNotFoundError(
+            "'Remittance Report' row not found in the input file"
+        )
 
     n = len(columns)
     records = []
