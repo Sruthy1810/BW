@@ -127,9 +127,10 @@ def _payment_block(ws, header_row, title, client_pct, bw_pct):
     first, last = header_row + 1, max(ws.max_row, header_row + 1)
     ws["A1"] = title
     ws["A2"] = f"Payments Thru {thru_date()}"
-    ws["E4"], ws["F4"] = client_pct, bw_pct
-    ws["E4"].number_format = _pct_format(client_pct)
-    ws["F4"].number_format = _pct_format(bw_pct)
+    if client_pct is not None and bw_pct is not None:
+        ws["E4"], ws["F4"] = client_pct, bw_pct
+        ws["E4"].number_format = _pct_format(client_pct)
+        ws["F4"].number_format = _pct_format(bw_pct)
     ws["B5"] = "Total"
     for col in "CD":                                   # Amount Paid, Direct Payment: sum of the rows
         ws[f"{col}5"] = f"=SUM({col}{first}:{col}{last})"

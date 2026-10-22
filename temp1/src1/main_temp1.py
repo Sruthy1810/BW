@@ -1,5 +1,6 @@
 from pathlib import Path
-import shutil
+from datetime import datetime
+import pandas as pd
 from notify.mail import record_files
 from config.config_loader import load_temp1_config
 from logs.logger_setup import setup_logger
@@ -25,22 +26,43 @@ from temp1.src1.t1_cost import find_cost_rows, parse_cost_rows
 
 def process_file(input_file, config, log):
     title = Path(input_file).stem.upper()                         
-    output_file = Path(config["output_folder_temp1"]) / f"{Path(input_file).stem}.xlsx"
-    raw = read_raw(input_file)
-    rows = rows_after_marker(raw)
-    client_pct, bw_pct = get_shares(config["MasterDatatable"], input_file, log, sheet_name="IntrestPercentage")
+    output_name = f"{Path(input_file).stem.title()} - Output - {datetime.now():%m-%d-%Y}.xlsx"
+    output_file = Path(config["output_folder_temp1"]) / output_name
+    client_pct = bw_pct = None
+    payment_sheet = build_payment_sheet(pd.DataFrame(), 0, 0)
+    cost_sheet = build_cost_sheet(pd.DataFrame())
+    section_errors = []
 
-    prepare_output(config["output_template1"], output_file, log)   # copy template -> same name as input
+    try:
+        raw = read_raw(input_file)
+        rows = rows_after_marker(raw)
+        data = parse_rows(rows, log)
+        client_pct, bw_pct = get_shares(
+            config["MasterDatatable"], input_file, log,
+            sheet_name="IntrestPercentage")
+        payment_sheet = build_payment_sheet(data, client_pct, bw_pct)
+    except Exception as exc:
+        section_errors.append(("payment", exc))
+        log.exception("Payment section failed for %s; payment output will be blank",
+                      input_file)
 
-    # ---- Payment sheet ----
-    data = parse_rows(rows, log)
-    payment_sheet = build_payment_sheet(data, client_pct, bw_pct) 
+    try:
+        cost_rows = find_cost_rows(input_file, log)
+        cost_data = parse_cost_rows(cost_rows, log)
+        cost_sheet = build_cost_sheet(cost_data)
+    except Exception as exc:
+        section_errors.append(("cost", exc))
+        log.exception("Cost section failed for %s; cost output will be blank",
+                      input_file)
+
+    if len(section_errors) == 2:
+        failures = ", ".join(section for section, _ in section_errors)
+        raise RuntimeError(
+            f"Both payment and cost sections failed: {failures}"
+        ) from section_errors[0][1]
+
+    prepare_output(config["output_template1"], output_file, log)
     write_payment_sheet(payment_sheet, output_file, log, title, client_pct, bw_pct)
-
-    # ---- Cost sheet ----
-    cost_rows = find_cost_rows(input_file, log)
-    cost_data = parse_cost_rows(cost_rows, log)
-    cost_sheet = build_cost_sheet(cost_data)
     write_cost_sheet(cost_sheet, output_file, log, title)
     write_statement_address(output_file, input_file, log)
     remove_empty_data_sheets(output_file, log)
@@ -66,17 +88,7 @@ def run_temp1():
                 process_file(input_file, config, log)
                 done.append(Path(input_file).name)
             except StartMarkerNotFoundError:
-                failed_folder = Path(config["failed_temp1"])
-                failed_folder.mkdir(parents=True, exist_ok=True)
-                source = Path(input_file)
-                destination = failed_folder / source.name
-                suffix = 1
-                if source.resolve().parent != failed_folder.resolve():
-                    while destination.exists():
-                        destination = failed_folder / f"{source.stem}_{suffix}{source.suffix}"
-                        suffix += 1
-                    shutil.move(str(source), str(destination))
-                log.exception("Missing remittance marker; moved to %s", destination)
+                log.exception("Missing remittance marker: %s", input_file)
                 failed.append(Path(input_file).name)
             except Exception:
                 log.exception("Failed: %s", input_file)        # log it and continue with the next file
