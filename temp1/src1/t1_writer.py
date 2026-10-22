@@ -21,8 +21,8 @@ PAYMENT_CURRENCY_COLS = ["AMOUNT PAID", "DIRECT PAYMENT"]
 COST_CURRENCY_COLS = ["AMOUNT"]
 COST_DATE_COLS = ["Date"]
 
-CURRENCY_FORMAT = '"$"#,##0.00'
-SHARE_FORMAT = '"$"#,##0.00'
+CURRENCY_FORMAT = '_("$"* #,##0.00_);_("$"* (#,##0.00);_("$"* "-"??_);_(@_)'
+SHARE_FORMAT = CURRENCY_FORMAT
 DATE_FORMAT = "mm/dd/yyyy"
 
 # ---- address on the statement sheets ----
@@ -97,6 +97,13 @@ def _autofit(ws, header_row):
         ws.column_dimensions[col[0].column_letter].width = width + 3
 
 
+def _format_currency_cell(cell):
+    cell.number_format = CURRENCY_FORMAT
+    alignment = copy(cell.alignment)
+    alignment.horizontal = "right"
+    cell.alignment = alignment
+
+
 def _format_table(ws, header_row, currency_cols, date_cols):
     headers = {str(c.value).strip(): c.column for c in ws[header_row] if c.value is not None}
     formats = (
@@ -109,7 +116,11 @@ def _format_table(ws, header_row, currency_cols, date_cols):
             col = headers.get(name)
             if col:
                 for r in range(header_row + 1, ws.max_row + 1):
-                    ws.cell(row=r, column=col).number_format = fmt
+                    cell = ws.cell(row=r, column=col)
+                    if fmt in (CURRENCY_FORMAT, SHARE_FORMAT):
+                        _format_currency_cell(cell)
+                    else:
+                        cell.number_format = fmt
 
 
 def _payment_block(ws, header_row, title, client_pct, bw_pct):
@@ -125,9 +136,9 @@ def _payment_block(ws, header_row, title, client_pct, bw_pct):
     ws["E5"] = f"=SUM(E{first}:E{last})"
     ws["F5"] = f"=SUM(F{first}:F{last})"
     for col in "CD":
-        ws[f"{col}5"].number_format = CURRENCY_FORMAT
+        _format_currency_cell(ws[f"{col}5"])
     for col in "EF":
-        ws[f"{col}5"].number_format = SHARE_FORMAT
+        _format_currency_cell(ws[f"{col}5"])
     for ref in ("A1", "A2", "E4", "F4", "B5", "C5", "D5", "E5", "F5"):
         ws[ref].font = Font(bold=True)
 
@@ -138,7 +149,7 @@ def _cost_block(ws, header_row, title):
     ws["B2"] = f"Costs Thru {thru_date()}"
     ws["B5"] = "Total"
     ws["C5"] = f"=SUM(C{first}:C{last})"
-    ws["C5"].number_format = CURRENCY_FORMAT
+    _format_currency_cell(ws["C5"])
     for ref in ("B1", "B2", "B5", "C5"):
         ws[ref].font = Font(bold=True)
 
@@ -199,7 +210,7 @@ def format_payment_share_precision(output_file):
             alignment.shrink_to_fit = False
             cell.alignment = alignment
             if row == 5 or row > header_row:
-                cell.number_format = SHARE_FORMAT
+                _format_currency_cell(cell)
 
     wb.save(output_file)
     wb.close()

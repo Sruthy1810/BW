@@ -5,6 +5,7 @@ from openpyxl import load_workbook
 from statement_logo import ensure_statement_logo
 
 log = logging.getLogger("remittance")
+MONEY_FMT = '_("$"* #,##0.00_);_("$"* (#,##0.00);_("$"* "-"??_);_(@_)'
 
 
 def write_cost_sheet(path, sheet_name, cost_df, title, thru_date):
@@ -25,6 +26,7 @@ def write_cost_sheet(path, sheet_name, cost_df, title, thru_date):
             ws.cell(row=row_idx, column=col_idx).value = None
 
     template_max_row = ws.max_row
+    amount_column = cost_df.columns.get_loc("AMOUNT") + 1
     for r, row in enumerate(cost_df.itertuples(index=False), start=data_start):
         if r > template_max_row:
             ws.row_dimensions[r].height = ws.row_dimensions[data_start].height
@@ -32,6 +34,12 @@ def write_cost_sheet(path, sheet_name, cost_df, title, thru_date):
                 ws.cell(r, col)._style = copy(ws.cell(data_start, col)._style)
         for c, value in enumerate(row, start=1):
             ws.cell(row=r, column=c, value=value)
+    for row_idx in range(data_start, max(template_max_row, data_start + len(cost_df) - 1) + 1):
+        cell = ws.cell(row=row_idx, column=amount_column)
+        cell.number_format = MONEY_FMT
+        alignment = copy(cell.alignment)
+        alignment.horizontal = "right"
+        cell.alignment = alignment
 
     ensure_statement_logo(ws)
     wb.calculation.fullCalcOnLoad = True

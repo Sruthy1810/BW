@@ -6,7 +6,7 @@ from openpyxl import load_workbook
 from statement_logo import ensure_statement_logo
 
 log = logging.getLogger("remittance")
-MONEY_FMT = '"$"#,##0.00'
+MONEY_FMT = '_("$"* #,##0.00_);_("$"* (#,##0.00);_("$"* "-"??_);_(@_)'
 HEADERS = ["DEFENDANT'S NAME", "PLAINTIFF", "REF NO.", "TOTAL PAYMENT",
            "APPLIED TO PRINCIPAL", "COSTS RETURNED", "CLIENT SHARE",
            "BW, LLP SHARE", "BW, LLP INTEREST", "Notes"]
@@ -185,6 +185,13 @@ def format_payment_sheet(path, df, cfg, intonly_df=None):      # <-- new argumen
         _copy_row_style(ws, style_source_row, index, len(HEADERS))
         for column, value in enumerate(row, start=1):
             ws.cell(row=index, column=column, value=value)
+    for row_idx in range(data_start, max(ws.max_row, data_start + len(rows) - 1) + 1):
+        for column in range(4, 10):
+            cell = ws.cell(row=row_idx, column=column)
+            cell.number_format = MONEY_FMT
+            alignment = copy(cell.alignment)
+            alignment.horizontal = "right"
+            cell.alignment = alignment
 
     int_ws = wb["IntOnly"]
     int_data_start = 8
@@ -194,10 +201,19 @@ def format_payment_sheet(path, df, cfg, intonly_df=None):      # <-- new argumen
     int_ws["B5"] = "Total"
     int_ws["C5"] = "=SUM(C8:C1000)"
     int_ws["C5"].number_format = MONEY_FMT
+    alignment = copy(int_ws["C5"].alignment)
+    alignment.horizontal = "right"
+    int_ws["C5"].alignment = alignment
     for index, row in enumerate(interest_only_rows, start=int_data_start):
         _copy_row_style(int_ws, int_data_start, index, 3)
         for column, value in enumerate(row, start=1):      # row = (name, plaintiff, interest share)
             int_ws.cell(row=index, column=column, value=value)
+    for row_idx in range(int_data_start, max(int_ws.max_row, int_data_start + len(interest_only_rows) - 1) + 1):
+        cell = int_ws.cell(row=row_idx, column=3)
+        cell.number_format = MONEY_FMT
+        alignment = copy(cell.alignment)
+        alignment.horizontal = "right"
+        cell.alignment = alignment
 
     if thru.upper() == "AUTO":
         thru = datetime.now().strftime("%m-%d-%Y")
