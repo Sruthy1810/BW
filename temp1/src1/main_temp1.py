@@ -1,5 +1,6 @@
 from pathlib import Path
 from datetime import datetime
+import shutil
 import pandas as pd
 from notify.mail import record_files
 from config.config_loader import load_temp1_config
@@ -11,6 +12,7 @@ from temp1.src1.t1_reader import (
     rows_after_marker,
 )
 from temp1.src1.t1_parser import parse_rows
+from notify.fonts import apply_font_to_file
 from temp1.src1.t1_builder import build_payment_sheet, build_cost_sheet
 from temp1.src1.t1_writer import (
     prepare_output,
@@ -24,9 +26,37 @@ from temp1.src1.t1_master import get_shares
 from temp1.src1.t1_cost import find_cost_rows, parse_cost_rows
 
 
+def _move_input_file(input_file, destination_folder, log, status):
+    source = Path(input_file)
+    destination_dir = Path(destination_folder)
+    destination_dir.mkdir(parents=True, exist_ok=True)
+
+    destination = destination_dir / source.name
+    if source.resolve() == destination.resolve():
+        log.info("%s is already in the %s folder", source, status)
+        return destination
+
+    suffix = 1
+    while destination.exists():
+        destination = destination_dir / f"{source.stem} ({suffix}){source.suffix}"
+        suffix += 1
+
+    shutil.move(str(source), str(destination))
+    log.info("Moved %s input %s to %s", status.lower(), source, destination)
+    return destination
+
+
+def move_to_failed_folder(input_file, failed_folder, log):
+    return _move_input_file(input_file, failed_folder, log, "Failed")
+
+
+def move_to_processed_folder(input_file, processed_folder, log):
+    return _move_input_file(input_file, processed_folder, log, "Processed")
+
+
 def process_file(input_file, config, log):
     title = Path(input_file).stem.upper()                         
-    output_name = f"{Path(input_file).stem.title()} - Output - {datetime.now():%m-%d-%Y}.xlsx"
+    output_name = f"{Path(input_file).stem.upper()} - OUTPUT - {datetime.now():%m-%d-%Y}.xlsx"
     output_file = Path(config["output_folder_temp1"]) / output_name
     client_pct = bw_pct = None
     payment_sheet = build_payment_sheet(pd.DataFrame(), 0, 0)
@@ -56,6 +86,7 @@ def process_file(input_file, config, log):
                       input_file)
 
     if len(section_errors) == 2:
+        move_to_failed_folder(input_file, config["failed_temp1"], log)
         failures = ", ".join(section for section, _ in section_errors)
         raise RuntimeError(
             f"Both payment and cost sections failed: {failures}"
@@ -67,6 +98,7 @@ def process_file(input_file, config, log):
     write_statement_address(output_file, input_file, log)
     remove_empty_data_sheets(output_file, log)
     format_payment_share_precision(output_file)
+    apply_font_to_file(output_file)
 
     print(f"{Path(input_file).name}: payment rows {len(payment_sheet)}, "
           f"cost rows {len(cost_sheet)} -> {output_file}")
@@ -86,6 +118,9 @@ def run_temp1():
             log.info("----- Processing %s -----", Path(input_file).name)
             try:
                 process_file(input_file, config, log)
+                move_to_processed_folder(
+                    input_file, config["processed_file1"], log
+                )
                 done.append(Path(input_file).name)
             except StartMarkerNotFoundError:
                 log.exception("Missing remittance marker: %s", input_file)

@@ -1,6 +1,7 @@
 import logging
 import re
 from decimal import Decimal, InvalidOperation
+from pathlib import Path
 
 import pandas as pd
 from openpyxl import load_workbook
@@ -47,6 +48,7 @@ def keep_valid_rows(df: pd.DataFrame, col_a: int, col_b: int,
 def remove_empty_data_sheets(path, log=None):
     """Remove empty/all-zero Temp2 data sheets, preserving Summary sheets."""
     wb = load_workbook(path)
+    wb.properties.title = Path(path).stem
     sheet_specs = {
         "payments": (9, (4, 5, 6, 7, 8, 9)),
         "cost": (8, (3,)),
@@ -108,8 +110,7 @@ def remove_empty_data_sheets(path, log=None):
                             log.info("Summary formula %s!%s set to zero after removing '%s'",
                                      ws.title, cell.coordinate, sheet_name)
 
-    if removed:
-        wb.save(path)
+    wb.save(path)
     wb.close()
     if log and removed:
         log.info("Removed empty/all-zero Temp2 sheets: %s", removed)

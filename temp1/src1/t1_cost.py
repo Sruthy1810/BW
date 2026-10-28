@@ -34,8 +34,9 @@ def find_cost_rows(input_file, log):
             if any(MARKER in c for c in cells):
                 log.info("'Cost Detail Report' found on sheet '%s', row %d", sheet_name, pos + 1)
                 return df.iloc[pos + 1:]
-    log.warning("'Cost Detail Report' not found - Cost sheet will be empty")
-    return pd.DataFrame()
+    raise ValueError(
+        f"'Cost Detail Report' marker not found in {input_file}"
+    )
 
 
 def to_date(value):

@@ -63,6 +63,29 @@ def _claim_text(value):
     return str(value).strip()
 
 
+def _plaintiff_note(text):
+    plaintiff_match = re.search(
+        r"\bPlaintiff\s*:\s*(.*?)(?=\s+\bPlaintiff\s+Name\s+2\s*:|$)",
+        text,
+        flags=re.IGNORECASE,
+    )
+    name2_match = re.search(
+        r"\bPlaintiff\s+Name\s+2\s*:\s*(.*?)(?=\s+\bPlaintiff\s*:\s*|$)",
+        text,
+        flags=re.IGNORECASE,
+    )
+    plaintiff = plaintiff_match.group(1).strip() if plaintiff_match else None
+    name2 = name2_match.group(1).strip() if name2_match else None
+    if plaintiff and not name2:
+        plaintiff = re.sub(
+            r"\s+d\s*/\s*b\s*/\s*a\.?\s*$",
+            "",
+            plaintiff,
+            flags=re.IGNORECASE,
+        ).strip()
+    return plaintiff, name2
+
+
 def _pick_sheet(xls: pd.ExcelFile, wanted: str) -> str:
     names = xls.sheet_names
     log.info("Sheets found: %s", names)
@@ -121,6 +144,7 @@ def read_report(path: str, sheet_name: str, columns: list) -> pd.DataFrame:
             continue
 
         first = _claim_text(vals[0])
+        note_text = " ".join(str(value).strip() for value in vals)
 
         if CLAIM_RE.match(first):
             if len(vals) < n + 2:
@@ -139,13 +163,22 @@ def read_report(path: str, sheet_name: str, columns: list) -> pd.DataFrame:
             record["Plaintiff"] = ""
             records.append(record)
 
-        elif not first.startswith("Plaintiff:"):
+        elif not re.match(r"^Plaintiff(?:\s+Name\s+2)?\s*:", first, re.IGNORECASE):
             record = _payment_row_record(vals, columns)
             if record is not None:
                 records.append(record)
 
-        elif first.startswith("Plaintiff:") and records:
-            records[-1]["Plaintiff"] = first.replace("Plaintiff:", "").strip()
+        elif records:
+            plaintiff, name2 = _plaintiff_note(note_text)
+            if plaintiff is not None:
+                records[-1]["_plaintiff_name"] = plaintiff
+            if name2 is not None:
+                records[-1]["_plaintiff_name2"] = name2
+
+    for record in records:
+        plaintiff_name = record.pop("_plaintiff_name", None)
+        plaintiff_name2 = record.pop("_plaintiff_name2", None)
+        record["Plaintiff"] = plaintiff_name2 or plaintiff_name or record.get("Plaintiff", "")
 
     df = pd.DataFrame(records)
     log.info("Debtor rows read: %d", len(df))

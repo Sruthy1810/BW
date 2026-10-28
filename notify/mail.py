@@ -30,6 +30,9 @@ def get_file_stats(flow):
 class Notifier:
     """Trigger / exception / end mails. Never raises: a mail problem must not stop the bot."""
 
+    COLOR_OK = "#B7F5B5 "        # trigger mail + successful end mail
+    COLOR_ERR_RUN = "#E66349"   # end mail with errors
+
     def __init__(self, mail_cfg: dict):
         self.cfg = mail_cfg
         self.enabled = str(mail_cfg.get("mail_enabled", "")).strip().lower() in ("1", "true", "yes", "y")
@@ -103,6 +106,54 @@ class Notifier:
         except Exception as exc:
             print(f"Mail NOT sent ({kind}): {exc}")
 
+    # ------------------------------------------------------------ shared HTML helpers
+    @staticmethod
+    def _layout(title, color, inner_html):
+        return f"""\
+<html>
+<body style="margin:0;padding:16px;background:#f9fafb;font-family:Segoe UI,Arial,sans-serif;color:#111827;">
+  <div style="max-width:760px;margin:auto;background:#ffffff;border:1px solid #e5e7eb;border-radius:6px;overflow:hidden;">
+    <div style="background:{color};color:#ffffff;padding:14px 18px;font-size:18px;font-weight:bold;">
+      {title}
+    </div>
+    <div style="padding:18px;">{inner_html}</div>
+  </div>
+</body>
+</html>"""
+
+    @staticmethod
+    def _kv_table(rows):
+        e = html.escape
+        cells = "".join(
+            f'<tr><td style="padding:6px 12px;background:#f3f4f6;font-weight:bold;width:110px;'
+            f'border:1px solid #e5e7eb;">{e(str(k))}</td>'
+            f'<td style="padding:6px 12px;border:1px solid #e5e7eb;">{e(str(v))}</td></tr>'
+            for k, v in rows
+        )
+        return f'<table style="border-collapse:collapse;font-size:14px;margin-bottom:16px;">{cells}</table>'
+
+    @staticmethod
+    def _grid(headers, rows, header_bg="#f3f4f6"):
+        """rows = list of lists. A cell may be a value or a (value, color) tuple for coloured text."""
+        e = html.escape
+        th = "".join(
+            f'<th style="padding:6px 12px;background:{header_bg};border:1px solid #e5e7eb;'
+            f'text-align:left;">{e(h)}</th>'
+            for h in headers
+        )
+        body = ""
+        for row in rows:
+            tds = ""
+            for cell in row:
+                text, color = cell if isinstance(cell, tuple) else (cell, None)
+                style = "padding:6px 12px;border:1px solid #e5e7eb;"
+                if color:
+                    style += f"color:{color};font-weight:bold;"
+                tds += f'<td style="{style}">{e(str(text))}</td>'
+            body += f"<tr>{tds}</tr>"
+        return (f'<table style="border-collapse:collapse;font-size:14px;margin-bottom:16px;width:100%;">'
+                f'<tr>{th}</tr>{body}</table>')
+
     # ------------------------------------------------------------ HTML for the exception mail
     def _exception_html(self, flow, exc, traceback_text):
         e = html.escape
@@ -139,11 +190,64 @@ class Notifier:
 </body>
 </html>"""
 
+    # ------------------------------------------------------------ HTML for the trigger mail
+    def _trigger_html(self, flows):
+        inner = (
+            '<p style="margin:0 0 12px 0;">The B&amp;W bot has started.</p>'
+            + self._kv_table([
+                ("Started", f"{self.started:%Y-%m-%d %H:%M:%S}"),
+                ("Flows", ", ".join(flows)),
+            ])
+        )
+        return self._layout("&#9654; B&amp;W Bot &ndash; STARTED", self.COLOR_OK, inner)
+
+    # ------------------------------------------------------------ HTML for the end mail
+    def _end_html(self, results, failed_flows, took):
+        color = self.COLOR_ERR_RUN if failed_flows else self.COLOR_OK
+        title = ("&#9888; B&amp;W Bot &ndash; COMPLETED WITH ERRORS" if failed_flows
+                 else "&#10004; B&amp;W Bot &ndash; COMPLETED SUCCESSFULLY")
+
+        # result per flow
+        result_rows = []
+        for name, (status, err) in results.items():
+            ok = status == "Success"
+            result_rows.append([name, (status, self.COLOR_OK if ok else self.COLOR_ERR_RUN), err or ""])
+
+        # file statistics
+        stat_rows = []
+        for flow in results:
+            s = get_file_stats(flow)
+            if s:
+                stat_rows.append([
+                    flow, s["found"], s["done"],
+                    (s["failed"], self.COLOR_ERR_RUN) if s["failed"] else s["failed"],
+                ])
+
+        stats_html = (
+            self._grid(["Flow", "Found", "Success", "Failed"], stat_rows)
+            if stat_rows
+            else '<p style="color:#6b7280;font-size:14px;">No file statistics recorded.</p>'
+        )
+
+        inner = (
+            self._kv_table([
+                ("Started", f"{self.started:%Y-%m-%d %H:%M:%S}"),
+                ("Finished", f"{datetime.now():%Y-%m-%d %H:%M:%S}"),
+                ("Duration", str(took).split(".")[0]),
+            ])
+            + '<div style="font-weight:bold;margin-bottom:6px;">Result per flow</div>'
+            + self._grid(["Flow", "Status", "Error"], result_rows)
+            + '<div style="font-weight:bold;margin-bottom:6px;">File statistics</div>'
+            + stats_html
+            + '<p style="margin:0;color:#6b7280;font-size:13px;">The execution log is attached.</p>'
+        )
+        return self._layout(title, color, inner)
+
     # ------------------------------------------------------------ the three mails
     def trigger(self, flows):
         body = ("The B&W bot has started.\n\n" + self._info() +
                 f"Flows    : {', '.join(flows)}\n")
-        self._send("STARTED", body, attach_log=False)
+        self._send("STARTED", body, attach_log=False, html_body=self._trigger_html(flows))
 
     def exception(self, flow, exc, traceback_text):
         body = (f"The flow '{flow}' FAILED.\n\n" + self._info() +
@@ -157,7 +261,6 @@ class Notifier:
             name for name, (status, _) in results.items()
             if status != "Success"
         ]
-
         took = datetime.now() - self.started
 
         lines = [
@@ -167,10 +270,8 @@ class Notifier:
 
         # Collect file statistics
         stats_lines = []
-
         for flow in results:
             stats = get_file_stats(flow)
-
             if stats:
                 stats_lines.append(
                     f"  {flow:<8} "
@@ -198,7 +299,7 @@ class Notifier:
         )
 
         self._send(
-            "COMPLETED - "
-            + ("WITH ERRORS" if failed_flows else "SUCCESS"),
-            body
+            "COMPLETED - " + ("WITH ERRORS" if failed_flows else "SUCCESS"),
+            body,
+            html_body=self._end_html(results, failed_flows, took),
         )

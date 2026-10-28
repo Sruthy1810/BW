@@ -12,17 +12,24 @@ from logs.logger_setup import start_execution_log
 from notify.mail import Notifier
 from temp1.src1.main_temp1 import run_temp1
 from temp2.src2.main_temp2 import run_temp2
+from temp3_Court_Cost.src3.main_Court import run_temp3_Court
+from temp3_Firm_Payments.src4.main_Firm import run_temp3_Firm
+from temp3_Non_Attorney_Payments.src5.main_Non_Attorney import run_temp3_Non_Attorney
 from notify.process_killer import kill_excel
 FLOWS = {
     "temp1": run_temp1,
     "temp2": run_temp2,
+    "temp3_court_cost": run_temp3_Court,
+    "temp3_firm_payments": run_temp3_Firm,
+    "temp3_non_attorney": run_temp3_Non_Attorney
 }
 
 
 def main():
-    # python main.py            -> runs temp1 and temp2
+    # python main.py            -> runs all configured flows
     # python main.py temp1      -> runs only temp1
     # python main.py temp2      -> runs only temp2
+    # python main.py temp3_court_cost -> runs only temp3 court costs
     names = [a.lower() for a in sys.argv[1:]] or list(FLOWS)
 
     unknown = [n for n in names if n not in FLOWS]
@@ -44,7 +51,9 @@ def main():
         print(f"\n########## Running {name} ##########")
         log.info("########## Running %s ##########", name)
         try:
-            FLOWS[name]()
+            flow_result = FLOWS[name]()
+            if isinstance(flow_result, int) and flow_result != 0:
+                raise RuntimeError(f"Flow returned exit code {flow_result}")
             results[name] = ("Success", "")
         except Exception as exc:               # one flow failing must not stop the other
             tb = traceback.format_exc()

@@ -33,7 +33,10 @@ def write_cost_sheet(path, sheet_name, cost_df, title, thru_date):
             for col in range(1, max(ws.max_column, len(cost_df.columns)) + 1):
                 ws.cell(r, col)._style = copy(ws.cell(data_start, col)._style)
         for c, value in enumerate(row, start=1):
-            ws.cell(row=r, column=c, value=value)
+            cell = ws.cell(row=r, column=c, value=value)
+            font = copy(cell.font)
+            font.name = "Arial Narrow"
+            cell.font = font
     for row_idx in range(data_start, max(template_max_row, data_start + len(cost_df) - 1) + 1):
         cell = ws.cell(row=row_idx, column=amount_column)
         cell.number_format = MONEY_FMT
@@ -42,6 +45,14 @@ def write_cost_sheet(path, sheet_name, cost_df, title, thru_date):
         cell.alignment = alignment
 
     ensure_statement_logo(ws)
+    for sheet in wb.worksheets:
+        for row in sheet.iter_rows():
+            for cell in row:
+                if cell.value is None:
+                    continue
+                font = copy(cell.font)
+                font.name = "Arial Narrow"
+                cell.font = font
     wb.calculation.fullCalcOnLoad = True
     wb.calculation.forceFullCalc = True
     wb.save(path)

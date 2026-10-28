@@ -47,6 +47,11 @@ DBA_PATTERN = re.compile(r"(?<![a-z0-9])d[./]?b[./]?a\.?(?![a-z0-9])")   # dba, 
 STARTS_PATTERN = re.compile(r"^(the|city of)(?![a-z0-9])")               # "The ...", "City of ..."
 
 
+def _has_business_suffix(name):
+    match = re.search(r"([a-z]+)\W*$", str(name).lower())
+    return bool(match and match.group(1) in BUSINESS_SUFFIXES)
+
+
 def is_business(name):
     """True if the defendant name looks like a business. Whole words only, not case-sensitive."""
     text = " ".join(str(name).lower().split())
@@ -54,6 +59,8 @@ def is_business(name):
     if not text:
         return False
 
+    if _has_business_suffix(text):
+        return True
     if "&" in text or any(ch.isdigit() for ch in text):
         return True                                 # ampersand or a number anywhere
     if DBA_PATTERN.search(text):
@@ -80,6 +87,8 @@ def format_name(name):
     'John Smith Jr' -> 'Smith Jr, John'
     Business names, names already in 'Last, First' form and single words -> unchanged."""
     name = " ".join(str(name).split())
+    if _has_business_suffix(name):
+        return name
     if not name or "," in name:
         return name                      # empty or already in 'Last, First' form
 

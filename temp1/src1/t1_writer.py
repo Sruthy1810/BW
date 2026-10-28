@@ -10,7 +10,9 @@ from openpyxl import load_workbook
 from openpyxl.styles import Font
 from statement_logo import ensure_statement_logo
 from temp1.src1.t1_reader import excel_engine
+from copy import copy
 
+FONT_NAME = "Arial Narrow"
 PAYMENT_SHEET = "Payments"          # must match the sheet name in your template
 COST_SHEET = "Cost"                 # must match the sheet name in your template
 
@@ -22,6 +24,7 @@ COST_CURRENCY_COLS = ["AMOUNT"]
 COST_DATE_COLS = ["Date"]
 
 CURRENCY_FORMAT = '_("$"* #,##0.00_);_("$"* (#,##0.00);_("$"* "-"??_);_(@_)'
+DIRECT_PAYMENT_FORMAT = '_("$"* #,##0.00_);_("$"* (#,##0.00);_("$"* 0.00_);_(@_)'
 SHARE_FORMAT = CURRENCY_FORMAT
 DATE_FORMAT = "mm/dd/yyyy"
 
@@ -50,6 +53,10 @@ def prepare_output(template_file, output_file, log=None):
     output_file = Path(output_file)
     output_file.parent.mkdir(parents=True, exist_ok=True)
     shutil.copyfile(template, output_file)
+    wb = load_workbook(output_file)
+    wb.properties.title = output_file.stem
+    wb.save(output_file)
+    wb.close()
     if log:
         log.info("Template copied to %s", output_file.resolve())
     return output_file
@@ -70,6 +77,16 @@ def _find_header_row(ws):
     return HEADER_ROW
 
 
+def _set_sheet_font_to_arial_narrow(ws):
+    for row in ws.iter_rows():
+        for cell in row:
+            if cell.value is None:
+                continue
+            font = copy(cell.font)
+            font.name = "Arial Narrow"
+            cell.font = font
+
+
 def _write_table(ws, df, header_row):
     # 1) unmerge every merged range that reaches below the header row (e.g. E7:E8 'CLIENT / SHARE')
     for rng in list(ws.merged_cells.ranges):
@@ -88,7 +105,10 @@ def _write_table(ws, df, header_row):
     clean = df.astype(object).where(df.notna(), None)
     for i, row in enumerate(clean.itertuples(index=False), start=header_row + 1):
         for j, value in enumerate(row, start=1):
-            ws.cell(row=i, column=j, value=value)
+            cell = ws.cell(row=i, column=j, value=value)
+            font = copy(cell.font)
+            font.name = "Arial Narrow"
+            cell.font = font
 
 
 def _autofit(ws, header_row):
@@ -121,6 +141,13 @@ def _format_table(ws, header_row, currency_cols, date_cols):
                         _format_currency_cell(cell)
                     else:
                         cell.number_format = fmt
+    direct_payment_col = headers.get("DIRECT PAYMENT")
+    if direct_payment_col:
+        for row in range(header_row + 1, ws.max_row + 1):
+            _format_currency_cell(ws.cell(row=row, column=direct_payment_col))
+            ws.cell(row=row, column=direct_payment_col).number_format = (
+                DIRECT_PAYMENT_FORMAT
+            )
 
 
 def _payment_block(ws, header_row, title, client_pct, bw_pct):
@@ -138,6 +165,7 @@ def _payment_block(ws, header_row, title, client_pct, bw_pct):
     ws["F5"] = f"=SUM(F{first}:F{last})"
     for col in "CD":
         _format_currency_cell(ws[f"{col}5"])
+    ws["D5"].number_format = DIRECT_PAYMENT_FORMAT
     for col in "EF":
         _format_currency_cell(ws[f"{col}5"])
     for ref in ("A1", "A2", "E4", "F4", "B5", "C5", "D5", "E5", "F5"):
@@ -154,6 +182,13 @@ def _cost_block(ws, header_row, title):
     for ref in ("B1", "B2", "B5", "C5"):
         ws[ref].font = Font(bold=True)
 
+def _apply_font(ws, name=FONT_NAME):
+    """Set the font name on every cell of the sheet; bold / size / colour stay as they are."""
+    for row in ws.iter_rows():
+        for cell in row:
+            f = copy(cell.font)
+            f.name = name
+            cell.font = f
 
 def _write_sheet(output_file, sheet_name, df, fill_block, currency_cols, date_cols):
     wb = load_workbook(output_file)
@@ -164,13 +199,18 @@ def _write_sheet(output_file, sheet_name, df, fill_block, currency_cols, date_co
     fill_block(ws, header_row)
     _format_table(ws, header_row, currency_cols, date_cols)
     ensure_statement_logo(ws)
-    if is_new:                                         # keep the template's own column widths
+    if is_new:                       # keep the template's own column widths
         _autofit(ws, header_row)
+
+    # fonts for every sheet (replaces _apply_font + the second loop)
+    for sheet in wb.worksheets:
+        _set_sheet_font_to_arial_narrow(sheet)
 
     wb.calculation.calcMode = "auto"
     wb.calculation.fullCalcOnLoad = True
     wb.calculation.forceFullCalc = True
-    wb.save(output_file)
+
+    wb.save(output_file)             # single save
     wb.close()
 
 
